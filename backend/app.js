@@ -22,7 +22,6 @@ app.use(morgan('dev'));
 
 let userRoutes = require('./routes/userRoutes');
 
-
 app.use('/api/', userRoutes);
 // start the server and bind to all interfaces
 app.listen(port, "0.0.0.0", () => {

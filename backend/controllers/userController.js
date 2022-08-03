@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('../configs/jwt');
 
 const userModel = require('../models/userModel');
 
@@ -43,7 +44,54 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
+
+    let {username, password} = req.body;
+
+    if(!username || !password){
+        return res.json({status:"error", message: "One or more fields must be provided"});
+    }
+
+    userModel.getPasswordByUsername(username, (err, result) => {
+        if(err){
+            console.log(err);
+
+            return res.json({status:"error", message:err});
+        }
+
+        if(!result[0]){
+            return res.json({status:"error", message:"Invalid username or password"});
+        }
+
+        bcrypt.compare(password, result[0].password, (err, result) => {
+            if(err){
+                console.log(err);
     
+                return res.json({status:"error", message:err});
+            }
+
+            if(!result){
+                return res.json({status:"error", message:"Invalid username or password"});
+            }
+
+            userModel.getUsernameAndRoleByUsername(username, (err, result) => {
+                if(err){
+                    console.log(err);
+        
+                    return res.json({status:"error", message:err});
+                }
+
+                if(!result){
+                    return res.json({status:"error", message:"Invalid username or password"});
+                }
+
+                // create jwt token and send it to user
+
+                let createdToken = jwt.createToken(result[0].username, result[0].role);
+
+                res.json({status:"success", message:"Login success", token:createdToken});
+            })
+        })
+    })
 }
 
 module.exports = {
