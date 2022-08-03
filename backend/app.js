@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const db = require('./configs/db');
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require("helmet");
@@ -18,6 +20,10 @@ app.use(helmet());
 app.use(express.json());
 app.use(morgan('dev'));
 
+let userRoutes = require('./routes/userRoutes');
+
+
+app.use('/api/', userRoutes);
 // start the server and bind to all interfaces
 app.listen(port, "0.0.0.0", () => {
     console.log(`Listening at http://localhost:${port}`);

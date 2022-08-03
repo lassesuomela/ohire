@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import NotFound from "@/views/NotFound.vue";
-import HelloWorld from "@/components/HelloWorld.vue";
+import LoginView from "@/views/LoginView.vue";
 
 const routes = [
     {
@@ -9,9 +9,9 @@ const routes = [
         name: "NotFound"
     },
     {
-        path: "/",
-        component: HelloWorld,
-        name: "HelloWorld"
+        path: "/login",
+        component: LoginView,
+        name: "Login"
     },
 ];
 
