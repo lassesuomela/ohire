@@ -25,7 +25,55 @@ const create = (req, res) => {
     })
 }
 
+const getNAmountOfPostings = (req, res) => {
+
+    let page = req.params.page;
+
+    if(!page){
+        return res.json({status:"error",message:"Page number is required"});
+    }
+
+    let perPageCount = 30; 
+    let maxRecordCount = 0;
+    let currentPage = 0;
+    let maxPage = 0;
+
+    jobsModel.getCount((err, result) => {
+
+        if(err){
+            console.log(err);
+            return res.json({status:"error", message:err});
+        }
+
+        if(!result) {
+            return res.json({status:"error", message:"No job listings found"});
+        }
+
+        maxRecordCount = result[0].maxCount;
+
+        maxPage = Math.ceil(maxRecordCount/perPageCount);
+
+        if(page <= 0 || page > maxPage){
+            return res.json({status:"error",message:"Page number out of scope"});
+        }
+
+        currentPage = (page - 1) * perPageCount;
+
+        jobsModel.getNAmountOfPostings(currentPage,(err, result) => {
+
+            if(err){
+                console.log(err);
+                return res.json({status:"error", message:err});
+            }
+
+            res.json({status:"success", maxPageAmount: maxPage, data:result})
+
+        })
+    })
+}
+
 module.exports = {
     create,
+    getNAmountOfPostings,
     
 }

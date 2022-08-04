@@ -12,8 +12,6 @@ const auth = (req, res, next) => {
 
     let apiKey = authHeader.split(' ')[1];
 
-    console.log(apiKey);
-
     jwt.verifyToken(apiKey, (err, result) => {
         if(err) {
             console.log(err);
