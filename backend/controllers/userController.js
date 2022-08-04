@@ -98,8 +98,22 @@ const authenticated = (req, res) => {
     res.json({status:"success", message:"Authenticated"});
 }
 
+const profile = (req, res) => {
+
+    userModel.getProfileDataByUsername(req.username, (err, result) => {
+        if(err){
+            console.log(err);
+
+            return res.json({status:"error", message:err});
+        }
+
+        res.json({status:"success", data:result});
+    })
+}
+
 module.exports = {
     register,
     login,
-    authenticated
+    authenticated,
+    profile
 }
