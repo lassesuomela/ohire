@@ -2,15 +2,16 @@ const jobsModel = require('../models/jobsModel');
 
 const create = (req, res) => {
 
-    let {title, description} = req.body;
+    let {title, description, salary} = req.body;
 
-    if(!title || !description) {
+    if(!title || !description ||!salary) {
         return res.json({status:"error", message: "One or more fields must be provided"});
     }
 
     let data = {
         title: title, 
         description: description,
+        salary: salary,
         users_id:req.id
     };
 

@@ -3,6 +3,7 @@ import NotFound from "@/views/NotFound.vue";
 import LoginView from "@/views/LoginView.vue";
 import LogoutComponent from "@/components/LogoutComponent.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import JobView from "@/views/JobView.vue";
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: "/register",
         component: RegisterView,
         name: "Register"
+    },
+    {
+        path: "/jobs",
+        component: JobView,
+        name: "Jobs"
     },
 ];
 

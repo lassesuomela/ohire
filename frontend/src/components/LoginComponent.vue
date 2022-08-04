@@ -68,7 +68,7 @@ export default {
           this.$toast.add({severity:'success', summary: this.loginStatus, life: 2000});
 
           // redirect to job listings
-          this.$router.push('jobListings');
+          this.$router.push('jobs');
         }
 
         if(response.data.status === "error"){

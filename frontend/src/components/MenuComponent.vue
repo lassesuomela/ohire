@@ -16,7 +16,7 @@ export default {
             items: [
                 {label: 'Login', to: 'login'},
                 {label: 'Register', to: 'register'},
-                {label: 'Job Listings', to: 'listings'},
+                {label: 'Job Listings', to: 'jobs'},
                 {label: 'Meetings', to: 'meetings'},
                 {label: 'Profile', to: 'profile'},
                 {label: 'Logout', to: 'logout'},
