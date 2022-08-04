@@ -20,9 +20,16 @@ app.use(helmet());
 app.use(express.json());
 app.use(morgan('dev'));
 
+let auth = require('./configs/auth');
+
 let userRoutes = require('./routes/userRoutes');
+let jobRoutes = require('./routes/jobRoutes');
 
 app.use('/api/', userRoutes);
+
+app.use(auth);
+
+app.use('/api/', jobRoutes);
 // start the server and bind to all interfaces
 app.listen(port, "0.0.0.0", () => {
     console.log(`Listening at http://localhost:${port}`);

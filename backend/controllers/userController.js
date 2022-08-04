@@ -73,7 +73,7 @@ const login = (req, res) => {
                 return res.json({status:"error", message:"Invalid username or password"});
             }
 
-            userModel.getUsernameAndRoleByUsername(username, (err, result) => {
+            userModel.getByUsername(username, (err, result) => {
                 if(err){
                     console.log(err);
         
@@ -86,7 +86,7 @@ const login = (req, res) => {
 
                 // create jwt token and send it to user
 
-                let createdToken = jwt.createToken(result[0].username, result[0].role);
+                let createdToken = jwt.createToken(result[0].id, result[0].username, result[0].role);
 
                 res.json({status:"success", message:"Login success", token:createdToken});
             })

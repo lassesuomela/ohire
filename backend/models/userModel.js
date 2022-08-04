@@ -7,8 +7,8 @@ const user = {
     getPasswordByUsername: (username, cb) => {
         return db.query('SELECT password FROM users WHERE username = ? LIMIT 1', [username], cb);
     },
-    getUsernameAndRoleByUsername: (username, cb) => {
-        return db.query('SELECT username, role FROM users WHERE username = ? LIMIT 1', [username], cb);
+    getByUsername: (username, cb) => {
+        return db.query('SELECT id, username, role FROM users WHERE username = ? LIMIT 1', [username], cb);
     }
 }
 

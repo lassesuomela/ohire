@@ -3,11 +3,8 @@ require('dotenv').config();
 let jwt = require('./jwt');
 
 const auth = (req, res, next) => {
-    //Todo: verify jwt token
 
     let authHeader = req.headers.authorization;
-
-    console.log(authHeader);
 
     if(!authHeader) {
         return res.json({status:"error", message:"JWT token is required"});
@@ -24,7 +21,13 @@ const auth = (req, res, next) => {
             return res.json({status:"error", message:err});
         }
 
-        console.log(result);
+        // save tokens data to req for future use on other controllers
+
+        req.id = result.id;
+        req.username = result.username;
+        req.role = result.role;
+
+        next();
     })
 
 }
