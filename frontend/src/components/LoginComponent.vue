@@ -1,10 +1,11 @@
 <template>
   <div class="field">
-    <i class="pi pi-user"></i>
+
+    <i class="material-symbols-outlined">account_circle</i>
     <InputText type="text" v-model="username" placeholder="Username" name="username"/>
   </div>
   <div class="field">
-    <i class="pi pi-key"></i>
+    <i class="material-symbols-outlined">lock</i>
     <Password v-model="password" :feedback="false" placeholder="Password"/>
   </div>
   <div class="field">
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+
 
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
@@ -45,7 +47,7 @@ export default {
     Login () {
 
       if(!this.username || !this.password){
-        this.$toast.add({severity:'error', summary: 'One or more fields must be provided', detail:'', life: 3000});
+        this.$toast.add({severity:'warn', summary: 'One or more fields must be provided', detail:'', life: 3000});
         return;
       }
 

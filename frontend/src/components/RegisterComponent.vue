@@ -1,21 +1,21 @@
 <template>
   <div class="field">
-    <i class="pi pi-user"></i>
+    <i class="material-symbols-outlined">account_circle</i>
     <InputText type="text" v-model="username" placeholder="Username" name="username"/>
   </div>
 
   <div class="field">
-    <i class="pi pi-user"></i>
+    <i class="material-symbols-outlined">email</i>
     <InputText type="text" v-model="email" placeholder="Email" name="email"/>
   </div>
 
   <div class="field">
-    <i class="pi pi-key"></i>
+    <i class="material-symbols-outlined">lock</i>
     <Password v-model="password"  placeholder="Password"/>
   </div>
 
   <div class="field">
-    <i class="pi pi-key"></i>
+    <i class="material-symbols-outlined">lock</i>
     <Password v-model="password2" :feedback="false" placeholder="Repeat Password"/>
   </div>
 

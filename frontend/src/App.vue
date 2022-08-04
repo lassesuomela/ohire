@@ -6,10 +6,10 @@
         <router-view></router-view>
       </div>
     </div>
+    
 </template>
 
 <script>
-
 
 import MenuComponent from '@/components/MenuComponent.vue';
 
@@ -22,8 +22,13 @@ export default {
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Material+Symbols+Outlined');
+
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Condensed';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
