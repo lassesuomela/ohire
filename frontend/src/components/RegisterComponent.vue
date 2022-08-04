@@ -3,16 +3,28 @@
     <i class="pi pi-user"></i>
     <InputText type="text" v-model="username" placeholder="Username" name="username"/>
   </div>
+
+  <div class="field">
+    <i class="pi pi-user"></i>
+    <InputText type="text" v-model="email" placeholder="Email" name="email"/>
+  </div>
+
   <div class="field">
     <i class="pi pi-key"></i>
-    <Password v-model="password" :feedback="false" placeholder="Password"/>
+    <Password v-model="password"  placeholder="Password"/>
   </div>
+
   <div class="field">
-    <Button label="Login" icon="pi pi-sign-in" iconPos="right" @click="Login"/>
+    <i class="pi pi-key"></i>
+    <Password v-model="password2" :feedback="false" placeholder="Repeat Password"/>
+  </div>
+
+  <div class="field">
+    <Button label="Register" icon="pi pi-sign-in" iconPos="right" @click="Register"/>
   </div>
 
   <div class="registerField">
-    <span>New user? <router-link to="/register">Register now</router-link></span>
+    <span>Already have an account? <router-link to="/login">Login here</router-link></span>
   </div>
   <Toast />
 </template>
@@ -38,35 +50,38 @@ export default {
     return {
       username: null,
       password: null,
-      loginStatus: null,
+      password2: null,
+      email: null,
+      registerStatus: null,
     }
   },
   methods: {
-    Login () {
+    Register () {
 
-      if(!this.username || !this.password){
-        this.$toast.add({severity:'error', summary: 'One or more fields must be provided', detail:'', life: 3000});
+      if(!this.username || !this.password || !this.password2 || !this.email){
+        this.$toast.add({severity:'warn', summary: 'One or more fields must be provided', detail:'', life: 3000});
+        return;
+      }
+
+      if(this.password !== this.password2){
+        this.$toast.add({severity:'warn', summary: 'Passwords don\'t match', detail:'', life: 3000});
         return;
       }
 
       let data = {
         username:this.username,
-        password:this.password
+        password:this.password,
+        email:this.email
       }
 
-      axios.post('/login', data).then(response => {
+      axios.post('/register', data).then(response => {
         console.log(response);
 
         if(response.data.status === "success"){
           this.loginStatus = response.data.message;
 
-          localStorage.setItem("token", response.data.token);3
-
           // send success toast msg
           this.$toast.add({severity:'success', summary: this.loginStatus, life: 2000});
-
-          // redirect to job listings
-          this.$router.push('jobListings');
         }
 
         if(response.data.status === "error"){
