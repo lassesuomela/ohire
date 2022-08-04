@@ -1,28 +1,24 @@
 <template>
-<Card>
-
-    <template #title>
-        <h2>Login</h2>
-    </template>
-    <template #content>
-        <LoginComponent/>
-    </template>
-</Card>
+<div class="loginContainer">
+    <h1>Login</h1>
+    <LoginComponent/>
+</div>
 </template>
 
 <script>
 
 import LoginComponent from "@/components/LoginComponent.vue"
-import Card from 'primevue/card';
 
 export default {
     components: {
         LoginComponent,
-        Card,
     }
 }
 </script>
 
-<style>
+<style scoped>
 
+.loginContainer {
+    padding-top: 2rem;
+}
 </style>
