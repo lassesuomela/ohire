@@ -45,6 +45,11 @@ export default {
   },
   methods: {
     FetchJobs () {
+
+      if(!localStorage.getItem("token")){
+        return;
+      }
+
       axios.get('/jobs/' + this.currentPage).then(response => {
         console.log(response);
 

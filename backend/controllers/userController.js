@@ -94,7 +94,12 @@ const login = (req, res) => {
     })
 }
 
+const authenticated = (req, res) => {
+    res.json({status:"success", message:"Authenticated"});
+}
+
 module.exports = {
     register,
-    login
+    login,
+    authenticated
 }
