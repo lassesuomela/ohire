@@ -1,6 +1,5 @@
 <template>
   <div class="field">
-
     <i class="material-symbols-outlined">account_circle</i>
     <InputText type="text" v-model="username" placeholder="Username" name="username"/>
   </div>
@@ -67,8 +66,8 @@ export default {
           // send success toast msg
           this.$toast.add({severity:'success', summary: this.loginStatus, life: 2000});
 
-          // redirect to job listings
-          this.$router.push('jobs');
+          // refresh
+          this.$router.go();
         }
 
         if(response.data.status === "error"){
@@ -82,6 +81,11 @@ export default {
         console.log(error);
       })
     }
+  },
+  mounted () {
+    if(localStorage.getItem('token')){
+      this.$router.push('/jobs');
+    }
   }
 }
 </script>
@@ -90,9 +94,13 @@ export default {
 
 .field i {
   padding-right: 1rem;
+  font-size: 2rem;
 }
 
 .field {
+  justify-content: center;
+  text-align: center;
+  display: flex;
   padding: 0.5rem;
 }
 

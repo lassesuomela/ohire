@@ -8,17 +8,14 @@
     <i class="material-symbols-outlined">email</i>
     <InputText type="text" v-model="email" disabled name="email"/>
   </div>
-
   <div class="field">
     <i class="material-symbols-outlined">calendar_month</i>
     <InputText type="text" v-model="createdAt" disabled name="createdAt"/>
   </div>
-
   <Toast />
 </template>
 
 <script>
-
 import InputText from 'primevue/inputtext';
 import Toast from 'primevue/toast';
 
@@ -28,7 +25,7 @@ export default {
   name: 'LoginComponent',
   components: {
     InputText,
-    Toast
+    Toast,
   },
   data () {
     return {
@@ -77,16 +74,18 @@ export default {
 
 <style scoped>
 
+@import "/node_modules/primeflex/primeflex.css";
+@import "/node_modules/primeflex/themes/arya-blue.css";
 .field i {
   padding-right: 1rem;
+  font-size: 2rem;
 }
 
-.field {
+.field{
+  justify-content: center;
+  text-align: center;
+  display: flex;
   padding: 0.5rem;
-}
-
-.registerField {
-  padding-top: 1rem;
 }
 
 </style>

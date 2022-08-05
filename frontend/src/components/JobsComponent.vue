@@ -1,6 +1,7 @@
 <template>
 
 <div class="jobContainer">
+
   <DataTable :value="jobs" :paginator="true" :rows="30">
     <Column field="title" header="Title"></Column>
     <Column field="description" header="Description"></Column>
@@ -18,7 +19,6 @@
 </template>
 
 <script>
-
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 
@@ -40,7 +40,7 @@ export default {
       status: null,
       currentPage: 1,
       maxPage: 1,
-      jobs: []
+      jobs: [],
     }
   },
   methods: {
@@ -75,6 +75,10 @@ export default {
           }else{
             this.jobs[i].salary = "Not specified";
           }
+
+          if(this.jobs[i].description.length > 150){
+            this.jobs[i].description = this.jobs[i].description.substring(0, 150) + "...";
+          }
         }
 
       }).catch(error => {
@@ -107,6 +111,9 @@ export default {
 <style scoped>
 
 .jobContainer {
+  justify-content: center;
+  text-align: center;
+  display: flex;
   padding: 2rem;
   padding-left: 5rem;
   padding-right: 5rem;

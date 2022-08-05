@@ -102,15 +102,20 @@ export default {
 <style scoped>
 
 .field i {
+  font-size: 2rem;
   padding-right: 1rem;
 }
 
 .field {
+  justify-content: center;
+  text-align: center;
+  display: flex;
   padding: 0.5rem;
 }
 
 .registerField {
   padding-top: 1rem;
+  
 }
 
 </style>

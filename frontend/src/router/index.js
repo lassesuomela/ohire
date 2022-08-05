@@ -72,10 +72,12 @@ router.beforeEach((to) => {
 
         }else{
             // incase of error status we dont let the user in
+            localStorage.removeItem('token');
             return router.push('Login');
         }
 
         if(!isAuthenticated){
+            localStorage.removeItem('token');
             return router.push('Login');
         }else{
             return true;
@@ -83,6 +85,7 @@ router.beforeEach((to) => {
 
     }).catch(error => {
         console.log(error);
+        localStorage.removeItem('token');
         return router.push('Login');
     })
 })
