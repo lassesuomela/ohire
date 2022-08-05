@@ -2,7 +2,7 @@
     <h1>{{title}}</h1>
     <h3>Salary: {{salary}}</h3>
   <div class="field">
-    <Textarea v-model="description" :autoResize="true" rows="20" cols="100" maxlength="1000" disabled/>
+    <Textarea class="customText" v-model="description" :autoResize="true" rows="20" cols="100" maxlength="1000" disabled/>
   </div>
   <div class="field">
     <Button label="Apply" icon="pi pi-arrow-right" iconPos="right" @click="Apply(id)"/>
@@ -96,6 +96,11 @@ export default {
 
 .registerField {
   padding-top: 1rem;
+}
+
+.customText {
+  color: black;
+  font-size: 16px;
 }
 
 </style>
