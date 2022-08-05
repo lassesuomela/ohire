@@ -1,6 +1,8 @@
 <template>
+<div class="container">
     <h1>Jobs</h1>
     <JobComponent/>
+</div>
 </template>
 
 <script>
@@ -15,5 +17,9 @@ export default {
 </script>
 
 <style scoped>
+
+.container {
+    padding-top: 2rem;
+}
 
 </style>

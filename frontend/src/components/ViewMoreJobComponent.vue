@@ -47,6 +47,8 @@ export default {
 
           if(!this.salary) {
             this.salary = "Not specified";
+          }else {
+            this.salary = this.FormatSalary(this.salary);
           }
         }
 
@@ -64,6 +66,13 @@ export default {
     Apply(id) {
       this.$router.push('/apply/' + id);
     },
+    FormatSalary(salary){
+
+      return new Intl.NumberFormat('fi', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(salary);
+    }
   },
   mounted () {
     this.FetchJob(this.id);

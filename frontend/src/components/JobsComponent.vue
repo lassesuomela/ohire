@@ -2,13 +2,17 @@
 
 <div class="jobContainer">
 
-  <DataTable :value="jobs" :paginator="true" :rows="30">
+  <DataTable :value="jobs" :paginator="true" :rows="10" :first="currentPage-1" :rowHover="true" >
     <Column field="title" header="Title">
       <template #body="slotProps">
-        <p @click="ViewMore(slotProps.data.id)">{{slotProps.data.title}}</p>
+        <p class="link" @click="ViewMore(slotProps.data.id)">{{slotProps.data.title}}</p>
       </template>
     </Column>
-    <Column field="description" header="Description"></Column>
+    <Column field="description" header="Description">
+      <template #body="slotProps">
+        <p class="link" @click="ViewMore(slotProps.data.id)">{{slotProps.data.description}}</p>
+      </template>
+    </Column>
     <Column field="salary" header="Salary"></Column>
     <Column field="timestamp" header="Date"></Column>
     <Column header="Apply">
@@ -80,8 +84,12 @@ export default {
             this.jobs[i].salary = "Not specified";
           }
 
-          if(this.jobs[i].description.length > 150){
-            this.jobs[i].description = this.jobs[i].description.substring(0, 150) + "...";
+          if(this.jobs[i].description.length > 120){
+            this.jobs[i].description = this.jobs[i].description.substring(0, 120) + "...";
+          }
+
+          if(this.jobs[i].title.length > 35){
+            this.jobs[i].title = this.jobs[i].title.substring(0, 35) + "...";
           }
         }
 
@@ -124,5 +132,9 @@ export default {
   padding: 2rem;
   padding-left: 5rem;
   padding-right: 5rem;
+}
+
+.link {
+  cursor: pointer;
 }
 </style>

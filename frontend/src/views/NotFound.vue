@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <h2>Not found</h2>
+  <div class="container">
+    <h1>Not found</h1>
     <p>Oops! Nothing to see here</p>
   </div>
 </template>
 
-<script>
-export default {
-
+<style scoped>
+.container {
+  padding-top: 2rem;
 }
-</script>
-
-<style>
-
 </style>
