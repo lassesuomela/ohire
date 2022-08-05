@@ -67,6 +67,11 @@ const router = createRouter({
 
 router.beforeEach((to) => {
 
+    // this is to 'fix' ghost token 
+    if(to.name === 'Logout'){
+        router.go();
+    }
+
     document.title = to.name;
     let isAuthenticated = false;
 
