@@ -1,6 +1,7 @@
 <template>
     <div>
-      <MenuComponent />
+      <AuthenticatedMenu v-if="isAuthenticated"/>
+      <UnauthenticatedMenu v-else/>
 
       <div>
         <router-view></router-view>
@@ -11,12 +12,40 @@
 
 <script>
 
-import MenuComponent from '@/components/MenuComponent.vue';
+import AuthenticatedMenu from '@/components/AuthenticatedMenuComponent.vue';
+import UnauthenticatedMenu from '@/components/UnauthenticatedMenuComponent.vue';
+
+import axios from './axios';
 
 export default {
   name: 'App',
   components: {
-    MenuComponent
+    AuthenticatedMenu,
+    UnauthenticatedMenu
+  },
+  data () { 
+    return {
+      isAuthenticated: null,
+    }
+  },
+  methods: {
+    CheckLogin () {
+      axios.get('/user').then((response) => {
+        if(response.data.status === "success"){
+            this.isAuthenticated = true;
+
+        }else{
+            // incase of error status we dont let the user in
+            this.isAuthenticated = false;
+        }
+      }).catch(error => {
+        console.log(error);
+        this.isAuthenticated = false;
+      })
+    }
+  },
+  mounted () {
+    this.CheckLogin();
   }
 }
 </script>
@@ -25,7 +54,6 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 @import url('https://fonts.googleapis.com/css?family=Material+Symbols+Outlined');
-
 
 #app {
   font-family: 'Roboto Condensed';

@@ -2,8 +2,9 @@
   <div class="field">
     <i class="material-symbols-outlined">title</i>
     <InputText type="text" v-model="title" placeholder="Title" name="title" aria-describedby="title-help" maxLength="60"/>
-    <span id="title-help">{{title.length}} / 60</span>
+    <p id="title-help">{{title.length}} / 60</p>
   </div>
+
   <div class="field">
     <i class="material-symbols-outlined">payments</i>
     <InputNumber v-model="salary" id="integeronly" placeholder="Salary" locale="fi-FI" />
@@ -11,7 +12,7 @@
   <div class="field">
     <i class="material-symbols-outlined">edit_note</i>
     <Textarea v-model="description" placeholder="Description" :autoResize="true" rows="8" cols="60" maxlength="1000"/>
-    <span id="description-help">{{description.length}} / 1000</span>
+    <p id="description-help">{{description.length}} / 1000</p>
   </div>
   <div class="field">
     <Button label="Create" icon="pi pi-cloud-upload" iconPos="right" @click="Create"/>

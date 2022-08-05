@@ -107,7 +107,7 @@ const profile = (req, res) => {
             return res.json({status:"error", message:err});
         }
 
-        res.json({status:"success", data:result});
+        res.json({status:"success", data:result[0]});
     })
 }
 

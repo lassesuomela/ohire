@@ -1,16 +1,22 @@
 <template>
   <div class="field">
     <i class="material-symbols-outlined">account_circle</i>
-    <InputText type="text" v-model="username" disabled name="username"/>
+    <InputText class="customText" type="text" v-model="username" disabled name="username"/>
   </div>
 
   <div class="field">
     <i class="material-symbols-outlined">email</i>
-    <InputText type="text" v-model="email" disabled name="email"/>
+    <InputText class="customText" type="text" v-model="email" disabled name="email"/>
   </div>
+
+  <div class="field">
+    <i class="material-symbols-outlined">badge</i>
+    <InputText class="customText" type="text" v-model="accountType" disabled name="accountType"/>
+  </div>
+
   <div class="field">
     <i class="material-symbols-outlined">calendar_month</i>
-    <InputText type="text" v-model="createdAt" disabled name="createdAt"/>
+    <InputText class="customText" type="text" v-model="createdAt" disabled name="createdAt"/>
   </div>
   <Toast />
 </template>
@@ -33,6 +39,7 @@ export default {
       email: null,
       createdAt: null,
       status: null,
+      accountType: null,
     }
   },
   methods: {
@@ -42,10 +49,17 @@ export default {
         console.log(response);
 
         if(response.data.status === "success"){
-          this.status = response.data.message;
-          this.username = response.data.data[0].username;
-          this.email = response.data.data[0].email;
-          this.createdAt = this.FormatDate(response.data.data[0].createdAt);
+          this.username = response.data.data.username;
+          this.email = response.data.data.email;
+
+          this.createdAt = this.FormatDate(response.data.data.createdAt);
+
+          // check for role
+          if(response.data.data.role === 1){
+            this.accountType = "User";
+          }else if(response.data.data.role === 2){
+            this.accountType = "Corporate User";
+          }
         }
 
         if(response.data.status === "error"){
@@ -86,6 +100,11 @@ export default {
   text-align: center;
   display: flex;
   padding: 0.5rem;
+}
+
+.customText {
+  color: black;
+  font-size: 16px;
 }
 
 </style>
