@@ -6,7 +6,7 @@
   </div>
   <div class="field">
     <i class="material-symbols-outlined">payments</i>
-    <InputNumber v-model="salary" id="integeronly" placeholder="Salary" :useGrouping="false" />
+    <InputNumber v-model="salary" id="integeronly" placeholder="Salary" locale="fi-FI" />
   </div>
   <div class="field">
     <i class="material-symbols-outlined">edit_note</i>

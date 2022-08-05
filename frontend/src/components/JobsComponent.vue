@@ -3,7 +3,11 @@
 <div class="jobContainer">
 
   <DataTable :value="jobs" :paginator="true" :rows="30">
-    <Column field="title" header="Title"></Column>
+    <Column field="title" header="Title">
+      <template #body="slotProps">
+        <p @click="ViewMore(slotProps.data.id)">{{slotProps.data.title}}</p>
+      </template>
+    </Column>
     <Column field="description" header="Description"></Column>
     <Column field="salary" header="Salary"></Column>
     <Column field="timestamp" header="Date"></Column>
@@ -100,6 +104,9 @@ export default {
     },
     Apply(id) {
       this.$router.push('apply/' + id);
+    },
+    ViewMore(id) {
+      this.$router.push('job/' + id);
     }
   },
   mounted () {

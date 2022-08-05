@@ -7,6 +7,9 @@ const jobs = {
     getCount: (cb) => {
         return db.query('SELECT COUNT(id) AS maxCount FROM jobListings', cb);
     },
+    getById: (id, cb) => {
+        return db.query('SELECT * from jobListings WHERE id = ? LIMIT 1', [id], cb);
+    },
     getNAmountOfPostings: (n, cb) =>{
         return db.query("SELECT * FROM jobListings ORDER BY id DESC LIMIT ?, 10", [n], cb);
     },

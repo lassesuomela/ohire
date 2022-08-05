@@ -15,11 +15,11 @@ export default {
     data () {
         return {
             itemsAuthenticated: [
-                {label: 'Job Listings', to: 'jobs'},
+                {label: 'Job Listings', to: '/jobs'},
                 {label: 'Create Jobs', to: '/createJobs'},
-                {label: 'Meetings', to: 'meetings'},
-                {label: 'Profile', to: 'profile'},
-                {label: 'Logout', to: 'logout'},
+                {label: 'Meetings', to: '/meetings'},
+                {label: 'Profile', to: '/profile'},
+                {label: 'Logout', to: '/logout'},
             ],
             itemsUnauthenticated: [
                 {label: 'Login', to: 'login'},

@@ -6,6 +6,7 @@ import RegisterView from "@/views/RegisterView.vue";
 import JobView from "@/views/JobView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import CreateJobsView from "@/views/CreateJobsView.vue";
+import ViewMoreJobView from "@/views/ViewMoreJobView.vue";
 
 import axios from "../axios";
 
@@ -42,6 +43,14 @@ const routes = [
         }
     },
     {
+        path: "/job/:id",
+        component: ViewMoreJobView,
+        name: "Job",
+        meta: {
+            auth: true
+        }
+    },
+    {
         path: "/profile",
         component: ProfileView,
         name: "Profile",
@@ -68,7 +77,7 @@ const router = createRouter({
 router.beforeEach((to) => {
 
     // this is to 'fix' ghost token 
-    if(to.name === 'Logout'){
+    if(to.name === 'Logout' && localStorage.getItem('token')){
         router.go();
     }
 

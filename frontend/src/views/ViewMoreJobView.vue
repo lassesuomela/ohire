@@ -1,17 +1,16 @@
 <template>
 <div class="container">
-    <h1>Create Job Listing</h1>
-    <CreateJobsComponent/>
+    <ViewMoreJobComponent/>
 </div>
 </template>
 
 <script>
 
-import CreateJobsComponent from "@/components/CreateJobsComponent.vue"
+import ViewMoreJobComponent from "@/components/ViewMoreJobComponent.vue"
 
 export default {
     components: {
-        CreateJobsComponent,
+        ViewMoreJobComponent,
     }
 }
 </script>

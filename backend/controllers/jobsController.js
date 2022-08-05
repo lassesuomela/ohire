@@ -73,8 +73,32 @@ const getNAmountOfPostings = (req, res) => {
     })
 }
 
+const getById = (req, res) => {
+
+    let id = req.params.id;
+
+    if(!id){
+        return res.json({status:"error",message:"Page number is required"});
+    }
+
+    jobsModel.getById(id, (err, result) => {
+
+        if(err){
+            console.log(err);
+            return res.json({status:"error", message:err});
+        }
+
+        if(!result) {
+            return res.json({status:"error", message:"No job listings found for that id"});
+        }
+
+        res.json({status:"success", data:result[0]})
+    })
+}
+
 module.exports = {
     create,
     getNAmountOfPostings,
+    getById,
     
 }

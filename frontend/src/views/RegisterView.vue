@@ -1,5 +1,5 @@
 <template>
-<div class="registerContainer">
+<div class="container">
     <h1>Register</h1>
     <RegisterComponent/>
 </div>
@@ -18,7 +18,7 @@ export default {
 
 <style scoped>
 
-.registerContainer {
+.container {
     padding-top: 2rem;
 }
 </style>
