@@ -17,7 +17,6 @@ insert into meetings (timestamp, description) values ("2022-11-02 12:00:00", "Jo
 insert into participants (meetings_id, users_id) values (3, 4);
 insert into applications (timestamp, application, cvFile, applicationFile, users_id, joblistings_id) values ("2022-08-05 18:16:20", "very fancy application", "/file/applicaitons", "/file/cv", 34, 11);
 
-
 select users.username, users.uuid, meetings.timestamp, meetings.description, meetings.id, participants.meetings_id
 	from users 
     left JOIN participants on participants.users_id = users.id and users.id = 1
@@ -39,7 +38,6 @@ FROM participants p1
      inner join users on users.id = p2.users_id
      inner join meetings on meetings.id = p2.meetings_id
 WHERE p1.users_id=1 AND p2.users_id<>1;
-
 
 # select all applications made with specifed user id
 SELECT users.username, applications.timestamp, joblistings.title
