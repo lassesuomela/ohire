@@ -16,6 +16,7 @@ export default {
         return {
             itemsAuthenticated: [
                 {label: 'Job Listings', to: 'jobs'},
+                {label: 'Create Jobs', to: '/createJobs'},
                 {label: 'Meetings', to: 'meetings'},
                 {label: 'Profile', to: 'profile'},
                 {label: 'Logout', to: 'logout'},

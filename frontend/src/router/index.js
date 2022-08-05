@@ -5,6 +5,7 @@ import LogoutComponent from "@/components/LogoutComponent.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import JobView from "@/views/JobView.vue";
 import ProfileView from "@/views/ProfileView.vue";
+import CreateJobsView from "@/views/CreateJobsView.vue";
 
 import axios from "../axios";
 
@@ -44,6 +45,14 @@ const routes = [
         path: "/profile",
         component: ProfileView,
         name: "Profile",
+        meta: {
+            auth: true
+        }
+    },
+    {
+        path: "/createJobs",
+        component: CreateJobsView,
+        name: "Create job listings",
         meta: {
             auth: true
         }
