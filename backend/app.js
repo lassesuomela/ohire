@@ -23,13 +23,18 @@ app.use(morgan('dev'));
 let auth = require('./configs/auth');
 
 let userRoutes = require('./routes/userRoutes');
+let loginRoutes = require('./routes/loginRoutes');
 let jobRoutes = require('./routes/jobRoutes');
+let applicationRoutes = require('./routes/applicationRoutes');
 
-app.use('/api/', userRoutes);
+app.use('/api/', loginRoutes);
 
 app.use(auth);
 
+app.use('/api/', userRoutes);
 app.use('/api/', jobRoutes);
+app.use('/api/', applicationRoutes);
+
 // start the server and bind to all interfaces
 app.listen(port, "0.0.0.0", () => {
     console.log(`Listening at http://localhost:${port}`);

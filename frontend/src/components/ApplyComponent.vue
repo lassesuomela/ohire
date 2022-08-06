@@ -48,7 +48,7 @@ export default {
 
       let data = {
         application:this.application,
-        jobId:this.jobId
+        jobId:this.jobId,
       }
 
       axios.post('/application', data).then(response => {

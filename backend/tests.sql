@@ -40,7 +40,7 @@ FROM participants p1
 WHERE p1.users_id=1 AND p2.users_id<>1;
 
 # select all applications made with specifed user id
-SELECT users.username, applications.timestamp, joblistings.title
+SELECT users.username, applications.id, applications.timestamp, joblistings.title, joblistings.id
 FROM applications
 	JOIN users on users.id = applications.users_id
     JOIN joblistings on joblistings.id = applications.joblistings_id
