@@ -4,7 +4,7 @@ import PrimeVue from 'primevue/config';
 import router from './router';
 
 import 'primevue/resources/themes/bootstrap4-light-blue/theme.css'
-import 'primevue/resources/primevue.min.css';
+import 'primevue/resources/primevue.css';
 import 'primeicons/primeicons.css';
 
 import ToastService from 'primevue/toastservice';

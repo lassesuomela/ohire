@@ -78,7 +78,7 @@ const getById = (req, res) => {
     let id = req.params.id;
 
     if(!id){
-        return res.json({status:"error",message:"Page number is required"});
+        return res.json({status:"error",message:"Job id number is required"});
     }
 
     jobsModel.getById(id, (err, result) => {

@@ -7,6 +7,7 @@ import JobView from "@/views/JobView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import CreateJobsView from "@/views/CreateJobsView.vue";
 import ViewMoreJobView from "@/views/ViewMoreJobView.vue";
+import ApplyView from "@/views/ApplyView.vue";
 
 import axios from "../axios";
 import store from '../store';
@@ -70,6 +71,14 @@ const routes = [
         meta: {
             auth: true,
             corporateUserNeeded: true
+        }
+    },
+    {
+        path: "/apply/:id",
+        component: ApplyView,
+        name: "Apply for a job",
+        meta: {
+            auth: true,
         }
     },
 ];
