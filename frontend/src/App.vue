@@ -63,4 +63,8 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.notification {
+  font-family: 'Roboto Condensed';
+}
 </style>
