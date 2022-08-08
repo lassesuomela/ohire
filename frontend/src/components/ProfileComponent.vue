@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ElForm from 'element-plus';
+import {ElForm} from 'element-plus';
 
 import axios from '../axios';
 

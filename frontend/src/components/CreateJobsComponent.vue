@@ -1,43 +1,51 @@
 <template>
-  <div class="field">
-    <i class="material-symbols-outlined">title</i>
-    <InputText type="text" v-model="title" placeholder="Title" name="title" aria-describedby="title-help" maxLength="60"/>
-    <p id="title-help">{{title.length}} / 60</p>
-  </div>
+<div class="container">
+  <el-card>
+    <el-main>
+      <el-form label-position="top">
+        <el-form-item label="Job Title">
+          <el-input v-model="title" placeholder="Title" size="large" show-word-limit="true" maxlength="60">
+            <template #prepend>
+              <i class="material-symbols-outlined">title</i>
+            </template>
+          </el-input>
+        </el-form-item>
 
-  <div class="field">
-    <i class="material-symbols-outlined">payments</i>
-    <InputNumber v-model="salary" id="integeronly" placeholder="Salary" locale="fi-FI" />
-  </div>
-  <div class="field">
-    <i class="material-symbols-outlined">edit_note</i>
-    <Textarea v-model="description" placeholder="Description" :autoResize="true" rows="8" cols="60" maxlength="1000"/>
-    <p id="description-help">{{description.length}} / 1000</p>
-  </div>
-  <div class="field">
-    <Button label="Create" icon="pi pi-cloud-upload" iconPos="right" @click="Create"/>
-  </div>
-  <Toast />
+        <el-form-item label="Salary">
+          <el-input type="number" v-model="salary" placeholder="0" size="large" controls="false">
+            <template #prepend>
+              <i class="material-symbols-outlined">payments</i>
+            </template>
+
+            <template #suffix>
+              <i class="material-symbols-outlined">euro</i>
+            </template>
+          </el-input>
+        </el-form-item>
+
+        <el-form-item label="Job Description">
+          <el-input v-model="description" placeholder="Description" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}"/>
+        </el-form-item>
+
+        <div class="btn">
+          <el-button @click="Create" size="large" type="primary">Create<i class="material-symbols-outlined">send</i></el-button>
+        </div>
+      </el-form>
+    </el-main>
+  </el-card>
+</div>
 </template>
 
 <script>
-
-import InputNumber from 'primevue/inputnumber';
-import InputText from 'primevue/inputtext';
-import Textarea from 'primevue/textarea';
-import Button from 'primevue/button';
-import Toast from 'primevue/toast';
+import { ElButton, ElForm} from 'element-plus';
 
 import axios from '../axios';
 
 export default {
   name: 'LoginComponent',
   components: {
-    InputText,
-    Button,
-    Textarea,
-    Toast,
-    InputNumber
+    ElButton,
+    ElForm,
   },
   data () {
     return {
@@ -51,17 +59,17 @@ export default {
     Create () {
 
       if(!this.title || !this.description){
-        this.$toast.add({severity:'warn', summary: 'One or more fields must be provided', detail:'', life: 3000});
+        this.$notify({title:"Warning", message:"One or more fields must be provided", type:"warning", customClass:"notification"});
         return;
       }
 
       if(this.description.length > 1000){
-        this.$toast.add({severity:'warn', summary: 'Description is too long', detail:'Length must be less than 1000', life: 3000});
+        this.$notify({title:"Warning", message:"Description is too long", type:"warning", customClass:"notification"});
         return;
       }
 
       if(this.title.length > 60){
-        this.$toast.add({severity:'warn', summary: 'Title is too long', detail:'Length must be less than 60', life: 3000});
+        this.$notify({title:"Warning", message:"Title is too long", type:"warning", customClass:"notification"});
         return;
       }
 
@@ -77,15 +85,15 @@ export default {
         if(response.data.status === "success"){
           this.status = response.data.message;
 
-          // send success toast msg
-          this.$toast.add({severity:'success', summary: this.status, life: 2000});
+          // send success msg
+          this.$notify({title:"Success", message:this.status, type:"success", customClass:"notification"});
         }
 
         if(response.data.status === "error"){
           this.status = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.status, life: 2000});
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
         }
 
       }).catch(error => {
@@ -98,30 +106,19 @@ export default {
 
 <style scoped>
 
-.field i {
-  padding-right: 1rem;
-  font-size: 2rem;
+.btn{
+  padding-top: 2rem;
 }
 
-.field {
+.btn i{
+  padding-left: 0.5rem;
+}
+
+.container {
   justify-content: center;
   text-align: center;
-  display: flex;
-  padding: 0.5rem;
-}
-
-.registerField {
-  padding-top: 1rem;
-}
-
-#title-help {
-  padding-left: 0.5rem;
-  font-size: 14px;
-}
-
-#description-help {
-  padding-left: 0.5rem;
-  font-size: 14px;
+  display: grid;
+  font-size: 1.2em;
 }
 
 </style>
