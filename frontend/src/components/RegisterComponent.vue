@@ -1,9 +1,9 @@
 <template>
 <div class="container">
-  <el-container>
+  <el-card>
     <el-main>
       <el-form label-position="top">
-        <el-form-item label="Username"  >
+        <el-form-item label="Username">
           <el-input v-model="username" placeholder="Username" size="large">
             <template #prepend>
               <i class="material-symbols-outlined">account_circle</i>
@@ -44,7 +44,7 @@
       </div>
 
     </el-footer>
-  </el-container>
+  </el-card>
 </div>
 <Toast />
 
@@ -103,6 +103,8 @@ export default {
 
           // send success notification
           this.$notify({title:"Success", message:this.loginStatus, type:"success", customClass:"notification"});
+
+          this.$router.push('/login');
         }
 
         if(response.data.status === "error"){
@@ -145,6 +147,7 @@ export default {
   justify-content: center;
   text-align: center;
   display: grid;
+  font-size: 1.2em;
 }
 
 </style>
