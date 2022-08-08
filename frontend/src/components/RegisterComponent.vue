@@ -34,11 +34,13 @@
             </template>
           </el-input>
         </el-form-item>
-
-        <el-button @click="Register" size="large" type="primary">Register<i class="material-symbols-outlined">login</i></el-button>
+        <div class="registerBtn">
+          <el-button @click="Register" size="large" type="primary">Register<i class="material-symbols-outlined">login</i></el-button>
+        </div>
       </el-form>
     </el-main>
     <el-footer>
+
       <div class="registerField">
         <span>Already have an account? <router-link to="/login">Login here</router-link></span>
       </div>
@@ -136,6 +138,10 @@ export default {
 
 .registerField {
   padding-top: 1rem;
+}
+
+.registerBtn{
+  padding-top: 2rem;
 }
 
 .container {

@@ -1,37 +1,54 @@
 <template>
-  <div class="field">
-    <i class="material-symbols-outlined">account_circle</i>
-    <InputText class="customText" type="text" v-model="username" disabled name="username"/>
-  </div>
+<div class="container">
+  <el-card>
+    <el-main>
+      <el-form label-position="top">
+        <el-form-item label="Username">
+          <el-input v-model="username" size="large" disabled class="customText">
+            <template #prepend>
+              <i class="material-symbols-outlined">account_circle</i>
+            </template>
+          </el-input>
+        </el-form-item>
 
-  <div class="field">
-    <i class="material-symbols-outlined">email</i>
-    <InputText class="customText" type="text" v-model="email" disabled name="email"/>
-  </div>
+        <el-form-item label="Email">
+          <el-input v-model="email" size="large" disabled class="customText">
+            <template #prepend>
+              <i class="material-symbols-outlined">email</i>
+            </template>
+          </el-input>
+        </el-form-item>
 
-  <div class="field">
-    <i class="material-symbols-outlined">badge</i>
-    <InputText class="customText" type="text" v-model="accountType" disabled name="accountType"/>
-  </div>
+        <el-form-item label="Account type">
+          <el-input v-model="accountType" size="large" disabled class="customText">
+            <template #prepend>
+              <i class="material-symbols-outlined">badge</i>
+            </template>
+          </el-input>
+        </el-form-item>
 
-  <div class="field">
-    <i class="material-symbols-outlined">calendar_month</i>
-    <InputText class="customText" type="text" v-model="createdAt" disabled name="createdAt"/>
-  </div>
-  <Toast />
+        <el-form-item label="Creation date">
+          <el-input v-model="createdAt" size="large" disabled class="customText">
+            <template #prepend>
+              <i class="material-symbols-outlined">calendar_month</i>
+            </template>
+          </el-input>
+        </el-form-item>
+      </el-form>
+    </el-main>
+  </el-card>
+</div>
 </template>
 
 <script>
-import InputText from 'primevue/inputtext';
-import Toast from 'primevue/toast';
+import ElForm from 'element-plus';
 
 import axios from '../axios';
 
 export default {
   name: 'LoginComponent',
   components: {
-    InputText,
-    Toast,
+    ElForm
   },
   data () {
     return {
@@ -65,8 +82,8 @@ export default {
         if(response.data.status === "error"){
           this.status = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.status, life: 2000});
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", class:"notification"});
         }
 
       }).catch(error => {
@@ -88,8 +105,6 @@ export default {
 
 <style scoped>
 
-@import "/node_modules/primeflex/primeflex.css";
-@import "/node_modules/primeflex/themes/arya-blue.css";
 .field i {
   padding-right: 1rem;
   font-size: 2rem;
@@ -107,4 +122,10 @@ export default {
   font-size: 16px;
 }
 
+.container {
+  justify-content: center;
+  text-align: center;
+  display: grid;
+  font-size: 1.2em;
+}
 </style>
