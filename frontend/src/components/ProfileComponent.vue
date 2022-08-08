@@ -105,18 +105,6 @@ export default {
 
 <style scoped>
 
-.field i {
-  padding-right: 1rem;
-  font-size: 2rem;
-}
-
-.field{
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  padding: 0.5rem;
-}
-
 .customText {
   color: black;
   font-size: 16px;

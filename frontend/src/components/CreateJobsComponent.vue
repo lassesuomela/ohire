@@ -4,7 +4,7 @@
     <el-main>
       <el-form label-position="top">
         <el-form-item label="Job Title">
-          <el-input v-model="title" placeholder="Title" size="large" show-word-limit="true" maxlength="60">
+          <el-input v-model="title" placeholder="Title" size="large" show-word-limit="true" maxlength="60" class="customText">
             <template #prepend>
               <i class="material-symbols-outlined">title</i>
             </template>
@@ -12,7 +12,7 @@
         </el-form-item>
 
         <el-form-item label="Salary">
-          <el-input type="number" v-model="salary" placeholder="0" size="large" controls="false">
+          <el-input type="number" v-model="salary" placeholder="0" size="large" controls="false" class="customText">
             <template #prepend>
               <i class="material-symbols-outlined">payments</i>
             </template>
@@ -24,7 +24,7 @@
         </el-form-item>
 
         <el-form-item label="Job Description">
-          <el-input v-model="description" placeholder="Description" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}"/>
+          <el-input v-model="description" placeholder="Description" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
         </el-form-item>
 
         <div class="btn">
@@ -121,4 +121,8 @@ export default {
   font-size: 1.2em;
 }
 
+.customText {
+  color: black;
+  font-size: 16px;
+}
 </style>

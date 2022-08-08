@@ -29,7 +29,7 @@
       <div class="registerField">
         <span>New user? <router-link to="/register">Register now</router-link></span>
       </div>
-      
+
     </el-footer>
   </el-card>
 </div>
@@ -102,18 +102,6 @@ export default {
 </script>
 
 <style scoped>
-
-.field i {
-  padding-right: 1rem;
-  font-size: 2rem;
-}
-
-.field {
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  padding: 0.5rem;
-}
 
 .registerField {
   padding-top: 1rem;
