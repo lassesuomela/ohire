@@ -46,22 +46,17 @@
     </el-footer>
   </el-card>
 </div>
-<Toast />
-
 </template>
 
 <script>
 
 import { ElButton, ElForm} from 'element-plus';
 
-import Toast from 'primevue/toast';
-
 import axios from '../axios';
 
 export default {
   name: 'LoginComponent',
   components: {
-    Toast,
     ElButton,
     ElForm
   },

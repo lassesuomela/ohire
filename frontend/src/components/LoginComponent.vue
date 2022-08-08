@@ -1,39 +1,46 @@
 <template>
-  <div class="field">
-    <i class="material-symbols-outlined">account_circle</i>
-    <InputText type="text" v-model="username" placeholder="Username" name="username"/>
-  </div>
-  <div class="field">
-    <i class="material-symbols-outlined">lock</i>
-    <Password v-model="password" :feedback="false" placeholder="Password"/>
-  </div>
-  <div class="field">
-    <Button label="Login" icon="pi pi-sign-in" iconPos="right" @click="Login"/>
-  </div>
+<div class="container">
+  <el-card>
+    <el-main>
+      <el-form label-position="top">
+        <el-form-item label="Username">
+          <el-input v-model="username" placeholder="Username" size="large">
+            <template #prepend>
+              <i class="material-symbols-outlined">account_circle</i>
+            </template>
+          </el-input>
+        </el-form-item>
 
-  <div class="registerField">
-    <span>New user? <router-link to="/register">Register now</router-link></span>
-  </div>
-  <Toast />
+        <el-form-item label="Password" >
+          <el-input v-model="password" :show-password="true" type="password" placeholder="Password" size="large">
+            <template #prepend>
+              <i class="material-symbols-outlined">lock</i>
+            </template>
+          </el-input>
+        </el-form-item>
+
+        <el-button @click="Login" size="large" type="primary">Login<i class="material-symbols-outlined">login</i></el-button>
+      </el-form>
+    </el-main>
+    <el-footer>
+      <div class="registerField">
+        <span>New user? <router-link to="/register">Register now</router-link></span>
+      </div>
+    </el-footer>
+  </el-card>
+</div>
 </template>
 
 <script>
-
-
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import Button from 'primevue/button';
-import Toast from 'primevue/toast';
+import { ElButton, ElForm} from 'element-plus';
 
 import axios from '../axios';
 
 export default {
   name: 'LoginComponent',
   components: {
-    InputText,
-    Button,
-    Password,
-    Toast
+    ElButton,
+    ElForm,
   },
   data () {
     return {
@@ -46,7 +53,7 @@ export default {
     Login () {
 
       if(!this.username || !this.password){
-        this.$toast.add({severity:'warn', summary: 'One or more fields must be provided', detail:'', life: 3000});
+        this.$notify({title:"Warning", message:"One or more fields must be provided", type:"warning", customClass:"notification"});
         return;
       }
 
@@ -63,9 +70,8 @@ export default {
 
           localStorage.setItem("token", response.data.token);3
 
-          // send success toast msg
-          this.$toast.add({severity:'success', summary: this.loginStatus, life: 2000});
-
+          // send success msg
+          this.$notify({title:"Success", message:this.loginStatus, type:"success", customClass:"notification"});
           // refresh
           this.$router.go();
         }
@@ -73,8 +79,9 @@ export default {
         if(response.data.status === "error"){
           this.loginStatus = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.loginStatus, life: 2000});
+          // send error msg
+          this.$notify({title:"Error", message:this.loginStatus, type:"error", customClass:"notification"});
+
         }
 
       }).catch(error => {
@@ -108,4 +115,10 @@ export default {
   padding-top: 1rem;
 }
 
+.container {
+  justify-content: center;
+  text-align: center;
+  display: grid;
+  font-size: 1.2em;
+}
 </style>
