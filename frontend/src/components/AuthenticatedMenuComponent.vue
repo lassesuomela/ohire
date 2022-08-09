@@ -1,6 +1,8 @@
 <template>
+<div>
     <TabMenu :model="links" v-if="role === 1"/>
     <TabMenu :model="corporateLinks" v-if="role === 2"/>
+</div>
 </template>
 
 <script>

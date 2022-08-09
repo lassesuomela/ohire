@@ -1,5 +1,6 @@
 <template>
 <div class="container">
+    <h1>Job listing</h1>
     <ViewMoreJobComponent/>
 </div>
 </template>

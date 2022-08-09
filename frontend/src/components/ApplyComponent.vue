@@ -15,6 +15,7 @@
         </el-form-item>
 
         <div class="btn">
+          <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
           <el-button @click="SendApplication" size="large" type="primary">Send<i class="material-symbols-outlined">send</i></el-button>
         </div>
       </el-form>
@@ -134,4 +135,8 @@ export default {
   color: black;
   font-size: 16px;
 }
+.left {
+  padding-right: 0.5rem;
+}
+
 </style>

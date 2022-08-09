@@ -1,29 +1,39 @@
 <template>
-    <h1>{{title}}</h1>
-    <h3>Salary: {{salary}}</h3>
-  <div class="field">
-    <Textarea class="customText" v-model="description" :autoResize="true" rows="20" cols="100" maxlength="1000" disabled/>
-  </div>
-  <div class="field">
-    <Button label="Apply" icon="pi pi-arrow-right" iconPos="right" @click="Apply(id)"/>
-  </div>
-  <Toast />
+<div class="container">
+  <el-card>
+    <el-main>
+      <el-form label-position="top">
+        <el-header>
+          <h2>Job title: {{title}}</h2>
+        </el-header>
+        <el-main>
+          <h2>Salary: {{salary}}</h2>
+        </el-main>
+
+        <el-form-item label="Job Description">
+          <el-input v-model="description" size="large" type="textarea" :autosize="{minRows: 8, minColumns:100}" class="customText" disabled/>
+        </el-form-item>
+
+        <div class="btn">          
+          <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
+          <el-button @click="Apply(id)" size="large" type="primary">Apply<i class="material-symbols-outlined">edit_note</i></el-button>
+        </div>
+      </el-form>
+    </el-main>
+  </el-card>
+</div>
 </template>
 
 <script>
-
-import Textarea from 'primevue/textarea';
-import Button from 'primevue/button';
-import Toast from 'primevue/toast';
+import { ElButton, ElForm} from 'element-plus';
 
 import axios from '../axios';
 
 export default {
   name: 'LoginComponent',
   components: {
-    Button,
-    Textarea,
-    Toast,
+    ElButton, 
+    ElForm
   },
   data () {
     return {
@@ -55,8 +65,8 @@ export default {
         if(response.data.status === "error"){
           this.status = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.status, life: 2000});
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
         }
 
       }).catch(error => {
@@ -82,25 +92,27 @@ export default {
 
 <style scoped>
 
-.field i {
-  padding-right: 1rem;
-  font-size: 2rem;
-}
-
-.field {
+.container {
   justify-content: center;
   text-align: center;
-  display: flex;
-  padding: 0.5rem;
+  display: grid;
+  font-size: 1.2em;
 }
 
-.registerField {
-  padding-top: 1rem;
+.btn{
+  padding-top: 2rem;
+}
+
+.btn i{
+  padding-left: 0.5rem;
 }
 
 .customText {
   color: black;
   font-size: 16px;
+}
+.left {
+  padding-right: 0.5rem;
 }
 
 </style>
