@@ -40,8 +40,21 @@ FROM participants p1
 WHERE p1.users_id=1 AND p2.users_id<>1;
 
 # select all applications made with specifed user id
-SELECT users.username, applications.id, applications.timestamp, joblistings.title, joblistings.id
+SELECT applications.id as 'applicationId', applications.timestamp, joblistings.title, joblistings.id as 'joblistingsId'
+FROM applications
+    JOIN joblistings on joblistings.id = applications.joblistings_id
+WHERE applications.users_id = 34;
+
+# select all applications made with specifed joblistings id  and 
+SELECT users.username, applications.id as 'applicationId', applications.timestamp, joblistings.title, joblistings.id as 'joblistingsId'
+FROM applications
+    JOIN joblistings on joblistings.id = applications.joblistings_id
+    JOIN users on users.id = applications.users_id
+WHERE applications.joblistings_id = 12 AND jobListings.users_id = 34;
+
+# select applicaiton data made with specifed application id
+SELECT users.username, applications.timestamp, applications.application, applications.cvFile, applications.applicationFile, applications.rating, applications.users_id, applications.joblistings_id, joblistings.title
 FROM applications
 	JOIN users on users.id = applications.users_id
     JOIN joblistings on joblistings.id = applications.joblistings_id
-WHERE users.id = 34;
+WHERE applications.id = 17 AND applications.joblistings_id = 13;

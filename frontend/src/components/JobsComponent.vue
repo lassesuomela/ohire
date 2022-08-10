@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <el-card>
-  <ul v-infinite-scroll="Fetch" class="infinite-list" style="">
+  <ul v-infinite-scroll="Fetch" class="infinite-list">
     <li v-for="job in allJobs" :key="job">
       <a @click="ViewMore(job.id)" class="item">
         <el-card shadow="hover" :body-style="list-item">
@@ -12,7 +12,7 @@
                   <span>{{job.title}}</span>
                 </el-col>
                 <el-col :span="2">
-                  <el-tag class="companyHeader" size="large">{{job.company}}</el-tag>
+                  <el-tag class="companyHeader" size="large">{{job.company || "Company Not Defined"}}</el-tag>
                 </el-col>
               </el-row>
             </div>

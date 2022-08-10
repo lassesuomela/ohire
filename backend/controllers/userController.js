@@ -43,6 +43,47 @@ const register = (req, res) => {
     })
 }
 
+const registerCompany = (req, res) => {
+
+    let {username, password, email, company} = req.body;
+
+    let user = {};
+
+    if(!username || !password || !email || !company) {
+        return res.json({status:"error", message: "One or more fields must be provided"});
+    }
+
+    user.username = username;
+    user.email = email;
+    user.company = company;
+
+    bcrypt.hash(password, 10, (err, hash) => {
+
+        if(err){
+            console.log(err);
+
+            return res.json({status:"error", message:err});
+        }
+
+        user.password = hash;
+
+        userModel.addCompanyUser(user, (err, result) => {
+
+            if(err){
+    
+                if(err.code === 'ER_DUP_ENTRY'){
+                    return res.json({status:"error", message:"Username or email already registered"});
+                }
+    
+                console.log(err);
+                return res.json({status:"error", message:err});
+            }
+    
+            res.json({status:"success", message:"User registered for company " + company});
+        })
+    })
+}
+
 const login = (req, res) => {
 
     let {username, password} = req.body;
@@ -115,5 +156,6 @@ module.exports = {
     register,
     login,
     authenticated,
-    profile
+    profile,
+    registerCompany
 }

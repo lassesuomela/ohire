@@ -3,6 +3,7 @@ import NotFound from "@/views/NotFound.vue";
 import LoginView from "@/views/LoginView.vue";
 import LogoutComponent from "@/components/LogoutComponent.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import RegisterCompanyView from "@/views/RegisterCompanyView.vue";
 import JobView from "@/views/JobView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import CreateJobsView from "@/views/CreateJobsView.vue";
@@ -39,6 +40,11 @@ const routes = [
         path: "/register",
         component: RegisterView,
         name: "Register"
+    },
+    {
+        path: "/registerCompany",
+        component: RegisterCompanyView,
+        name: "Register Company"
     },
     {
         path: "/jobs",

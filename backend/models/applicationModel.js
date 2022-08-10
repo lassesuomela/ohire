@@ -2,7 +2,7 @@ const db = require('../configs/db');
 
 const applications = {
     add: (data, cb) =>{
-        return db.query('INSERT INTO applications (application, users_id, joblistings_id, cvFile, applicationFile) VALUES (?, ?, ?, ?, ?)', [data.application, data.users_id, data.joblistings_id, data.cvFile, data.applicationFile], cb)
+        return db.query('INSERT INTO applications (application, users_id, joblistings_id, cvFile, applicationFile) VALUES (?, ?, ?, ?, ?)', [data.application, data.users_id, data.joblistings_id, data.cvFile, data.applicationFile], cb);
     },
     getByUsersId: (id, cb) => {
         return db.query("SELECT applications.id as 'applicationId', applications.timestamp, joblistings.title, joblistings.id as 'joblistingsId' FROM applications JOIN joblistings on joblistings.id = applications.joblistings_id WHERE applications.users_id = ?", [id], cb);

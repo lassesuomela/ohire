@@ -12,8 +12,9 @@ export default {
     data () {
         return {
             items: [
-                {label: 'Login', to: 'login'},
-                {label: 'Register', to: 'register'},
+                {label: 'Login', to: '/login'},
+                {label: 'Register', to: '/register'},
+                {label: 'Register Company', to: '/registerCompany'},
             ],
         }
     }

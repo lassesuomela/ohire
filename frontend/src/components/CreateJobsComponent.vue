@@ -23,6 +23,17 @@
           </el-input>
         </el-form-item>
 
+        <el-form-item label="Working time">
+          <el-select v-model="workingTime" placeholder="Select">
+            <el-option class="notification"
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="Job Description">
           <el-input v-model="description" placeholder="Description" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
         </el-form-item>
@@ -53,12 +64,23 @@ export default {
       description: "",
       salary: null,
       status: null,
+      workingTime: null,
+      options: [
+        {
+          value: 1,
+          label: "Full-time",
+        },
+        {
+          value: 2,
+          label: "Part-time",
+        }
+      ]
     }
   },
   methods: {
     Create () {
 
-      if(!this.title || !this.description){
+      if(!this.title || !this.description || !this.workingTime){
         this.$notify({title:"Warning", message:"One or more fields must be provided", type:"warning", customClass:"notification"});
         return;
       }
@@ -77,6 +99,7 @@ export default {
         title: this.title,
         description: this.description,
         salary: this.salary,
+        workingTime: this.workingTime
       }
 
       axios.post('/jobs', data).then(response => {
