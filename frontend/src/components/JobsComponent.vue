@@ -1,54 +1,67 @@
 <template>
-
-<div class="jobContainer">
-
-  <DataTable :value="jobs" :paginator="true" :rows="10" :first="currentPage-1" :rowHover="true" >
-    <Column field="title" header="Title">
-      <template #body="slotProps">
-        <p class="link" @click="ViewMore(slotProps.data.id)">{{slotProps.data.title}}</p>
-      </template>
-    </Column>
-    <Column field="description" header="Description">
-      <template #body="slotProps">
-        <p class="link" @click="ViewMore(slotProps.data.id)">{{slotProps.data.description}}</p>
-      </template>
-    </Column>
-    <Column field="salary" header="Salary"></Column>
-    <Column field="timestamp" header="Date"></Column>
-    <Column header="Apply">
-      <template #body="slotProps">
-        <Button type="button" icon="pi pi-arrow-right" @click="Apply(slotProps.data.id)"></Button>
-      </template>
-    </Column>
-  </DataTable>
+<div class="container">
+  <el-card>
+  <ul v-infinite-scroll="Fetch" class="infinite-list" style="">
+    <li v-for="job in allJobs" :key="job">
+      <a @click="ViewMore(job.id)" class="item">
+        <el-card shadow="hover" :body-style="list-item">
+          <template #header>
+            <div class="card-header">
+              <el-row>
+                <el-col :span="22">
+                  <span>{{job.title}}</span>
+                </el-col>
+                <el-col :span="2">
+                  <el-tag class="companyHeader" size="large" type="info">{{job.company || "Company"}}</el-tag>
+                </el-col>
+              </el-row>
+            </div>
+          </template>
+          <el-row class="description">
+            <el-col :span="18">
+              <p>{{job.description}}</p>
+            </el-col>
+            <el-col :span="6" class="details">
+              <el-col :span="24" class="details">
+                <el-tag class="detailTag" size="large" type="info">{{job.timestamp}}</el-tag>
+              </el-col>
+              <el-col :span="24" class="details">
+                <el-tag class="detailTag" size="large" type="info">{{job.workingTime}}</el-tag>
+              </el-col>
+              <el-col :span="24" class="details">
+                <el-tag class="detailTag" size="large" type="success">{{job.salary}}</el-tag>
+              </el-col>
+            </el-col>
+          </el-row>
+          
+        </el-card>
+      </a>
+    </li>
+    <p v-if="loading">Loading...</p>
+    <p v-if="!noMore">Scroll to show more job listings</p>
+    <p v-if="noMore">No more job listings found</p>
+  </ul>
+  </el-card>
 </div>
-  <Toast />
-
 </template>
 
 <script>
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-
-import Toast from 'primevue/toast';
-import Button from 'primevue/button';
-
 import axios from '../axios';
 
 export default {
   name: 'LoginComponent',
   components: {
-    Toast,
-    Button,
-    DataTable,
-    Column,
   },
   data () {
     return {
       status: null,
       currentPage: 1,
       maxPage: 1,
+      firstFetch: true,
       jobs: [],
+      allJobs: [],
+      loading: true,
+      noMore: false,
     }
   },
   methods: {
@@ -84,14 +97,25 @@ export default {
             this.jobs[i].salary = "Not specified";
           }
 
-          if(this.jobs[i].description.length > 120){
-            this.jobs[i].description = this.jobs[i].description.substring(0, 120) + "...";
+          if(this.jobs[i].description.length > 500){
+            this.jobs[i].description = this.jobs[i].description.substring(0, 500) + "...";
           }
 
-          if(this.jobs[i].title.length > 35){
-            this.jobs[i].title = this.jobs[i].title.substring(0, 35) + "...";
+          if(this.jobs[i].title.length > 60){
+            this.jobs[i].title = this.jobs[i].title.substring(0, 60) + "...";
           }
+
+          if(this.jobs[i].workingTime === 1){
+            this.jobs[i].workingTime = "Full-time";
+          }else{
+            this.jobs[i].workingTime = "Part-time";
+          }
+
+          this.allJobs.push(this.jobs[i]);
         }
+
+        this.loading = false;
+        console.log("loading done");
 
       }).catch(error => {
         console.log(error);
@@ -115,26 +139,70 @@ export default {
     },
     ViewMore(id) {
       this.$router.push('job/' + id);
+    },
+    Fetch() {
+      if(this.firstFetch){
+        this.firstFetch = false;
+        this.loading = true;
+        this.FetchJobs();
+      }else if(this.currentPage < this.maxPage && !this.firstFetch){
+        this.loading = true;
+        this.currentPage++;
+        this.FetchJobs();
+      }else{
+        this.noMore = true;
+      }
     }
-  },
-  mounted () {
-    this.FetchJobs();
   }
 }
 </script>
 
 <style scoped>
-
-.jobContainer {
+.el-col {
+  padding: 0rem;
+}
+.el-col p{
+  margin: 0rem;
+  margin-bottom: 1rem;
+}
+.container {
   justify-content: center;
   text-align: center;
-  display: flex;
-  padding: 2rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding: 20rem;
+}
+.infinite-list {
+  list-style: none;
+  padding: 0rem;
+}
+.item {
+  cursor: pointer;
+  padding: 1rem;
+}
+.list-item {
+  height: 12rem;
+}
+.card-header{
+  text-align: start;
+  font-weight: bold;
+}
+.card-header-details {
+  text-align: end;
+}
+.description {
+  text-align: start;
+  word-break: break-all;
+
+}
+.details {
+  text-align: end;
+}
+.detailTag {
+  font-size: 0.95rem;
+}
+.companyHeader {
+  font-size: 1rem;
+  font-weight: normal;
+  float:right;
 }
 
-.link {
-  cursor: pointer;
-}
 </style>

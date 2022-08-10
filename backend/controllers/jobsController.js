@@ -34,7 +34,7 @@ const getNAmountOfPostings = (req, res) => {
         return res.json({status:"error",message:"Page number is required"});
     }
 
-    let perPageCount = 30; 
+    let perPageCount = 10; 
     let maxRecordCount = 0;
     let currentPage = 0;
     let maxPage = 0;
