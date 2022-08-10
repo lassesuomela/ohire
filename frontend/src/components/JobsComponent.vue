@@ -12,7 +12,7 @@
                   <span>{{job.title}}</span>
                 </el-col>
                 <el-col :span="2">
-                  <el-tag class="companyHeader" size="large" type="info">{{job.company || "Company"}}</el-tag>
+                  <el-tag class="companyHeader" size="large">{{job.company}}</el-tag>
                 </el-col>
               </el-row>
             </div>
@@ -21,7 +21,20 @@
             <el-col :span="18">
               <p>{{job.description}}</p>
             </el-col>
-            <el-col :span="6" class="details">
+            
+            <el-col :span="4" class="details">
+              <el-col :span="24" class="details">
+                <i class="material-symbols-outlined">calendar_month</i>
+              </el-col>
+              <el-col :span="24" class="details">
+                <i class="material-symbols-outlined">schedule</i>
+              </el-col>
+              <el-col :span="24" class="details">
+                <i class="material-symbols-outlined">payments</i>
+              </el-col>
+            </el-col>
+
+            <el-col :span="2" class="details">
               <el-col :span="24" class="details">
                 <el-tag class="detailTag" size="large" type="info">{{job.timestamp}}</el-tag>
               </el-col>
@@ -191,14 +204,19 @@ export default {
 .description {
   text-align: start;
   word-break: break-all;
-
 }
 .details {
   text-align: end;
 }
 .detailTag {
   font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
+.details i {
+  padding-bottom: 1rem;
+}
+
 .companyHeader {
   font-size: 1rem;
   font-weight: normal;
