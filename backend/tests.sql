@@ -13,8 +13,8 @@ select * from applications;
 select * from jobListings;
 
 insert into users (username, password, email, role, uuid) values ("taaperi", "qweasd", "tanne@testi.com", 1, "1231231313123123");
-insert into meetings (timestamp, description) values ("2022-11-02 12:00:00", "Job intervie for Company XYZ");
-insert into participants (meetings_id, users_id) values (3, 4);
+insert into meetings (timestamp, description, joblistings_id) values ("2022-11-07 12:00:00", "Job interview", 30);
+insert into participants (meetings_id, users_id) values (4, 34);
 insert into applications (timestamp, application, cvFile, applicationFile, users_id, joblistings_id) values ("2022-08-05 18:16:20", "very fancy application", "/file/applicaitons", "/file/cv", 34, 11);
 
 select users.username, users.uuid, meetings.timestamp, meetings.description, meetings.id, participants.meetings_id
@@ -31,7 +31,7 @@ from users
      on participants.meetings_id = meetings.id;
 	
 #select all meetings for specific user based on user is
-SELECT users.username, users.uuid, meetings.id as 'meetingId',
+SELECT users.username, users.uuid, meetings.id as 'meetingId', users.uuid as 'myUuid',
        meetings.timestamp, meetings.description
 FROM participants p1
      inner join participants p2 on p2.meetings_id = p1.meetings_id
@@ -64,4 +64,6 @@ SELECT applications.id as 'applicationId', applications.timestamp, joblistings.t
 FROM applications
 JOIN joblistings on joblistings.id = applications.joblistings_id
 WHERE applications.users_id = ?
-ORDER BY applications.timestamp DESC
+ORDER BY applications.timestamp DESC;
+
+update users set uuid="53244776-7e8f-4999-bf77-afedb49b7dcd" where username = "mayday";

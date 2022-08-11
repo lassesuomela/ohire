@@ -14,7 +14,7 @@ const user = {
         return db.query('SELECT id, username, role FROM users WHERE username = ? LIMIT 1', [username], cb);
     },
     getProfileDataByUsername: (username, cb) => {
-        return db.query('SELECT role, username, email, createdAt FROM users WHERE username = ? LIMIT 1', [username], cb);
+        return db.query('SELECT role, username, email, uuid, createdAt FROM users WHERE username = ? LIMIT 1', [username], cb);
     }
 }
 

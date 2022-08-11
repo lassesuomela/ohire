@@ -3,15 +3,19 @@ import { createStore } from 'vuex'
 const store = createStore({
     state () {
       return {
-        role: null
+        role: null,
+        uuid: null,
       }
     },
     mutations: {
         normalUser (state) {
-            state.role = 1;
+          state.role = 1;
         },
         corporateUser (state) {
-            state.role = 2;
+          state.role = 2;
+        },
+        changeUuid (state, newUuid) {
+          state.uuid = newUuid;
         },
     }
 })

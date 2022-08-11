@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "element-plus": "^2.2.12",
+    "peerjs": "^1.4.7",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
     "primevue": "^3.15.0",

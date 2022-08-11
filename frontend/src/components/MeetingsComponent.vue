@@ -3,26 +3,24 @@
   <el-card>
   <ul class="infinite-list">
     <li v-for="meeting in meetings" :key="meeting">
-      <a @click="ViewMore(meeting.meetingsId)" class="item">
-        <el-card shadow="hover" :body-style="list-item">
-          <div class="card-header">
-            <el-row>
-              <el-col :span="20">
-                <span>{{meeting.description}}</span>
-              </el-col>
-              
-              <el-col :span="4">
-                <el-tag class="companyHeader" size="large">{{meeting.username}}</el-tag>
-                <el-tag class="detailTag" type="info" size="large">{{meeting.timestamp}}</el-tag>
+      <el-card shadow="hover" :body-style="list-item">
+        <div class="card-header">
+          <el-row>
+            <el-col :span="20">
+              <span>{{meeting.description}}</span>
+            </el-col>
+            
+            <el-col :span="4">
+              <el-tag class="companyHeader" size="large">{{meeting.username}}</el-tag>
+              <el-tag class="detailTag" type="info" size="large">{{meeting.timestamp}}</el-tag>
 
-              </el-col>
-            </el-row>
-            <el-row class="btn">
-              <el-button @click="Join(meeting.uuid)" size="medium" type="primary">Join<i class="material-symbols-outlined">groups</i></el-button>
-            </el-row>
-          </div>
-        </el-card>
-      </a>
+            </el-col>
+          </el-row>
+          <el-row class="btn">
+            <el-button @click="Join(meeting.meetingId, meeting.uuid)" size="medium" type="primary">Join<i class="material-symbols-outlined">groups</i></el-button>
+          </el-row>
+        </div>
+      </el-card>
     </li>
   </ul>
   </el-card>
@@ -77,8 +75,8 @@ export default {
             
       return date.toLocaleString('fi');
     },
-    Join(id){
-      console.log("joing room with id " + id);
+    Join(id, uuid){
+      this.$router.push("/testWebcam/" + id + "/" + uuid);
     }
   },
   mounted () {
