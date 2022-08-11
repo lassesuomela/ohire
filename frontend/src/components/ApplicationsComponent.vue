@@ -13,10 +13,10 @@
               
               <el-col :span="4">
                 <el-tag class="companyHeader" size="large">{{application.company || "Company Not Defined"}}</el-tag>
-                <el-tag class="companyHeader" type="info" size="large">{{application.timestamp}}</el-tag>
+                <el-tag class="detailTag" type="info" size="large">{{application.timestamp}}</el-tag>
 
-                <el-tag class="companyHeader" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
-                <el-tag class="companyHeader" type="warning" size="large" v-else>Not reviewed</el-tag>
+                <el-tag class="detailTag" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
+                <el-tag class="detailTag" type="warning" size="large" v-else>Not reviewed</el-tag>
               </el-col>
             </el-row>
           </div>
@@ -124,15 +124,17 @@ export default {
 .detailTag {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
+  font-weight: normal;
   text-align: center;
+  float: right;
 }
 .details i {
   padding-bottom: 1rem;
 }
-
 .companyHeader {
+  margin-bottom: 0.5rem;
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: bold;
   float:right;
 }
 
