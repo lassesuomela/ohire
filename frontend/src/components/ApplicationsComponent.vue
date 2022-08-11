@@ -7,14 +7,16 @@
         <el-card shadow="hover" :body-style="list-item">
           <div class="card-header">
             <el-row>
-              <el-col :span="16">
+              <el-col :span="20">
                 <span>{{application.title}}</span>
               </el-col>
-              <el-col :span="4">
-                <el-tag class="companyHeader" type="info" size="large">{{application.timestamp}}</el-tag>
-              </el-col>
+              
               <el-col :span="4">
                 <el-tag class="companyHeader" size="large">{{application.company || "Company Not Defined"}}</el-tag>
+                <el-tag class="companyHeader" type="info" size="large">{{application.timestamp}}</el-tag>
+
+                <el-tag class="companyHeader" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
+                <el-tag class="companyHeader" type="warning" size="large" v-else>Not reviewed</el-tag>
               </el-col>
             </el-row>
           </div>
