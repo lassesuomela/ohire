@@ -57,7 +57,7 @@ import { ElButton, ElForm} from 'element-plus';
 import axios from '../axios';
 
 export default {
-  name: 'LoginComponent',
+  name: 'RegisterComponent',
   components: {
     ElButton,
     ElForm

@@ -9,7 +9,6 @@ import 'primeicons/primeicons.css';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-import ToastService from 'primevue/toastservice';
 import ElNotification from 'element-plus'
 
 import Tooltip from 'primevue/tooltip';
@@ -23,10 +22,8 @@ app.directive('tooltip', Tooltip);
 app.component("CardComponent", Card);
 app.component("ElNotification", ElNotification);
 
-
 app.use(router);
 app.use(PrimeVue);
-app.use(ToastService);
 app.use(store);
 app.use(ElementPlus)
 

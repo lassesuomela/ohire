@@ -58,3 +58,10 @@ FROM applications
 	JOIN users on users.id = applications.users_id
     JOIN joblistings on joblistings.id = applications.joblistings_id
 WHERE applications.id = 17 AND applications.joblistings_id = 13;
+
+
+SELECT applications.id as 'applicationId', applications.timestamp, joblistings.title, joblistings.id as 'joblistingsId'
+FROM applications
+JOIN joblistings on joblistings.id = applications.joblistings_id
+WHERE applications.users_id = ?
+ORDER BY applications.timestamp DESC

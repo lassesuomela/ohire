@@ -19,6 +19,7 @@ export default {
             links: [
                 {label: 'Job Listings', to: '/jobs'},
                 {label: 'Meetings', to: '/meetings'},
+                {label: 'Applications', to: '/applications'},
                 {label: 'Profile', to: '/profile'},
                 {label: 'Logout', to: '/logout'},
             ],

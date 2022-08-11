@@ -46,7 +46,7 @@ import {ElForm} from 'element-plus';
 import axios from '../axios';
 
 export default {
-  name: 'LoginComponent',
+  name: 'ProfileComponent',
   components: {
     ElForm
   },
