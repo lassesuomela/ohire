@@ -10,6 +10,7 @@ import CreateJobsView from "@/views/CreateJobsView.vue";
 import ViewMoreJobView from "@/views/ViewMoreJobView.vue";
 import ApplyView from "@/views/ApplyView.vue";
 import ApplicationsView from "@/views/ApplicationsView.vue";
+import MeetingsView from "@/views/MeetingsView.vue";
 
 import axios from "../axios";
 import store from '../store';
@@ -92,6 +93,14 @@ const routes = [
         path: "/applications",
         component: ApplicationsView,
         name: "Applications",
+        meta: {
+            auth: true,
+        }
+    },
+    {
+        path: "/meetings",
+        component: MeetingsView,
+        name: "Meetings",
         meta: {
             auth: true,
         }

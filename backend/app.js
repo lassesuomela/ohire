@@ -26,6 +26,7 @@ let userRoutes = require('./routes/userRoutes');
 let loginRoutes = require('./routes/loginRoutes');
 let jobRoutes = require('./routes/jobRoutes');
 let applicationRoutes = require('./routes/applicationRoutes');
+let meetingsRoutes = require('./routes/meetingsRoutes');
 
 app.use('/api/', loginRoutes);
 
@@ -34,6 +35,7 @@ app.use(auth);
 app.use('/api/', userRoutes);
 app.use('/api/', jobRoutes);
 app.use('/api/', applicationRoutes);
+app.use('/api/', meetingsRoutes);
 
 // start the server and bind to all interfaces
 app.listen(port, "0.0.0.0", () => {

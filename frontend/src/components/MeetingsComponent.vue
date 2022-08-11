@@ -2,21 +2,23 @@
 <div class="container">
   <el-card>
   <ul class="infinite-list">
-    <li v-for="application in applications" :key="application">
-      <a @click="ViewMore(application.applicationId)" class="item">
+    <li v-for="meeting in meetings" :key="meeting">
+      <a @click="ViewMore(meeting.meetingsId)" class="item">
         <el-card shadow="hover" :body-style="list-item">
           <div class="card-header">
             <el-row>
               <el-col :span="20">
-                <span>{{application.title}}</span>
+                <span>{{meeting.description}}</span>
               </el-col>
               
               <el-col :span="4">
-                <el-tag class="companyHeader" size="large">{{application.company || "Company Not Defined"}}</el-tag>
-                <el-tag class="detailTag" type="info" size="large">{{application.timestamp}}</el-tag>
+                <el-tag class="companyHeader" size="large">{{meeting.username}}</el-tag>
+                <el-tag class="detailTag" type="info" size="large">{{meeting.timestamp}}</el-tag>
 
-                <el-tag class="detailTag" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
               </el-col>
+            </el-row>
+            <el-row class="btn">
+              <el-button @click="Join(meeting.uuid)" size="medium" type="primary">Join<i class="material-symbols-outlined">groups</i></el-button>
             </el-row>
           </div>
         </el-card>
@@ -31,27 +33,27 @@
 import axios from '../axios';
 
 export default {
-  name: 'ApplicationsComponent',
+  name: 'meetingsComponent',
   components: {
   },
   data () {
     return {
       status: null,
-      applications: [],
+      meetings: [],
     }
   },
   methods: {
-    FetchApplications () {
+    FetchMeetings () {
 
       if(!localStorage.getItem("token")){
         return;
       }
 
-      axios.get('/application').then(response => {
+      axios.get('/meetings').then(response => {
         console.log(response);
 
         if(response.data.status === "success"){
-          this.applications = response.data.data;
+          this.meetings = response.data.data;
         }
 
         if(response.data.status === "error"){
@@ -62,8 +64,8 @@ export default {
           return;
         }
 
-        for(let i = 0; i < this.applications.length; i++){
-          this.applications[i].timestamp = this.FormatToDate(this.applications[i].timestamp);
+        for(let i = 0; i < this.meetings.length; i++){
+          this.meetings[i].timestamp = this.FormatToDate(this.meetings[i].timestamp);
         }
       }).catch(error => {
         console.log(error);
@@ -74,10 +76,13 @@ export default {
       const date = new Date(timestamp);
             
       return date.toLocaleString('fi');
+    },
+    Join(id){
+      console.log("joing room with id " + id);
     }
   },
   mounted () {
-    this.FetchApplications();
+    this.FetchMeetings();
   }
 }
 </script>
@@ -135,6 +140,9 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   float:right;
+}
+.btn i {
+  padding-left: 0.5rem;
 }
 
 </style>
