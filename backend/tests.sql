@@ -31,7 +31,7 @@ from users
      on participants.meetings_id = meetings.id;
 	
 #select all meetings for specific user based on user is
-SELECT users.username, users.uuid, meetings.id as 'meetingId', users.uuid as 'myUuid',
+SELECT users.username, users.uuid, meetings.id as 'meetingId',
        meetings.timestamp, meetings.description
 FROM participants p1
      inner join participants p2 on p2.meetings_id = p1.meetings_id

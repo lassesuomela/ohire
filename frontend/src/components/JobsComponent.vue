@@ -1,6 +1,20 @@
 <template>
 <div class="container">
   <el-card>
+    <el-row>
+      <el-col :span="16">
+      </el-col>
+
+      <el-col :span="8">
+        <el-input v-model="search" placeholder="Search for title">
+          <template #append><el-button @click="Fetch" size="small" type="primary">Search</el-button></template>
+        </el-input> 
+
+        <p class="info" >Found {{jobCount}} job listings </p>
+
+      </el-col>
+    </el-row>
+
   <ul v-infinite-scroll="Fetch" class="infinite-list">
     <li v-for="job in allJobs" :key="job">
       <a @click="ViewMore(job.id)" class="item">
@@ -12,7 +26,8 @@
                   <span>{{job.title}}</span>
                 </el-col>
                 <el-col :span="2">
-                  <el-tag class="companyHeader" size="large">{{job.company || "Company Not Defined"}}</el-tag>
+                  <el-tag v-if="job.company" class="companyHeader" size="large">{{job.company}}</el-tag>
+                  <el-tag v-else type="warning" class="companyHeader" size="large">Company Not Defined</el-tag>
                 </el-col>
               </el-row>
             </div>
@@ -75,6 +90,9 @@ export default {
       allJobs: [],
       loading: true,
       noMore: false,
+      search: '',
+      jobCount: 0,
+      searchMode: false
     }
   },
   methods: {
@@ -85,18 +103,15 @@ export default {
       }
 
       axios.get('/jobs/' + this.currentPage).then(response => {
-        console.log(response);
-
         if(response.data.status === "success"){
           this.maxPage = response.data.maxPageAmount;
           this.jobs = response.data.data;
+          this.jobCount = response.data.count;
         }
 
         if(response.data.status === "error"){
-          this.status = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.status, life: 2000});
+          this.$router.push('login');
           return;
         }
 
@@ -154,6 +169,14 @@ export default {
       this.$router.push('job/' + id);
     },
     Fetch() {
+
+      if(this.search !== ''){
+        this.loading = true;
+        this.currentPage = 1;
+        this.Search(this.search);
+        return;
+      }
+
       if(this.firstFetch){
         this.firstFetch = false;
         this.loading = true;
@@ -165,6 +188,60 @@ export default {
       }else{
         this.noMore = true;
       }
+    },
+    Search(searchTerm) {
+      axios.get('/jobs/' + this.currentPage + '/' + searchTerm).then(response => {
+        console.log(response);
+
+        if(response.data.status === "success"){
+          this.maxPage = response.data.maxPageAmount;
+          this.jobs = response.data.data;
+          this.jobCount = response.data.count;
+        }
+
+        if(response.data.status === "error"){
+          this.status = response.data.message;
+
+          
+          this.jobCount = 0;
+          this.allJobs = [];
+          this.loading = false;
+          this.noMore = true;
+          return;
+        }
+
+        for(let i = 0; i < this.jobs.length; i++){
+
+          this.jobs[i].timestamp = this.FormatToDate(this.jobs[i].timestamp);
+
+          if(this.jobs[i].salary){
+            this.jobs[i].salary = this.FormatSalary(this.jobs[i].salary);
+          }else{
+            this.jobs[i].salary = "Not specified";
+          }
+
+          if(this.jobs[i].description.length > 500){
+            this.jobs[i].description = this.jobs[i].description.substring(0, 500) + "...";
+          }
+
+          if(this.jobs[i].title.length > 60){
+            this.jobs[i].title = this.jobs[i].title.substring(0, 60) + "...";
+          }
+
+          if(this.jobs[i].workingTime === 1){
+            this.jobs[i].workingTime = "Full-time";
+          }else{
+            this.jobs[i].workingTime = "Part-time";
+          }
+
+          this.allJobs = this.jobs;
+        }
+
+        this.loading = false;
+      }).catch(error => {
+        console.log(error);
+      })
+      
     }
   }
 }
@@ -211,7 +288,7 @@ export default {
 .detailTag {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
-  text-align: center;
+  float: right;
 }
 .details i {
   padding-bottom: 1rem;
@@ -223,4 +300,12 @@ export default {
   float:right;
 }
 
+.btn i {
+  padding-bottom: 1rem;
+}
+
+.info {
+  padding-top: 1rem;
+  float: right;
+}
 </style>
