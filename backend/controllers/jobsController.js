@@ -157,10 +157,36 @@ const getById = (req, res) => {
     })
 }
 
+const deleteById = (req, res) => {
+
+    let {id} = req.params;
+
+    if(!id){
+        return res.json({status:"error",message:"Job id is required"});
+    }
+
+    jobsModel.deleteById(req.id, id, (err, result) => {
+
+        if(err){
+            console.log(err);
+            if(err.code === "ER_ROW_IS_REFERENCED_2"){
+                return res.json({status:"error", message:"Unable to delete the job because meeting is reserved for it"});
+            }
+            return res.json({status:"error", message:err});
+        }
+
+        if(!result) {
+            return res.json({status:"error", message:"No job listings found for that id"});
+        }
+
+        res.json({status:"success", message:"Job deleted"})
+    })
+}
+
 module.exports = {
     create,
     getNAmountOfPostings,
     getCompanysPostings,
     getById,
-    
+    deleteById
 }

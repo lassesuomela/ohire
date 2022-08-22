@@ -25,6 +25,16 @@
         >
       </template>
     </el-table-column>
+
+    <el-table-column label="View More">
+      <template #default="scope">
+        <el-button
+          size="small"
+          @click="ViewMore(scope.row.id)"
+          >View</el-button
+        >
+      </template>
+    </el-table-column>
   </el-table>
 
   <div v-if="maxPage > 1 && maxPage < 5">
@@ -64,7 +74,7 @@ export default {
     Fetch (page) {
 
       this.currentPage = page;
-      
+
       if(!localStorage.getItem("token")){
         return;
       }
@@ -114,7 +124,33 @@ export default {
       }).format(salary);
     },
     Delete(id){
-      console.log("deleting " + id);
+
+      axios.delete('/jobs/' + id).then(response => {
+        console.log(response);
+
+        if(response.data.status === "success"){
+          this.status = response.data.message;
+
+           // send success msg
+          this.$notify({title:"Success", message:this.status, type:"success", customClass:"notification"});
+
+          this.Fetch(1);
+          return;
+        }
+
+        if(response.data.status === "error"){
+          this.status = response.data.message;
+
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
+          return;
+        }
+      }).catch(error => {
+        console.log(error);
+      })
+    },
+    ViewMore(id){
+      this.$router.push('/job/' + id);
     }
   },
   mounted () {
