@@ -14,6 +14,7 @@
 
     <el-table-column label="Salary" prop="salary" />
     <el-table-column label="Timestamp" prop="timestamp" />
+    <el-table-column label="Applications" prop="applicationCount" />
 
     <el-table-column label="Remove">
       <template #default="scope">
@@ -31,6 +32,16 @@
         <el-button
           size="small"
           @click="ViewMore(scope.row.id)"
+          >Details</el-button
+        >
+      </template>
+    </el-table-column>
+
+    <el-table-column label="View Applications">
+      <template #default="scope">
+        <el-button
+          size="small"
+          @click="ViewApplications(scope.row.id)"
           >View</el-button
         >
       </template>
@@ -151,6 +162,9 @@ export default {
     },
     ViewMore(id){
       this.$router.push('/job/' + id);
+    },
+    ViewApplications(id){
+      this.$router.push('/jobApplications/' + id);
     }
   },
   mounted () {

@@ -13,6 +13,7 @@ import ApplicationsView from "@/views/ApplicationsView.vue";
 import MeetingsView from "@/views/MeetingsView.vue";
 import TestWebcamView from "@/views/TestWebcamView.vue";
 import CompanysJobsView from "@/views/CompanysJobsView.vue";
+import CompanyApplicationsView from "@/views/CompanyApplicationsView.vue";
 
 import axios from "../axios";
 import store from '../store';
@@ -119,6 +120,14 @@ const routes = [
         path: "/companyJobs",
         component: CompanysJobsView,
         name: "Company Jobs",
+        meta: {
+            auth: true,
+        }
+    },
+    {
+        path: "/jobApplications/:id",
+        component: CompanyApplicationsView,
+        name: "Job Applications",
         meta: {
             auth: true,
         }

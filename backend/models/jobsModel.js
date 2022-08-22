@@ -20,7 +20,7 @@ const jobs = {
         return db.query("SELECT COUNT(id) AS maxCount FROM joblistings WHERE users_id = ?", [id], cb);
     },
     getNAmountOfCompanyPostings: (id, n, cb) =>{
-        return db.query("SELECT * FROM joblistings WHERE users_id = ? ORDER BY id DESC LIMIT ?, 10", [id, n], cb);
+        return db.query("SELECT joblistings.id, joblistings.timestamp, joblistings.description, joblistings.title, joblistings.salary, joblistings.users_id, joblistings.workingTime, COUNT(applications.id) as 'applicationCount' FROM joblistings LEFT JOIN applications ON applications.joblistings_id = joblistings.id WHERE joblistings.users_id = ? GROUP BY joblistings.id ORDER BY id DESC LIMIT ?, 10", [id, n], cb);
     },
 }
 

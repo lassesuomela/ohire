@@ -4,7 +4,7 @@ show tables;
 
 describe users;
 describe meetings;
-
+describe applications;
 
 select * from users;
 select * from meetings;
@@ -67,3 +67,11 @@ WHERE applications.users_id = ?
 ORDER BY applications.timestamp DESC;
 
 update users set uuid="53244776-7e8f-4999-bf77-afedb49b7dcd" where username = "mayday";
+
+SELECT joblistings.id, joblistings.timestamp, joblistings.description, joblistings.title, joblistings.salary, joblistings.users_id, joblistings.workingTime, COUNT(applications.id) as 'applicationCount'
+FROM joblistings
+	LEFT JOIN applications ON applications.joblistings_id = joblistings.id
+WHERE joblistings.users_id = ?
+GROUP BY joblistings.id;
+
+SELECT COUNT(id) FROM joblistings WHERE users_id = 44;

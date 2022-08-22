@@ -52,9 +52,6 @@ const getApplicationsByJobId = (req, res) => {
         return res.json({status:"error", message:"Account type needs to be Corporate User or higher"});
     }
 
-    console.log(req.params.id);
-    console.log(req.id);
-
     applicationModel.getByJobId(req.params.id, req.id, (err, result) => {
         if(err){
             console.log(err);

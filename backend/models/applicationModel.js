@@ -8,7 +8,7 @@ const applications = {
         return db.query("SELECT applications.id as 'applicationId', applications.reviewed, applications.timestamp, joblistings.title, joblistings.id as 'joblistingsId', users.company FROM applications JOIN joblistings on joblistings.id = applications.joblistings_id JOIN users on users.id = joblistings.users_id WHERE applications.users_id = ? ORDER BY applications.timestamp DESC;", [id], cb);
     },
     getByJobId: (id, users_id, cb) => {
-        return db.query("SELECT users.username, applications.id as 'applicationId', applications.timestamp, joblistings.title, joblistings.id as 'joblistingsId' FROM applications JOIN joblistings on joblistings.id = applications.joblistings_id JOIN users on users.id = applications.users_id WHERE applications.joblistings_id = ? AND jobListings.users_id = ?", [id, users_id], cb);
+        return db.query("SELECT users.username, applications.id as 'applicationId', applications.timestamp, applications.rating, applications.reviewed FROM applications JOIN joblistings on joblistings.id = applications.joblistings_id JOIN users on users.id = applications.users_id WHERE applications.joblistings_id = ? AND jobListings.users_id = ? ORDER BY applications.timestamp DESC LIMIT 10", [id, users_id], cb);
     },
     getByApplicationId: (id, job_id, cb) => {
         return db.query("SELECT users.username, applications.timestamp, applications.application, applications.cvFile, applications.applicationFile, applications.rating, applications.users_id, applications.joblistings_id, joblistings.title FROM applications JOIN users on users.id = applications.users_id JOIN joblistings on joblistings.id = applications.joblistings_id WHERE applications.id = ? AND applications.joblistings_id = ?", [id, job_id], cb);
