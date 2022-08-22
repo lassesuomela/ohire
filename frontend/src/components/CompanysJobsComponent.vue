@@ -39,7 +39,7 @@
 
     <el-table-column label="View Applications">
       <template #default="scope">
-        <el-button
+        <el-button v-if="scope.row.applicationCount > 0"
           size="small"
           @click="ViewApplications(scope.row.id)"
           >View</el-button
