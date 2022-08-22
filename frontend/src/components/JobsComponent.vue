@@ -7,7 +7,7 @@
 
       <el-col :span="8">
         <el-input v-model="search" placeholder="Search for title">
-          <template #append><el-button @click="Fetch" size="small" type="primary">Search</el-button></template>
+          <template #append><el-button @click="DoSearch" size="small" type="primary">Search</el-button></template>
         </el-input> 
 
         <p class="info" >Found {{jobCount}} job listings </p>
@@ -15,7 +15,7 @@
       </el-col>
     </el-row>
 
-  <ul v-infinite-scroll="Fetch" class="infinite-list">
+  <ul v-infinite-scroll="Fetch" infinite-scroll-disabled="noMore" class="infinite-list">
     <li v-for="job in allJobs" :key="job">
       <a @click="ViewMore(job.id)" class="item">
         <el-card shadow="hover" :body-style="list-item">
@@ -143,7 +143,6 @@ export default {
         }
 
         this.loading = false;
-        console.log("loading done");
 
       }).catch(error => {
         console.log(error);
@@ -168,11 +167,19 @@ export default {
     ViewMore(id) {
       this.$router.push('job/' + id);
     },
+    DoSearch(){
+      this.searchMode = true;
+      this.currentPage = 1;
+      this.maxPage = 1;
+
+      this.allJobs = [];
+
+      this.Fetch();
+    },
     Fetch() {
 
       if(this.search !== ''){
         this.loading = true;
-        this.currentPage = 1;
         this.Search(this.search);
         return;
       }
@@ -201,7 +208,6 @@ export default {
 
         if(response.data.status === "error"){
           this.status = response.data.message;
-
           
           this.jobCount = 0;
           this.allJobs = [];
@@ -234,14 +240,19 @@ export default {
             this.jobs[i].workingTime = "Part-time";
           }
 
-          this.allJobs = this.jobs;
+          this.allJobs.push(this.jobs[i]);
+        }
+
+        if(this.currentPage === this.maxPage){
+          this.noMore = true;
+        }else if(this.currentPage < this.maxPage){
+          this.currentPage++;
         }
 
         this.loading = false;
       }).catch(error => {
         console.log(error);
       })
-      
     }
   }
 }

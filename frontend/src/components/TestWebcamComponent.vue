@@ -3,7 +3,7 @@
   <el-card>
     <video autoplay id="myWebcam"></video>
   </el-card>
-  <el-button size="large" type="primary" @click="OpenWebcam">Test Webcam</el-button>
+  <el-button size="large" type="primary" @click="OpenWebcam">Enable Webcam</el-button>
   <el-button size="large" type="primary" @click="JoinRoom">Join Meeting</el-button>
 </div>
 </template>
@@ -28,11 +28,14 @@ export default {
   methods: {
     JoinRoom () {
       if(!this.uuid){
-        console.log("No uuid found");
+        this.$notify({title:"Error", message:"Other participants uuid was not found", type:"error", class:"notification"});
         return;
       }
 
-      console.log("Connecting to peer: " + this.uuid);
+      if(!this.mediaStream){
+        this.$notify({title:"Warning", message:"Enable your webcam", type:"warning", class:"notification"});
+        return;
+      }
 
       // connect to other peer with their id
       this.connection = this.peer.connect(this.uuid);
@@ -41,6 +44,7 @@ export default {
 
       this.peer.on('open', () => {
         console.log("Connection established");
+        this.$notify({title:"Success", message:"Connected!", type:"success", class:"notification"});
       })
 
       this.peer.on('data', () => {
@@ -51,8 +55,6 @@ export default {
         console.log("User disconnected");
         this.Disconnect();
       })
-
-      this.Call();
     },
     OpenWebcam() {
 
@@ -68,7 +70,7 @@ export default {
       }).catch(error => {
         console.log(error);
       })
-    },
+    }
   },
   mounted () {
     console.log(this.myUuid);
