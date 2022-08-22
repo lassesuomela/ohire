@@ -57,8 +57,8 @@ export default {
         if(response.data.status === "error"){
           this.status = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.status, life: 2000});
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
           return;
         }
 

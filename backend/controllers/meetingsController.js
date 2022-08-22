@@ -12,7 +12,7 @@ const usersMeetings = (req, res) => {
         if(result.length > 0){
             return res.json({status:"success", data:result});
         }else{
-            return res.json({status:"success", message:"Meetings not found"});
+            return res.json({status:"error", message:"Meetings not found"});
         }
     })
 }

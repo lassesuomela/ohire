@@ -12,9 +12,9 @@
               </el-col>
               
               <el-col :span="4">
-                <el-tag class="companyHeader" size="large">{{application.company || "Company Not Defined"}}</el-tag>
+                <el-tag v-if="application.company" class="companyHeader" size="large">{{application.company}}</el-tag>
+                <el-tag v-else type="warning" class="companyHeader" size="large">Company Not Defined</el-tag>
                 <el-tag class="detailTag" type="info" size="large">{{application.timestamp}}</el-tag>
-
                 <el-tag class="detailTag" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
               </el-col>
             </el-row>
@@ -57,8 +57,8 @@ export default {
         if(response.data.status === "error"){
           this.status = response.data.message;
 
-          // send error toast msg
-          this.$toast.add({severity:'error', summary: this.status, life: 2000});
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
           return;
         }
 

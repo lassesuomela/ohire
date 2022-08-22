@@ -145,6 +145,10 @@ router.beforeEach((to) => {
         }
     }
 
+    if(!localStorage.getItem('token')){
+        return router.push('Login');
+    }
+
     axios.get('/user').then((response) => {
 
         if(response.data.status === "success"){
