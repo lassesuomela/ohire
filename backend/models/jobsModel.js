@@ -15,7 +15,13 @@ const jobs = {
     },
     deleteById: (users_id, id, cb) => {
         return db.query('DELETE FROM jobListings WHERE users_id = ? AND id = ?', [users_id, id], cb);
-    }
+    },
+    getCompanysPostingCount: (id, cb) => {
+        return db.query("SELECT COUNT(id) AS maxCount FROM joblistings WHERE users_id = ?", [id], cb);
+    },
+    getNAmountOfCompanyPostings: (id, n, cb) =>{
+        return db.query("SELECT * FROM joblistings WHERE users_id = ? ORDER BY id DESC LIMIT ?, 10", [id, n], cb);
+    },
 }
 
 module.exports = jobs;

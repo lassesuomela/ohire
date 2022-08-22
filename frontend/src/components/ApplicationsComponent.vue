@@ -3,7 +3,7 @@
   <el-card>
   <ul class="infinite-list">
     <li v-for="application in applications" :key="application">
-      <a @click="ViewMore(application.applicationId)" class="item">
+      <div class="item">
         <el-card shadow="hover" :body-style="list-item">
           <div class="card-header">
             <el-row>
@@ -20,7 +20,7 @@
             </el-row>
           </div>
         </el-card>
-      </a>
+      </div>
     </li>
   </ul>
   </el-card>
@@ -100,7 +100,6 @@ export default {
   padding: 0rem;
 }
 .item {
-  cursor: pointer;
   padding: 1rem;
 }
 .list-item {

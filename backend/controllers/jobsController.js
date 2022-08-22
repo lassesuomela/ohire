@@ -83,6 +83,57 @@ const getNAmountOfPostings = (req, res) => {
     })
 }
 
+const getCompanysPostings = (req, res) => {
+
+    // % throws urierror failed to decode param
+    let {page} = req.params;
+
+    if(!page){
+        return res.json({status:"error",message:"Page number is required"});
+    }
+
+    let perPageCount = 10; 
+    let maxRecordCount = 0;
+    let currentPage = 0;
+    let maxPage = 0;
+
+    jobsModel.getCompanysPostingCount(req.id, (err, result) => {
+
+        if(err){
+            console.log(err);
+            return res.json({status:"error", message:err});
+        }
+
+        if(!result) {
+            return res.json({status:"error", message:"No job listings found"});
+        }
+
+        maxRecordCount = result[0].maxCount;
+
+        if(maxRecordCount === 0) {
+            return res.json({status:"error", message:"No job listings found"});
+        }
+
+        maxPage = Math.ceil(maxRecordCount/perPageCount);
+
+        if(page <= 0 || page > maxPage){
+            return res.json({status:"error",message:"Page number out of scope"});
+        }
+
+        currentPage = (page - 1) * perPageCount;
+
+        jobsModel.getNAmountOfCompanyPostings(req.id, currentPage, (err, result) => {
+
+            if(err){
+                console.log(err);
+                return res.json({status:"error", message:err});
+            }
+
+            res.json({status:"success", maxPageAmount: maxPage, data:result, count: maxRecordCount})
+        })
+    })
+}
+
 const getById = (req, res) => {
 
     let id = req.params.id;
@@ -109,6 +160,7 @@ const getById = (req, res) => {
 module.exports = {
     create,
     getNAmountOfPostings,
+    getCompanysPostings,
     getById,
     
 }
