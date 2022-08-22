@@ -96,58 +96,6 @@ export default {
     }
   },
   methods: {
-    FetchJobs () {
-
-      if(!localStorage.getItem("token")){
-        return;
-      }
-
-      axios.get('/jobs/' + this.currentPage).then(response => {
-        if(response.data.status === "success"){
-          this.maxPage = response.data.maxPageAmount;
-          this.jobs = response.data.data;
-          this.jobCount = response.data.count;
-        }
-
-        if(response.data.status === "error"){
-
-          this.$router.push('login');
-          return;
-        }
-
-        for(let i = 0; i < this.jobs.length; i++){
-
-          this.jobs[i].timestamp = this.FormatToDate(this.jobs[i].timestamp);
-
-          if(this.jobs[i].salary){
-            this.jobs[i].salary = this.FormatSalary(this.jobs[i].salary);
-          }else{
-            this.jobs[i].salary = "Not specified";
-          }
-
-          if(this.jobs[i].description.length > 500){
-            this.jobs[i].description = this.jobs[i].description.substring(0, 500) + "...";
-          }
-
-          if(this.jobs[i].title.length > 60){
-            this.jobs[i].title = this.jobs[i].title.substring(0, 60) + "...";
-          }
-
-          if(this.jobs[i].workingTime === 1){
-            this.jobs[i].workingTime = "Full-time";
-          }else{
-            this.jobs[i].workingTime = "Part-time";
-          }
-
-          this.allJobs.push(this.jobs[i]);
-        }
-
-        this.loading = false;
-
-      }).catch(error => {
-        console.log(error);
-      })
-    },
     FormatToDate(timestamp){
 
       const date = new Date(timestamp);
@@ -161,9 +109,6 @@ export default {
         currency: 'EUR'
       }).format(salary);
     },
-    Apply(id) {
-      this.$router.push('apply/' + id);
-    },
     ViewMore(id) {
       this.$router.push('job/' + id);
     },
@@ -171,6 +116,7 @@ export default {
       this.searchMode = true;
       this.currentPage = 1;
       this.maxPage = 1;
+      this.noMore = false;
 
       this.allJobs = [];
 
@@ -178,20 +124,21 @@ export default {
     },
     Fetch() {
 
-      if(this.search !== ''){
+      if(this.searchMode){
         this.loading = true;
         this.Search(this.search);
         return;
       }
 
+      this.searchMode = false;
+
       if(this.firstFetch){
         this.firstFetch = false;
         this.loading = true;
-        this.FetchJobs();
-      }else if(this.currentPage < this.maxPage && !this.firstFetch){
+        this.Search(this.search);
+      }else if(!this.firstFetch){
         this.loading = true;
-        this.currentPage++;
-        this.FetchJobs();
+        this.Search(this.search);
       }else{
         this.noMore = true;
       }
@@ -243,15 +190,18 @@ export default {
           this.allJobs.push(this.jobs[i]);
         }
 
-        if(this.currentPage === this.maxPage){
-          this.noMore = true;
-        }else if(this.currentPage < this.maxPage){
+        if(this.currentPage < this.maxPage){
           this.currentPage++;
+        }else{
+          this.noMore = true;
         }
 
         this.loading = false;
       }).catch(error => {
         console.log(error);
+        this.allJobs = [];
+        this.loading = false;
+        this.noMore = true;
       })
     }
   }

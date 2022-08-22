@@ -29,6 +29,7 @@ const create = (req, res) => {
 
 const getNAmountOfPostings = (req, res) => {
 
+    // % throws urierror failed to decode param
     let {page, filter} = req.params;
 
     if(!filter){
