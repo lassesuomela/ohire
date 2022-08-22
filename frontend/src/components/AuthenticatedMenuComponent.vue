@@ -27,6 +27,7 @@ export default {
             corporateLinks: [
                 {label: 'Job Listings', to: '/jobs'},
                 {label: 'Create Jobs', to: '/createJobs'},
+                {label: 'My jobs', to: '/companyJobs'},
                 {label: 'Meetings', to: '/meetings'},
                 {label: 'Profile', to: '/profile'},
                 {label: 'Logout', to: '/logout'},

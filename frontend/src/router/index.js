@@ -12,6 +12,7 @@ import ApplyView from "@/views/ApplyView.vue";
 import ApplicationsView from "@/views/ApplicationsView.vue";
 import MeetingsView from "@/views/MeetingsView.vue";
 import TestWebcamView from "@/views/TestWebcamView.vue";
+import CompanysJobsView from "@/views/CompanysJobsView.vue";
 
 import axios from "../axios";
 import store from '../store';
@@ -110,6 +111,14 @@ const routes = [
         path: "/testWebcam/:meetingsId/:uuid",
         component: TestWebcamView,
         name: "Test Your Web Cam",
+        meta: {
+            auth: true,
+        }
+    },
+    {
+        path: "/companyJobs",
+        component: CompanysJobsView,
+        name: "Company Jobs",
         meta: {
             auth: true,
         }
