@@ -6,21 +6,28 @@
     <el-table-column label="Timestamp" prop="timestamp" />
     <el-table-column label="Score" prop="score">
       <template #default="scope">
-        <el-tag type="warning" v-if="!scope.row.rating">-</el-tag>
-        <el-tag type="info" v-else>{{scope.row.rating}}</el-tag>
+        <div v-if="!scope.row.rating">
+          <el-tag class="ratings" round effect="dark" type="info" >-</el-tag>
+        </div>
+        <div v-else> 
+          <el-tag class="ratings" round effect="dark" v-if="scope.row.rating > 6" type="success">{{scope.row.rating}}</el-tag>
+          <el-tag class="ratings" round effect="dark" v-else-if="scope.row.rating > 3" type="warning">{{scope.row.rating}}</el-tag>
+          <el-tag class="ratings" round effect="dark" v-else-if="scope.row.rating > 0" type="danger">{{scope.row.rating}}</el-tag>
+        </div>
       </template>
     </el-table-column>
 
     <el-table-column label="Status" prop="reviewed">
       <template #default="scope">
-        <el-tag type="warning" v-if="scope.row.reviewed === 0">Not reviwed</el-tag>
-        <el-tag type="success" v-else>Reviwed</el-tag>
+        <el-tag class="label" type="warning" v-if="scope.row.reviewed === 0">Not reviwed</el-tag>
+        <el-tag class="label" type="success" v-else>Reviwed</el-tag>
       </template>
     </el-table-column>
 
     <el-table-column label="View More">
       <template #default="scope">
         <el-button
+          class="label"
           size="small"
           @click="ViewMore(scope.row.applicationId)"
           >Review</el-button
@@ -106,4 +113,11 @@ export default {
   padding: 20rem;
 }
 
+.label {
+  font-size: 0.8rem;
+}
+
+.ratings {
+  font-size: 0.95rem;
+}
 </style>

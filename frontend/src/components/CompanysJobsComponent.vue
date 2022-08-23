@@ -7,8 +7,8 @@
 
     <el-table-column label="Working Time" prop="workingTime">
       <template #default="scope">
-        <el-tag v-if="scope.row.workingTime === 'Full-time'">{{scope.row.workingTime}}</el-tag>
-        <el-tag v-else type="info">{{scope.row.workingTime}}</el-tag>
+        <el-tag class="label" v-if="scope.row.workingTime === 'Full-time'">{{scope.row.workingTime}}</el-tag>
+        <el-tag class="label" v-else type="info">{{scope.row.workingTime}}</el-tag>
       </template>
     </el-table-column>
 
@@ -19,6 +19,7 @@
     <el-table-column label="View Applications">
       <template #default="scope">
         <el-button v-if="scope.row.applicationCount > 0"
+          class="label"
           size="small"
           @click="ViewApplications(scope.row.id)"
           >View</el-button
@@ -29,6 +30,7 @@
     <el-table-column label="View More">
       <template #default="scope">
         <el-button
+          class="label"
           size="small"
           @click="ViewMore(scope.row.id)"
           >Details</el-button
@@ -39,6 +41,7 @@
     <el-table-column label="Remove">
       <template #default="scope">
         <el-button
+          class="label"
           size="small"
           type="danger"
           @click="Delete(scope.row.id)"
@@ -181,4 +184,7 @@ export default {
   padding: 20rem;
 }
 
+.label {
+  font-size: 0.8rem;
+}
 </style>
