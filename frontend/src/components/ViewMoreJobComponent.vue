@@ -1,31 +1,27 @@
 <template>
 <div class="container">
   <el-card>
-    <el-main>
-      <el-form label-position="top">
-        <el-header>
-          <h2>Job title: {{title}}</h2>
-        </el-header>
-        <el-main>
-          <h2>Salary: {{salary}}</h2>
-        </el-main>
+      <el-header>
+        <h2>{{title}}</h2>
+      </el-header>
+      <el-main>
+        <h2>Salary: {{salary}}</h2>
 
-        <el-form-item label="Job Description">
-          <el-input v-model="description" size="large" type="textarea" :autosize="{minRows: 8, minColumns:100}" class="customText" disabled/>
-        </el-form-item>
+        <div class="desc">
+          <p class="customText">{{description}}</p>
+        </div>
 
         <div class="btn">          
           <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
           <el-button @click="Apply(id)" size="large" type="primary">Apply<i class="material-symbols-outlined">edit_note</i></el-button>
         </div>
-      </el-form>
-    </el-main>
+      </el-main>
   </el-card>
 </div>
 </template>
 
 <script>
-import { ElButton, ElForm} from 'element-plus';
+import { ElButton} from 'element-plus';
 
 import axios from '../axios';
 
@@ -33,7 +29,6 @@ export default {
   name: 'LoginComponent',
   components: {
     ElButton, 
-    ElForm
   },
   data () {
     return {
@@ -97,6 +92,7 @@ export default {
   text-align: center;
   display: grid;
   font-size: 1.2em;
+  padding: 20rem;
 }
 
 .btn{
@@ -115,4 +111,8 @@ export default {
   padding-right: 0.5rem;
 }
 
+.desc {
+  text-align: start;
+  word-break: break-all;
+}
 </style>

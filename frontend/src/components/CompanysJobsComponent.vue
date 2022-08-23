@@ -2,8 +2,8 @@
 <div class="container">
   <el-card>
     <el-table :data="jobs" :stripe="true">
-    <el-table-column label="Title" prop="title" />
-    <el-table-column label="Description" prop="description" />
+    <el-table-column label="Title" prop="title" width="200"/>
+    <el-table-column label="Description" prop="description" width="200"/>
 
     <el-table-column label="Working Time" prop="workingTime">
       <template #default="scope">
@@ -13,7 +13,7 @@
     </el-table-column>
 
     <el-table-column label="Salary" prop="salary" />
-    <el-table-column label="Timestamp" prop="timestamp" />
+    <el-table-column label="Timestamp" prop="timestamp" width="140"/>
     <el-table-column label="Applications" prop="applicationCount" />
 
     <el-table-column label="View Applications">
@@ -118,6 +118,14 @@ export default {
             this.jobs[i].workingTime = "Full-time";
           }else{
             this.jobs[i].workingTime = "Part-time";
+          }
+
+          if(this.jobs[i].description.length > 50){
+            this.jobs[i].description = this.jobs[i].description.substring(0, 50) + "...";
+          }
+
+          if(this.jobs[i].title.length > 35){
+            this.jobs[i].title = this.jobs[i].title.substring(0, 35) + "...";
           }
         }
       }).catch(error => {

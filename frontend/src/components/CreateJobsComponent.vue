@@ -110,6 +110,8 @@ export default {
 
           // send success msg
           this.$notify({title:"Success", message:this.status, type:"success", customClass:"notification"});
+
+          this.$router.go(-1);
         }
 
         if(response.data.status === "error"){

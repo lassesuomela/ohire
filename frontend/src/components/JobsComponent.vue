@@ -38,19 +38,7 @@
               <p>{{job.description}}</p>
             </el-col>
             
-            <el-col :span="4" class="details">
-              <el-col :span="24" class="details">
-                <i class="material-symbols-outlined">calendar_month</i>
-              </el-col>
-              <el-col :span="24" class="details">
-                <i class="material-symbols-outlined">schedule</i>
-              </el-col>
-              <el-col :span="24" class="details">
-                <i class="material-symbols-outlined">payments</i>
-              </el-col>
-            </el-col>
-
-            <el-col :span="2" class="details">
+            <el-col :span="5" class="details">
               <el-col :span="24" class="details">
                 <el-tag class="detailTag" size="large" type="info">{{job.timestamp}}</el-tag>
               </el-col>
@@ -59,6 +47,18 @@
               </el-col>
               <el-col :span="24" class="details">
                 <el-tag class="detailTag" size="large" type="success">{{job.salary}}</el-tag>
+              </el-col>
+            </el-col>
+
+            <el-col :span="1" class="details">
+              <el-col :span="24" class="details">
+                <i class="material-symbols-outlined">calendar_month</i>
+              </el-col>
+              <el-col :span="24" class="details">
+                <i class="material-symbols-outlined">schedule</i>
+              </el-col>
+              <el-col :span="24" class="details">
+                <i class="material-symbols-outlined">payments</i>
               </el-col>
             </el-col>
           </el-row>
@@ -289,7 +289,6 @@ export default {
 .detailTag {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
-  float: right;
 }
 .details i {
   padding-bottom: 1rem;

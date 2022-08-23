@@ -1,25 +1,22 @@
 <template>
 <div class="container">
   <el-card>
+    <el-header>
+      <h2>{{title}}</h2>
+    </el-header>
     <el-main>
-      <el-form label-position="top">
-        <el-header>
-          <h2>{{title}}</h2>
-        </el-header>
-        <el-main>
-          <h2>Salary: {{salary}}</h2>
-        </el-main>
-
-        <el-form-item label="Job Application">
-          <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
-        </el-form-item>
-
-        <div class="btn">
-          <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
-          <el-button @click="SendApplication" size="large" type="primary">Send<i class="material-symbols-outlined">send</i></el-button>
-        </div>
-      </el-form>
+      <h2>Salary: {{salary}}</h2>
     </el-main>
+    <el-form label-position="top">
+      <el-form-item label="Job Application">
+        <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
+      </el-form-item>
+
+      <div class="btn">
+        <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
+        <el-button @click="SendApplication" size="large" type="primary">Send<i class="material-symbols-outlined">send</i></el-button>
+      </div>
+    </el-form>
   </el-card>
 </div>
 </template>
