@@ -100,8 +100,42 @@ export default {
     FormatToDate(timestamp){
 
       const date = new Date(timestamp);
-            
-      return date.toLocaleDateString('fi');
+      
+      let seconds = Math.floor((new Date() - date) / 1000);
+      
+      // divide with year in seconds and check for n years
+      let interval = seconds / 31536000;
+
+      if (interval > 1) {
+        return Math.floor(interval) + " years ago";
+      }
+
+      // divide with month in seconds and check for n months
+      interval = seconds / 2592000;
+      if (interval > 1) {
+        return Math.floor(interval) + " months ago";
+      }
+
+      // divide with day in seconds and check for n days
+      interval = seconds / 86400;
+      if (interval > 1) {
+        return Math.floor(interval) + " days ago";
+      }
+
+      // divide with hour in seconds and check for n hours
+      interval = seconds / 3600;
+      if (interval > 1) {
+        return Math.floor(interval) + " hours ago";
+      }
+
+      // divide with minute in seconds and check for n minutes
+      interval = seconds / 60;
+      if (interval > 1) {
+        return Math.floor(interval) + " minutes ago";
+      }
+
+      // only seconds have passed
+      return Math.floor(seconds) + " seconds ago";
     },
     FormatSalary(salary){
 
@@ -114,6 +148,8 @@ export default {
       this.$router.push('job/' + id);
     },
     DoSearch(){
+
+      // enable search mode and reset vars to defaults
       this.searchMode = true;
       this.currentPage = 1;
       this.maxPage = 1;
@@ -124,8 +160,9 @@ export default {
       this.Fetch();
     },
     Fetch() {
-
+      
       if(this.searchMode){
+        // enable loading text and search with keywords
         this.loading = true;
         this.Search(this.search);
         return;
@@ -133,15 +170,17 @@ export default {
 
       this.searchMode = false;
 
+      // this is done when page is loaded for the first time
+      // enable loading text and search with nothing as keywords
       if(this.firstFetch){
         this.firstFetch = false;
         this.loading = true;
         this.Search(this.search);
-      }else if(!this.firstFetch){
+      }else{
+        // this happens when user just scrolls the page
+        // enable loading text and search with nothing as keywords
         this.loading = true;
         this.Search(this.search);
-      }else{
-        this.noMore = true;
       }
     },
     Search(searchTerm) {
