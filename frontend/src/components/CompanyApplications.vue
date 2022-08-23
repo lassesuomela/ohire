@@ -22,7 +22,7 @@
       <template #default="scope">
         <el-button
           size="small"
-          @click="ViewMore(scope.row.id)"
+          @click="ViewMore(scope.row.applicationId)"
           >Review</el-button
         >
       </template>
@@ -89,7 +89,7 @@ export default {
       return date.toLocaleString('fi');
     },
     ViewMore(id){
-      this.$router.push('/job/' + id);
+      this.$router.push('/jobApplications/' + this.$route.params.id + '/' + id);
     }
   },
   mounted () {

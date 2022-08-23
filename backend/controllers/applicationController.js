@@ -73,7 +73,7 @@ const getApplicationById = (req, res) => {
         return res.json({status:"error", message:"Account type needs to be Corporate User or higher"});
     }
 
-    applicationModel.getByApplicationId(req.params.id, req.params.jobId, (err, result) => {
+    applicationModel.getByApplicationId(req.params.id, req.params.jobId, req.id, (err, result) => {
         if(err){
             console.log(err);
 
@@ -83,8 +83,34 @@ const getApplicationById = (req, res) => {
         if(result.length > 0){
             return res.json({status:"success", data:result});
         }else{
-            return res.json({status:"success", message:"Application not found for that id"});
+            return res.json({status:"error", message:"Application not found for that id"});
         }
+    })
+}
+
+const reviewApplication = (req, res) => {
+
+    let {rating, applicationId, applicationUsersId, jobId} = req.body;
+
+    if(!rating || !jobId || !applicationId || !applicationUsersId) {
+        return res.json({status:"error", message: "One or more fields must be provided"});
+    }
+
+    if(rating === "0"){
+        reviewed = 0;
+    }else{
+        reviewed = 1;
+    }
+
+    applicationModel.review(rating, applicationId, jobId, applicationUsersId, req.id, reviewed, (err, result) => {
+        if(err){
+            console.log(err);
+
+            return res.json({status:"error", message:err});
+        }
+
+        return res.json({status:"success", message:"Application reviewed"});
+        
     })
 }
 
@@ -93,5 +119,6 @@ module.exports = {
     sendApplication,
     getUsersApplications,
     getApplicationsByJobId,
-    getApplicationById
+    getApplicationById,
+    reviewApplication
 }

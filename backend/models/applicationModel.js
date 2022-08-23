@@ -10,9 +10,12 @@ const applications = {
     getByJobId: (id, users_id, cb) => {
         return db.query("SELECT users.username, applications.id as 'applicationId', applications.timestamp, applications.rating, applications.reviewed FROM applications JOIN joblistings on joblistings.id = applications.joblistings_id JOIN users on users.id = applications.users_id WHERE applications.joblistings_id = ? AND jobListings.users_id = ? ORDER BY applications.timestamp DESC LIMIT 10", [id, users_id], cb);
     },
-    getByApplicationId: (id, job_id, cb) => {
-        return db.query("SELECT users.username, applications.timestamp, applications.application, applications.cvFile, applications.applicationFile, applications.rating, applications.users_id, applications.joblistings_id, joblistings.title FROM applications JOIN users on users.id = applications.users_id JOIN joblistings on joblistings.id = applications.joblistings_id WHERE applications.id = ? AND applications.joblistings_id = ?", [id, job_id], cb);
+    getByApplicationId: (id, job_id, users_id, cb) => {
+        return db.query("SELECT users.username, applications.id, applications.timestamp, applications.application, applications.cvFile, applications.applicationFile, applications.rating, applications.users_id, applications.joblistings_id, joblistings.title FROM applications JOIN users on users.id = applications.users_id JOIN joblistings on joblistings.id = applications.joblistings_id WHERE applications.id = ? AND applications.joblistings_id = ? AND joblistings.users_id = ?", [id, job_id, users_id], cb);
     },
+    review: (rating, applicationId, jobId, applicationUsersId, users_id, reviewed, cb) => {
+        return db.query("UPDATE applications INNER JOIN joblistings ON joblistings.id = applications.joblistings_id SET applications.rating = ?, applications.reviewed = ? WHERE applications.users_id = ? AND applications.joblistings_id = ? AND joblistings.users_id = ? AND applications.id = ?", [rating, reviewed, applicationUsersId, jobId, users_id, applicationId], cb);
+    }
 }
 
 module.exports = applications;

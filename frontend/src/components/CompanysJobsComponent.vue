@@ -16,13 +16,12 @@
     <el-table-column label="Timestamp" prop="timestamp" />
     <el-table-column label="Applications" prop="applicationCount" />
 
-    <el-table-column label="Remove">
+    <el-table-column label="View Applications">
       <template #default="scope">
-        <el-button
+        <el-button v-if="scope.row.applicationCount > 0"
           size="small"
-          type="danger"
-          @click="Delete(scope.row.id)"
-          >Delete</el-button
+          @click="ViewApplications(scope.row.id)"
+          >View</el-button
         >
       </template>
     </el-table-column>
@@ -37,12 +36,13 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="View Applications">
+    <el-table-column label="Remove">
       <template #default="scope">
-        <el-button v-if="scope.row.applicationCount > 0"
+        <el-button
           size="small"
-          @click="ViewApplications(scope.row.id)"
-          >View</el-button
+          type="danger"
+          @click="Delete(scope.row.id)"
+          >Delete</el-button
         >
       </template>
     </el-table-column>

@@ -22,10 +22,11 @@
           <template #header>
             <div class="card-header">
               <el-row>
-                <el-col :span="22">
+                <el-col :span="20">
                   <span>{{job.title}}</span>
                 </el-col>
-                <el-col :span="2">
+
+                <el-col :span="4">
                   <el-tag v-if="job.company" class="companyHeader" size="large">{{job.company}}</el-tag>
                   <el-tag v-else type="warning" class="companyHeader" size="large">Company Not Defined</el-tag>
                 </el-col>

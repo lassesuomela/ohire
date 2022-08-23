@@ -71,7 +71,18 @@ update users set uuid="53244776-7e8f-4999-bf77-afedb49b7dcd" where username = "m
 SELECT joblistings.id, joblistings.timestamp, joblistings.description, joblistings.title, joblistings.salary, joblistings.users_id, joblistings.workingTime, COUNT(applications.id) as 'applicationCount'
 FROM joblistings
 	LEFT JOIN applications ON applications.joblistings_id = joblistings.id
-WHERE joblistings.users_id = ?
+WHERE joblistings.users_id = 34
 GROUP BY joblistings.id;
 
 SELECT COUNT(id) FROM joblistings WHERE users_id = 44;
+
+SELECT users.username, applications.timestamp, applications.application, applications.cvFile, applications.applicationFile, applications.rating, applications.users_id, applications.joblistings_id, joblistings.title
+FROM applications
+JOIN users on users.id = applications.users_id
+JOIN joblistings on joblistings.id = applications.joblistings_id
+WHERE applications.id = 22 AND applications.joblistings_id = 30 AND joblistings.users_id = 34;
+
+UPDATE applications
+INNER JOIN joblistings ON joblistings.id = applications.joblistings_id
+SET applications.rating = 1, applications.reviewed = 1
+WHERE applications.users_id = 34 AND applications.joblistings_id = 12 AND joblistings.users_id = 34 AND applications.id = 13
