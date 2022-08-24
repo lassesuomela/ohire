@@ -90,6 +90,7 @@ export default {
 
       }).catch(error => {
         console.log(error);
+        this.$notify({title:"Error", message:error, type:"error", customClass:"notification"});
       })
     }
   },

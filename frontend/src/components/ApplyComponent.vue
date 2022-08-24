@@ -12,6 +12,24 @@
         <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
       </el-form-item>
 
+      <el-upload
+        :auto-upload="false"
+        :limit="1"
+        :on-exceed="handleExceed"
+        v-model:file-list="file"
+        accept=".pdf"
+      >
+        <template #trigger>
+          <el-button type="primary">Select File</el-button>
+        </template>
+
+        <template #tip>
+          <div class="el-upload__tip">
+            Only pdf files are allowed. Max file size 5 Mb.
+          </div>
+        </template>
+      </el-upload>
+
       <div class="btn">
         <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
         <el-button @click="SendApplication" size="large" type="primary">Send<i class="material-symbols-outlined">send</i></el-button>
@@ -39,12 +57,14 @@ export default {
       title: null,
       salary: null,
       jobId: this.$route.params.id,
+      file: [],
+      disableUpload: false,
     }
   },
   methods: {
     SendApplication () {
 
-      if(!this.application){
+      if(!this.application || this.file.length != 1){
         this.$notify({title:"Warning", message:"One or more fields must be provided", type:"warning", customClass:"notification"});
         return;
       }
@@ -54,7 +74,20 @@ export default {
         jobId:this.jobId,
       }
 
-      axios.post('/application', data).then(response => {
+      let json = JSON.stringify(data);
+
+      let formData = new FormData();
+
+      // send file and json data in the form data
+      formData.append("file", this.file[0]);
+      formData.append("data",  json);
+
+      console.log(formData);
+      axios.post('/application', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }}).then(response => {
+
         console.log(response);
 
         if(response.data.status === "success"){
