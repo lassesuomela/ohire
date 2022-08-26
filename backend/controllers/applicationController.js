@@ -1,13 +1,15 @@
 const multer = require('multer');
 const applicationModel = require('../models/applicationModel');
 const crypto = require('crypto');
+const path = require('path');
+
 
 const storages = multer.diskStorage({
     destination: "applications/",
     filename: (req, file, cb) => {
 
         // valid mimes that match valid extensions
-        let mimes = {'application/pdf':'pdf'};
+        let mimes = {'application/pdf':'.pdf'};
 
         // get the file extension
         let fileExt = mimes[file.mimetype];
@@ -15,7 +17,7 @@ const storages = multer.diskStorage({
         // add random characters to randomize the filename in case some one has the same file name
         let random = crypto.randomBytes(16).toString('hex')
 
-        let finalName = file.originalname.split(fileExt)[0] + fileExt + random;
+        let finalName = file.originalname.split(fileExt)[0] + random + fileExt;
         // return filename with extension
 
         cb(null, finalName);
@@ -187,11 +189,38 @@ const reviewApplication = (req, res) => {
     })
 }
 
+const getCV = (req, res) => {
+
+    if(req.role === 1){
+        return res.json({status:"error", message:"Account type needs to be Corporate User or higher"});
+    }
+
+    let {applicationId, applicationUsersId, jobId} = req.params;
+
+    if(!jobId || !applicationId || !applicationUsersId) {
+        return res.json({status:"error", message: "One or more fields must be provided"});
+    }
+
+    applicationModel.getCVByIds(jobId, req.id, applicationUsersId, applicationId, (err, result) => {
+        if(err){
+            console.log(err);
+
+            return res.json({status:"error", message:err});
+        }
+
+        let filename = result[0].cvFile;
+
+        //filename = filename.slice(0, filename.length - 32);
+
+        return res.sendFile(filename, {root: "./applications"});
+    })
+}
 
 module.exports = {
     sendApplication,
     getUsersApplications,
     getApplicationsByJobId,
     getApplicationById,
-    reviewApplication
+    reviewApplication,
+    getCV
 }

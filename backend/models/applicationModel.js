@@ -15,6 +15,9 @@ const applications = {
     },
     review: (rating, applicationId, jobId, applicationUsersId, users_id, reviewed, cb) => {
         return db.query("UPDATE applications INNER JOIN joblistings ON joblistings.id = applications.joblistings_id SET applications.rating = ?, applications.reviewed = ? WHERE applications.users_id = ? AND applications.joblistings_id = ? AND joblistings.users_id = ? AND applications.id = ?", [rating, reviewed, applicationUsersId, jobId, users_id, applicationId], cb);
+    },
+    getCVByIds: (jobId, users_id, appUsersId, appId, cb) => {
+        return db.query("SELECT applications.cvFile FROM applications JOIN joblistings ON joblistings.id = applications.joblistings_id WHERE applications.joblistings_id = ? AND joblistings.users_id = ? AND applications.users_id = ? AND applications.id = ?", [jobId, users_id, appUsersId, appId], cb);
     }
 }
 

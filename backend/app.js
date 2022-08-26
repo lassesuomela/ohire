@@ -31,6 +31,7 @@ let meetingsRoutes = require('./routes/meetingsRoutes');
 app.use('/api/', loginRoutes);
 
 app.use(auth);
+app.use(express.static('applications'));
 
 app.use('/api/', userRoutes);
 app.use('/api/', jobRoutes);

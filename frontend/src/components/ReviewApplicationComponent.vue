@@ -8,9 +8,12 @@
       <p>{{ application.application }}</p>
     </div>
 
+    <div>
+    </div>
+
     <el-row>
       <el-col>
-        <a href="">Download CV</a>
+        <el-button @click="DownloadCV">Download CV</el-button>
       </el-col>
     </el-row>
     <el-row>
@@ -24,6 +27,9 @@
     </el-row>
     <el-row>
       <el-col>
+        <el-button @click="Back">
+          Back
+        </el-button>
         <el-button @click="Save">
           Save
         </el-button>
@@ -49,9 +55,14 @@ export default {
       applicationId: null,
       applicationUsersId: null,
       jobId: null,
+      pdfLink: null,
+      filename: null,
     }
   },
   methods: {
+    Back () {
+      this.$router.go(-1);
+    },
     FetchApplication (id, jobId) {
 
       axios.get('/application/' + jobId + '/' + id).then(response => {
@@ -68,6 +79,7 @@ export default {
 
           this.applicationId = this.application.id;
           this.applicationUsersId = this.application.users_id;
+          this.filename = this.application.cvFile;
         }
 
         if(response.data.status === "error"){
@@ -110,6 +122,27 @@ export default {
       }).catch(error => {
         console.log(error);
       })
+    },
+    DownloadCV () {
+      axios.get("/cv/application/" + this.jobId + '/' + this.applicationId + '/' + this.applicationUsersId, {
+        responseType: "arraybuffer",
+      }).then(response => {
+        console.log(response);
+
+        const blob = new Blob([response.data], { type: "application/pdf" });
+
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+
+        let filename = this.filename.substring(0, this.filename.length - 36) + ".pdf";
+
+        link.download = filename;
+        link.click();
+
+      }).catch(error => {
+        console.log(error);
+      })
+
     }
   },
   mounted () {
