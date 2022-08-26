@@ -17,6 +17,7 @@ const storages = multer.diskStorage({
 
         let finalName = file.originalname.split(fileExt)[0] + fileExt + random;
         // return filename with extension
+
         cb(null, finalName);
     }
 })
@@ -30,13 +31,10 @@ const upload = multer(
     },
     fileFilter(req, file, cb) {
 
-        console.log(file);
-
         // check if file is not found 
         if(!file){
             return cb("Filetype not found", false);
         }
-
 
         // valid mimes that match valid extensions
         let mimes = {'application/pdf':'pdf'};
@@ -49,7 +47,7 @@ const upload = multer(
             return cb("Filetype not allowed: " + file.mimetype, false);
         }
 
-        // else return null error
+        // else return null as error
         cb(null, true);
     }
 }
@@ -64,16 +62,32 @@ const sendApplication = (req, res) => {
             console.log(err);
             return res.json({status:"error", message:err});
         }
+
+        let application, jobId;
+
+        try {
+            let body = JSON.parse(req.body.data);
+
+            application = body.application;
+            jobId = body.jobId;
+        }catch(e){
+            console.log(e);
+            return res.json({status:"error", message:"Unable to parse JSON"});
+        }
         
-        console.log(req.body.data.application);
-        /*
+        if(!application || !jobId || !req.file){
+            return res.json({status:"error", message:"One or more fields must be provided"});
+        }
+
+        let filename = req.file.filename;
+
         let data = {
             application: application,
             users_id: req.id,
             joblistings_id: jobId,
-            cvFile: '',
+            cvFile: filename,
             applicationFile: ''
-        }
+        };
 
         applicationModel.add(data, (err, result) => {
             if(err){
@@ -83,10 +97,7 @@ const sendApplication = (req, res) => {
             }
     
             return res.json({status:"success", message:"Application submitted"});
-            
         })
-        */
-        return res.json({status:"success", message:"Application submitted"});
     })
 }
 

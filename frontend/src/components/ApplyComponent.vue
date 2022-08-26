@@ -12,12 +12,14 @@
         <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
       </el-form-item>
 
+      <p>Upload your CV</p>
       <el-upload
         :auto-upload="false"
         :limit="1"
-        :on-exceed="handleExceed"
-        v-model:file-list="file"
         accept=".pdf"
+        :on-change="HandleFile"
+        v-model:file-list="list"
+        :on-exceed="HandleExceed"
       >
         <template #trigger>
           <el-button type="primary">Select File</el-button>
@@ -40,7 +42,7 @@
 </template>
 
 <script>
-import { ElButton, ElForm} from 'element-plus';
+import { ElButton} from 'element-plus';
 
 import axios from '../axios';
 
@@ -48,7 +50,6 @@ export default {
   name: 'ApplyComponent',
   components: {
     ElButton,
-    ElForm
   },
   data () {
     return {
@@ -57,38 +58,43 @@ export default {
       title: null,
       salary: null,
       jobId: this.$route.params.id,
-      file: [],
-      disableUpload: false,
+      file: null,
+      list: []
     }
   },
   methods: {
+    HandleExceed(UploadFiles) {
+      // when file limit is exceeded remove old file and replace it with the new one
+      this.file = UploadFiles
+      this.list = this.file;
+    },
+    HandleFile (uploadFile) {
+      this.file = uploadFile.raw;
+      this.list = this.file;
+    },
     SendApplication () {
 
-      if(!this.application || this.file.length != 1){
+      if(!this.application || !this.file){
         this.$notify({title:"Warning", message:"One or more fields must be provided", type:"warning", customClass:"notification"});
         return;
       }
 
       let data = {
         application:this.application,
-        jobId:this.jobId,
+        jobId:this.jobId
       }
-
-      let json = JSON.stringify(data);
 
       let formData = new FormData();
 
       // send file and json data in the form data
-      formData.append("file", this.file[0]);
-      formData.append("data",  json);
 
-      console.log(formData);
+      formData.append("file", this.file);
+      formData.append("data", JSON.stringify(data));
+
       axios.post('/application', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }}).then(response => {
-
-        console.log(response);
 
         if(response.data.status === "success"){
           this.status = response.data.message;
@@ -116,7 +122,11 @@ export default {
 
         if(response.data.status === "success"){
           this.title = response.data.data.title;
-          this.salary = this.FormatSalary(response.data.data.salary);
+          if(this.salary) {
+            this.FormatSalary(response.data.data.salary);
+          }else{
+            this.salary = "Not specified"
+          }
         }
 
         if(response.data.status === "error"){
