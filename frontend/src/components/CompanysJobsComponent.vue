@@ -51,17 +51,17 @@
     </el-table-column>
   </el-table>
 
-  <div v-if="maxPage > 1 && maxPage < 5">
-    <el-button link class="btn" v-for="index in maxPage" :key="index" @click="Fetch(index)">{{index}}</el-button>
+  <div v-if="maxPage > 1 && maxPage < 5" class="buttons">
+    <el-button link class="buttons" v-for="index in maxPage" :key="index" @click="Fetch(index)">{{index}}</el-button>
   </div>
-  <div v-else>
-    <el-button link v-if="currentPage != 1" class="btn" @click="Fetch(currentPage - 1)">{{currentPage - 1}}</el-button>
-    <el-button link class="btn" style="font-weight:bold">{{currentPage}}</el-button>
-    <el-button link v-if="currentPage !== maxPage" class="btn" @click="Fetch(currentPage + 1)">{{currentPage + 1}}</el-button>
-    <el-button link v-if="currentPage !== maxPage && currentPage < 2" class="btn" @click="Fetch(currentPage + 2)">{{currentPage + 2}}</el-button>
+  <div v-else class="buttons">
+    <el-button link v-if="currentPage != 1" class="buttons" @click="Fetch(currentPage - 1)">{{currentPage - 1}}</el-button>
+    <el-button link class="buttons" style="font-weight:bold">{{currentPage}}</el-button>
+    <el-button link v-if="currentPage !== maxPage" class="buttons" @click="Fetch(currentPage + 1)">{{currentPage + 1}}</el-button>
+    <el-button link v-if="currentPage !== maxPage && currentPage < 2" class="buttons" @click="Fetch(currentPage + 2)">{{currentPage + 2}}</el-button>
     <span v-if="currentPage !== maxPage && currentPage !== (maxPage - 1)">...</span>
 
-    <el-button link v-if="currentPage !== maxPage && currentPage !== (maxPage - 1)" class="btn" @click="Fetch(maxPage)">{{maxPage}}</el-button>
+    <el-button link v-if="currentPage !== maxPage && currentPage !== (maxPage - 1)" class="buttons" @click="Fetch(maxPage)">{{maxPage}}</el-button>
   </div>
   </el-card>
 
@@ -156,6 +156,8 @@ export default {
            // send success msg
           this.$notify({title:"Success", message:this.status, type:"success", customClass:"notification"});
 
+          // reset jobs array and fetch new job listings
+          this.jobs = [];
           this.Fetch(1);
           return;
         }
@@ -194,5 +196,9 @@ export default {
 
 .label {
   font-size: 0.8rem;
+}
+
+.buttons {
+  padding-top: 1rem;
 }
 </style>

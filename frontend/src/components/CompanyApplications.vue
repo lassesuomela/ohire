@@ -35,7 +35,9 @@
       </template>
     </el-table-column>
   </el-table>
-
+  <div class="buttons">
+    <el-button @click="Back">Back</el-button>
+  </div>
   </el-card>
 
 </div>
@@ -57,6 +59,9 @@ export default {
     }
   },
   methods: {
+    Back(){
+      this.$router.go(-1);
+    },
     Fetch (id, page) {
 
       this.currentPage = page;
@@ -120,4 +125,9 @@ export default {
 .ratings {
   font-size: 0.95rem;
 }
+
+.buttons {
+  padding-top: 1rem;
+}
+
 </style>
