@@ -3,6 +3,14 @@
   <el-card>
     <el-main>
       <el-form label-position="top">
+        <el-form-item label="Company Name" v-if="company">
+          <el-input v-model="company" size="large" disabled class="customText">
+            <template #prepend>
+              <i class="material-symbols-outlined">apartment</i>
+            </template>
+          </el-input>
+        </el-form-item>
+
         <el-form-item label="Username">
           <el-input v-model="username" size="large" disabled class="customText">
             <template #prepend>
@@ -57,6 +65,7 @@ export default {
       createdAt: null,
       status: null,
       accountType: null,
+      company: null,
     }
   },
   methods: {
@@ -68,6 +77,7 @@ export default {
         if(response.data.status === "success"){
           this.username = response.data.data.username;
           this.email = response.data.data.email;
+          this.company = response.data.data.company;
 
           this.createdAt = this.FormatDate(response.data.data.createdAt);
 
