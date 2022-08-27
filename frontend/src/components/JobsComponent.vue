@@ -244,6 +244,9 @@ export default {
         this.noMore = true;
       })
     }
+  },
+  mounted () {
+    this.Search('');
   }
 }
 </script>
