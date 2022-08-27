@@ -3,7 +3,7 @@
   <el-card>
     <el-table :data="jobs" :stripe="true">
     <el-table-column label="Title" prop="title" width="200"/>
-    <el-table-column label="Description" prop="description" width="200"/>
+    <el-table-column label="Description" prop="description" width="150"/>
 
     <el-table-column label="Working Time" prop="workingTime">
       <template #default="scope">
@@ -16,7 +16,7 @@
     <el-table-column label="Timestamp" prop="timestamp" width="140"/>
     <el-table-column label="Applications" prop="applicationCount" />
 
-    <el-table-column label="View Applications">
+    <el-table-column label="Applicants">
       <template #default="scope">
         <el-button v-if="scope.row.applicationCount > 0"
           class="label"
@@ -27,13 +27,13 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="View More">
+    <el-table-column label="Details">
       <template #default="scope">
         <el-button
           class="label"
           size="small"
           @click="ViewMore(scope.row.id)"
-          >Details</el-button
+          >View</el-button
         >
       </template>
     </el-table-column>
@@ -191,7 +191,7 @@ export default {
 .container {
   justify-content: center;
   text-align: center;
-  padding: 20rem;
+  padding: 10rem;
 }
 
 .label {

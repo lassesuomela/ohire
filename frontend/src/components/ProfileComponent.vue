@@ -123,7 +123,7 @@ export default {
 .container {
   justify-content: center;
   text-align: center;
-  display: grid;
+  padding: 15rem;
   font-size: 1.2em;
 }
 </style>

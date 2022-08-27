@@ -173,6 +173,7 @@ export default {
       // this is done when page is loaded for the first time
       // enable loading text and search with nothing as keywords
       if(this.firstFetch){
+
         this.firstFetch = false;
         this.loading = true;
         this.Search(this.search);
@@ -184,6 +185,8 @@ export default {
       }
     },
     Search(searchTerm) {
+      
+
       axios.get('/jobs/' + this.currentPage + '/' + searchTerm).then(response => {
         console.log(response);
 
@@ -246,7 +249,7 @@ export default {
     }
   },
   mounted () {
-    this.Search('');
+    //this.Search('');
   }
 }
 </script>
@@ -262,7 +265,7 @@ export default {
 .container {
   justify-content: center;
   text-align: center;
-  padding: 20rem;
+  padding: 10rem;
 }
 .infinite-list {
   list-style: none;

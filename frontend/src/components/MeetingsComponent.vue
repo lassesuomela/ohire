@@ -96,7 +96,7 @@ export default {
 .container {
   justify-content: center;
   text-align: center;
-  padding: 20rem;
+  padding: 15rem;
 }
 .infinite-list {
   list-style: none;

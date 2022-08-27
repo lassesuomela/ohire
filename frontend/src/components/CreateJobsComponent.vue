@@ -12,15 +12,19 @@
         </el-form-item>
 
         <el-form-item label="Salary">
-          <el-input type="number" v-model="salary" placeholder="0" size="large" controls="false" class="customText">
-            <template #prepend>
-              <i class="material-symbols-outlined">payments</i>
-            </template>
+          <el-row>
+            <el-col :span="15">
+              <el-input type="number" v-model="salary" placeholder="0" size="large" controls="false" class="customText">
+              <template #prepend>
+                <i class="material-symbols-outlined">payments</i>
+              </template>
 
-            <template #suffix>
-              <i class="material-symbols-outlined">euro</i>
-            </template>
-          </el-input>
+              <template #suffix>
+                <i class="material-symbols-outlined">euro</i>
+              </template>
+            </el-input>
+            </el-col>
+          </el-row>
         </el-form-item>
 
         <el-form-item label="Working time">
@@ -142,8 +146,8 @@ export default {
 .container {
   justify-content: center;
   text-align: center;
-  display: grid;
   font-size: 1.2em;
+  padding: 15rem;
 }
 
 .customText {
