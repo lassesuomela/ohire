@@ -8,7 +8,7 @@
         <h2>Salary: {{salary}}</h2>
 
         <div class="desc">
-          <p class="customText">{{description}}</p>
+          <span class="customText">{{description}}</span>
         </div>
 
         <div class="btn">          
@@ -106,6 +106,8 @@ export default {
 .customText {
   color: black;
   font-size: 16px;
+  white-space: pre-wrap;
+  word-break:normal;
 }
 .left {
   padding-right: 0.5rem;

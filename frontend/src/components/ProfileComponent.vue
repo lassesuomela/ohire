@@ -3,14 +3,13 @@
   <el-card>
     <el-main>
       <el-form label-position="top">
-        <el-form-item label="Company Name" v-if="company">
-          <el-input v-model="company" size="large" disabled class="customText">
-            <template #prepend>
-              <i class="material-symbols-outlined">apartment</i>
-            </template>
-          </el-input>
-        </el-form-item>
-
+          <el-form-item label="Company Name" v-if="company">
+            <el-input v-model="company" size="large" disabled class="customText">
+              <template #prepend>
+                <i class="material-symbols-outlined">apartment</i>
+              </template>
+            </el-input>
+          </el-form-item>
         <el-form-item label="Username">
           <el-input v-model="username" size="large" disabled class="customText">
             <template #prepend>

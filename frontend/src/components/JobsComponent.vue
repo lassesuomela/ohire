@@ -35,7 +35,7 @@
           </template>
           <el-row class="description">
             <el-col :span="18">
-              <p>{{job.description}}</p>
+              <span>{{job.description}}</span>
             </el-col>
             
             <el-col :span="5" class="details">
@@ -288,6 +288,7 @@ export default {
 .description {
   text-align: start;
   word-break: break-all;
+  white-space: pre-wrap;
 }
 .details {
   text-align: end;
