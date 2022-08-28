@@ -18,6 +18,9 @@
                 <el-tag class="detailTag" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
               </el-col>
             </el-row>
+            <el-row>
+              <el-button type="danger" @click="Delete(application.applicationId)">Delete</el-button>
+            </el-row>
           </div>
         </el-card>
       </div>
@@ -41,6 +44,26 @@ export default {
     }
   },
   methods: {
+    Delete (id) {
+      axios.delete('/application/' + id).then(response => {
+        if(response.data.status === "success"){
+          this.status = response.data.message;
+          this.$notify({title:"Success", message:this.status, type:"success", customClass:"notification"});
+          this.FetchApplications();
+        }
+
+        if(response.data.status === "error"){
+          this.status = response.data.message;
+          this.applications = [];
+
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
+          return;
+        }
+      }).catch(error => {
+        console.log(error);
+      })
+    },
     FetchApplications () {
 
       if(!localStorage.getItem("token")){

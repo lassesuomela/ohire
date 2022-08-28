@@ -2,6 +2,7 @@ const multer = require('multer');
 const applicationModel = require('../models/applicationModel');
 const crypto = require('crypto');
 const path = require('path');
+const fs = require('fs')
 
 
 const storages = multer.diskStorage({
@@ -216,11 +217,39 @@ const getCV = (req, res) => {
     })
 }
 
+const deleteApplication = (req, res) => {
+    let id = req.params.id;
+
+    applicationModel.getCVByIds(id, req.id, (err, result) => {
+        if(err){
+            console.log(err);
+            return res.json({status:"srror", message:"Error on file deletion"});
+        }
+
+        try {
+            fs.unlinkSync("./applications/" + result[0].cvFile);
+        }catch(e){
+            console.log(e);
+            return res.json({status:"srror", message:"Error on file deletion"});
+        }
+    })
+
+    applicationModel.deleteById(id, req.id, (err, result) => {
+        if(err){
+            console.log(err);
+            return res.json({status:"srror", message:"Error on application deletion"});
+        }
+
+        return res.json({status:"success", message:"Application deleted"});
+    })
+}
+
 module.exports = {
     sendApplication,
     getUsersApplications,
     getApplicationsByJobId,
     getApplicationById,
     reviewApplication,
-    getCV
+    getCV,
+    deleteApplication
 }

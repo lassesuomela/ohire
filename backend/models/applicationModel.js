@@ -18,6 +18,12 @@ const applications = {
     },
     getCVByIds: (jobId, users_id, appUsersId, appId, cb) => {
         return db.query("SELECT applications.cvFile FROM applications JOIN joblistings ON joblistings.id = applications.joblistings_id WHERE applications.joblistings_id = ? AND joblistings.users_id = ? AND applications.users_id = ? AND applications.id = ?", [jobId, users_id, appUsersId, appId], cb);
+    },
+    deleteById: (id, users_id, cb) => {
+        return db.query("DELETE FROM applications WHERE id = ? AND users_id = ?", [id, users_id], cb);
+    },
+    getCVByIds: (id, users_id, cb) => {
+        return db.query("SELECT cvFile FROM applications WHERE id = ? AND users_id = ?", [id, users_id], cb);
     }
 }
 
