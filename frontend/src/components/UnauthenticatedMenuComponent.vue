@@ -1,5 +1,5 @@
 <template>
-    <TabMenu :model="items"/>
+    <TabMenu :model="items" class="nav"/>
 </template>
 
 <script>

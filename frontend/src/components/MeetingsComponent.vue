@@ -142,5 +142,9 @@ export default {
 .btn i {
   padding-left: 0.5rem;
 }
-
+@media screen and (max-width: 600px) {
+  .container, .infinite-list, .item{
+    padding: 0rem;
+  }
+}
 </style>

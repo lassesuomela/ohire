@@ -141,4 +141,10 @@ export default {
   display: flex;
   padding-top:1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .container{
+    padding: 0rem;
+  }
+}
 </style>

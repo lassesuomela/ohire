@@ -168,4 +168,25 @@ export default {
   justify-content: center;
   display: flex;
 }
+
+@media screen and (max-width: 600px) {
+  .container, .content{
+    padding: 0rem;
+  }
+  .title {
+    width: 35ch;
+  }
+  .salary {
+    width: 40ch;
+  }
+  .description {
+    width: 35ch;
+  }
+  .btn{
+    padding: 0rem;
+  }
+  .btn i{
+    padding-left: 0.5rem;
+  }
+}
 </style>

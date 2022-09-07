@@ -135,10 +135,6 @@ export default {
 .card-header-details {
   text-align: end;
 }
-.description {
-  text-align: start;
-  word-break: break-all;
-}
 .details {
   text-align: end;
 }
@@ -159,4 +155,15 @@ export default {
   float:right;
 }
 
+@media screen and (max-width: 600px) {
+  .container, .item{
+    padding: 0rem;
+  }
+  .item {
+    padding-bottom: 0.5rem;
+  }
+  .card-header {
+    font-size:0.9rem;
+  }
+}
 </style>

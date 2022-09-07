@@ -118,4 +118,5 @@ export default {
   display: grid;
   font-size: 1.2em;
 }
+
 </style>

@@ -1,20 +1,13 @@
 <template>
 <div class="container">
-  <el-card>
-    <el-row>
-      <el-col :span="16">
-      </el-col>
+  <el-card class="card">
+    <div class="searchBar">
+      <el-input v-model="search" placeholder="Search for title">
+        <template #append><el-button @click="DoSearch" size="small" type="primary">Search</el-button></template>
+      </el-input> 
 
-      <el-col :span="8">
-        <el-input v-model="search" placeholder="Search for title">
-          <template #append><el-button @click="DoSearch" size="small" type="primary">Search</el-button></template>
-        </el-input> 
-
-        <p class="info" >Found {{jobCount}} job listings </p>
-
-      </el-col>
-    </el-row>
-
+      <p class="info" >Found {{jobCount}} job listings </p>
+    </div>
   <ul v-infinite-scroll="Fetch" infinite-scroll-disabled="noMore" class="infinite-list">
     <li v-for="job in allJobs" :key="job">
       <a @click="ViewMore(job.id)" class="item">
@@ -342,5 +335,39 @@ export default {
 .info {
   padding-top: 1rem;
   float: right;
+}
+
+.searchBar {
+  padding-bottom: 1rem;
+  display: grid;
+  width: 50ch;
+}
+.searchBar p {
+  text-align: start;
+  padding: 0rem;
+}
+
+@media screen and (max-width: 600px) {
+  .container{
+    padding: 0rem;
+  }
+  .card-header{
+    font-size: 0.9rem;
+    padding:0rem;
+  }
+  .details {
+    display: block;
+  }
+  .companyHeader{
+    display: grid;
+  }
+  .searchBar {
+    display: grid;
+    width: 100%;
+  }
+  .searchBar p {
+    text-align: start;
+    padding: 0rem;
+  }
 }
 </style>
