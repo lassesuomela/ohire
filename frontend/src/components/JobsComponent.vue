@@ -308,6 +308,7 @@ export default {
 .card-header{
   text-align: start;
   font-weight: bold;
+  font-size: 1.5rem;
 }
 .card-header-details {
   text-align: end;

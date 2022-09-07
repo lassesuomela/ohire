@@ -1,41 +1,45 @@
 <template>
 <div class="container">
-  <el-card>
+  <el-card class="content">
 
     <el-header>
       <h2>{{title}}</h2>
+      <el-divider />
     </el-header>
-    
-    <el-form label-position="top" class="form">
-      <el-form-item label="Job Application">
-        <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
-      </el-form-item>
+    <el-main>
+      <el-form label-position="top" class="form">
+        <el-form-item label="Job Application">
+          <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
+        </el-form-item>
 
-      <p>Upload your CV</p>
-      <el-upload
-        :auto-upload="false"
-        :limit="1"
-        accept=".pdf"
-        :on-change="HandleFile"
-        v-model:file-list="list"
-        :on-exceed="HandleExceed"
-      >
-        <template #trigger>
-          <el-button type="primary">Select File</el-button>
-        </template>
+        <div class="fileUpload">
+          <p>Upload your CV</p>
+          <el-upload
+            :auto-upload="false"
+            :limit="1"
+            accept=".pdf"
+            :on-change="HandleFile"
+            v-model:file-list="list"
+            :on-exceed="HandleExceed"
+          >
+            <template #trigger>
+              <el-button type="primary">Select File</el-button>
+            </template>
 
-        <template #tip>
-          <div class="el-upload__tip">
-            Only pdf files are allowed. Max file size 5 Mb.
-          </div>
-        </template>
-      </el-upload>
+            <template #tip>
+              <div class="el-upload__tip">
+                Only pdf files are allowed. Max file size 5 Mb.
+              </div>
+            </template>
+          </el-upload>
+        </div>
 
-      <div class="btn">
-        <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
-        <el-button @click="SendApplication" size="large" type="primary">Send<i class="material-symbols-outlined">send</i></el-button>
-      </div>
-    </el-form>
+        <div class="btn">
+          <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
+          <el-button @click="SendApplication" size="large" type="primary">Send<i class="material-symbols-outlined">send</i></el-button>
+        </div>
+      </el-form>
+    </el-main>
   </el-card>
 </div>
 </template>
@@ -63,9 +67,10 @@ export default {
   },
   methods: {
     HandleExceed(UploadFiles) {
+
       // when file limit is exceeded remove old file and replace it with the new one
-      this.file = UploadFiles
-      this.list = this.file;
+      this.file = UploadFiles[0];
+      this.list = UploadFiles;
     },
     HandleFile (uploadFile) {
       this.file = uploadFile.raw;
@@ -154,16 +159,16 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   justify-content: center;
-  text-align: center;
-  display: grid;
+  text-align: start;
   font-size: 1.2em;
-  padding: 10rem;
+  padding: 35rem;
+  padding-bottom: 0rem;
 }
 
 .btn{
+  text-align: center;
   padding-top: 2rem;
 }
 
@@ -178,7 +183,11 @@ export default {
 .left {
   padding-right: 0.5rem;
 }
-.form {
-  widows: 100character;
+.content{
+  justify-content: center;
 }
+.form ,.fileUpload{
+  padding-top:2rem;
+}
+
 </style>

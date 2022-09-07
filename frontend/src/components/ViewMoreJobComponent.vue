@@ -3,7 +3,7 @@
   <el-card>
     <el-container>
       <el-header>
-        <h1>{{title}}</h1>
+        <h2>{{title}}</h2>
         <el-divider />
         <h3>Salary: {{salary}}</h3>
         <h3>Description:</h3>
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style scoped>
-h1, h3{ 
+h1, h2, h3{ 
   text-align: start;
 }
 .container {
