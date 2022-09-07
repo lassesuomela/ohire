@@ -96,7 +96,7 @@ export default {
   },
   mounted () {
     if(localStorage.getItem('token')){
-      this.$router.push('/jobs');
+      this.$router.push('/profile');
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
 <div class="container">
-  <el-card>
+  <el-card class="content">
     <el-main>
       <el-form label-position="top">
-        <el-form-item label="Job Title">
+        <el-form-item label="Job Title" class="title">
           <el-input v-model="title" placeholder="Title" size="large" show-word-limit="true" maxlength="60" class="customText">
             <template #prepend>
               <i class="material-symbols-outlined">title</i>
@@ -11,7 +11,7 @@
           </el-input>
         </el-form-item>
 
-        <el-form-item label="Salary">
+        <el-form-item label="Salary" class="salary">
           <el-row>
             <el-col :span="15">
               <el-input type="number" v-model="salary" placeholder="0" size="large" controls="false" class="customText">
@@ -38,7 +38,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Job Description">
+        <el-form-item label="Job Description" class="description">
           <el-input v-model="description" placeholder="Description" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
         </el-form-item>
 
@@ -147,11 +147,25 @@ export default {
   justify-content: center;
   text-align: center;
   font-size: 1.2em;
-  padding: 15rem;
+  padding: 35rem;
+  padding-bottom:0rem;
 }
 
 .customText {
   color: black;
   font-size: 16px;
+}
+.title {
+  width: 70ch;
+}
+.salary {
+  width: 40ch;
+}
+.description {
+  width: 70h;
+}
+.content{
+  justify-content: center;
+  display: flex;
 }
 </style>

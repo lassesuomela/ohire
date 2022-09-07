@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
+
 import NotFound from "@/views/NotFound.vue";
 import LoginView from "@/views/LoginView.vue";
 import LogoutComponent from "@/components/LogoutComponent.vue";
@@ -56,17 +57,11 @@ const routes = [
         path: "/jobs",
         component: JobView,
         name: "Jobs",
-        meta: {
-            auth: true
-        }
     },
     {
         path: "/job/:id",
         component: ViewMoreJobView,
         name: "Job",
-        meta: {
-            auth: true
-        }
     },
     {
         path: "/profile",
@@ -173,7 +168,7 @@ router.beforeEach((to) => {
     }
 
     if(!localStorage.getItem('token')){
-        return router.push('Login');
+        return router.push('/Login');
     }
 
     axios.get('/user').then((response) => {

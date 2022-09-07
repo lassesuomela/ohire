@@ -1,21 +1,24 @@
 <template>
 <div class="container">
   <el-card>
+    <el-container>
       <el-header>
-        <h2>{{title}}</h2>
+        <h1>{{title}}</h1>
+        <el-divider />
+        <h3>Salary: {{salary}}</h3>
+        <h3>Description:</h3>
       </el-header>
       <el-main>
-        <h2>Salary: {{salary}}</h2>
-
         <div class="desc">
           <span class="customText">{{description}}</span>
         </div>
 
         <div class="btn">          
           <el-button @click="this.$router.go(-1)" size="large" type="primary"><i class="material-symbols-outlined left">arrow_back</i>Back</el-button>
-          <el-button @click="Apply(id)" size="large" type="primary">Apply<i class="material-symbols-outlined">edit_note</i></el-button>
+          <el-button v-if="role === 1" @click="Apply(id)" size="large" type="primary">Apply<i class="material-symbols-outlined">edit_note</i></el-button>
         </div>
       </el-main>
+    </el-container>
   </el-card>
 </div>
 </template>
@@ -37,6 +40,7 @@ export default {
       description: "",
       salary: null,
       status: null,
+      role: null,
     }
   },
   methods: {
@@ -80,19 +84,22 @@ export default {
     }
   },
   mounted () {
+    this.role = this.$store.state.role;
     this.FetchJob(this.id);
   }
 }
 </script>
 
 <style scoped>
-
+h1, h3{ 
+  text-align: start;
+}
 .container {
   justify-content: center;
   text-align: center;
-  display: grid;
   font-size: 1.2em;
-  padding: 20rem;
+  padding: 15rem;
+  padding-bottom: 0rem;
 }
 
 .btn{
@@ -102,7 +109,6 @@ export default {
 .btn i{
   padding-left: 0.5rem;
 }
-
 .customText {
   color: black;
   font-size: 16px;
@@ -116,5 +122,6 @@ export default {
 .desc {
   text-align: start;
   word-break: break-all;
+  padding-top:8rem;
 }
 </style>

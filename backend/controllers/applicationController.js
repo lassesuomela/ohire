@@ -203,6 +203,7 @@ const getCV = (req, res) => {
     }
 
     applicationModel.getCVByIds(jobId, req.id, applicationUsersId, applicationId, (err, result) => {
+
         if(err){
             console.log(err);
 
@@ -220,10 +221,10 @@ const getCV = (req, res) => {
 const deleteApplication = (req, res) => {
     let id = req.params.id;
 
-    applicationModel.getCVByIds(id, req.id, (err, result) => {
+    applicationModel.getCVById(id, req.id, (err, result) => {
         if(err){
             console.log(err);
-            return res.json({status:"srror", message:"Error on file deletion"});
+            return res.json({status:"error", message:"Error on file deletion"});
         }
 
         try {

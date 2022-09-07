@@ -25,16 +25,19 @@ let auth = require('./configs/auth');
 let userRoutes = require('./routes/userRoutes');
 let loginRoutes = require('./routes/loginRoutes');
 let jobRoutes = require('./routes/jobRoutes');
+let modifyJobsRoutes = require('./routes/modifyJobsRoutes');
 let applicationRoutes = require('./routes/applicationRoutes');
 let meetingsRoutes = require('./routes/meetingsRoutes');
 
 app.use('/api/', loginRoutes);
+app.use('/api/', jobRoutes);
 
 app.use(auth);
+
 app.use(express.static('applications'));
 
+app.use('/api/', modifyJobsRoutes);
 app.use('/api/', userRoutes);
-app.use('/api/', jobRoutes);
 app.use('/api/', applicationRoutes);
 app.use('/api/', meetingsRoutes);
 

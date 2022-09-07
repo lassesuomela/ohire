@@ -1,48 +1,54 @@
 <template>
 <div class="container">
   <el-card>
-    <el-main>
-      <el-form label-position="top">
+    <el-container>
+      <el-main>
+        <el-form label-position="top">
           <el-form-item label="Company Name" v-if="company">
-            <el-input v-model="company" size="large" disabled class="customText">
+              <el-input v-model="company" size="large" disabled class="customText">
+                <template #prepend>
+                  <i class="material-symbols-outlined">apartment</i>
+                </template>
+              </el-input>
+            </el-form-item>
+          <el-form-item label="Username">
+            <el-input v-model="username" size="large" disabled class="customText">
               <template #prepend>
-                <i class="material-symbols-outlined">apartment</i>
+                <i class="material-symbols-outlined">account_circle</i>
               </template>
             </el-input>
           </el-form-item>
-        <el-form-item label="Username">
-          <el-input v-model="username" size="large" disabled class="customText">
-            <template #prepend>
-              <i class="material-symbols-outlined">account_circle</i>
-            </template>
-          </el-input>
-        </el-form-item>
 
-        <el-form-item label="Email">
-          <el-input v-model="email" size="large" disabled class="customText">
-            <template #prepend>
-              <i class="material-symbols-outlined">email</i>
-            </template>
-          </el-input>
-        </el-form-item>
+          <el-form-item label="Email">
+            <el-input v-model="email" size="large" disabled class="customText">
+              <template #prepend>
+                <i class="material-symbols-outlined">email</i>
+              </template>
+            </el-input>
+          </el-form-item>
 
-        <el-form-item label="Account type">
-          <el-input v-model="accountType" size="large" disabled class="customText">
-            <template #prepend>
-              <i class="material-symbols-outlined">badge</i>
-            </template>
-          </el-input>
-        </el-form-item>
+          <el-form-item label="Account type">
+            <el-input v-model="accountType" size="large" disabled class="customText">
+              <template #prepend>
+                <i class="material-symbols-outlined">badge</i>
+              </template>
+            </el-input>
+          </el-form-item>
 
-        <el-form-item label="Creation date">
-          <el-input v-model="createdAt" size="large" disabled class="customText">
-            <template #prepend>
-              <i class="material-symbols-outlined">calendar_month</i>
-            </template>
-          </el-input>
-        </el-form-item>
-      </el-form>
-    </el-main>
+          <el-form-item label="Creation date">
+            <el-input v-model="createdAt" size="large" disabled class="customText">
+              <template #prepend>
+                <i class="material-symbols-outlined">calendar_month</i>
+              </template>
+            </el-input>
+          </el-form-item>
+        </el-form>
+      </el-main>
+
+      <el-aside class="avatar">
+        <el-avatar :size="200" />
+      </el-aside>
+    </el-container>
   </el-card>
 </div>
 </template>
@@ -117,12 +123,22 @@ export default {
 .customText {
   color: black;
   font-size: 16px;
+  width:60ch;
 }
 
+.avatar {
+  padding-top: 3rem;
+}
 .container {
   justify-content: center;
   text-align: center;
-  padding: 15rem;
+  padding: 35rem;
+  padding-bottom: 0rem;
   font-size: 1.2em;
+}
+
+.info {
+  display: flex;
+  padding-top:1rem;
 }
 </style>

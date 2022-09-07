@@ -85,4 +85,19 @@ WHERE applications.id = 22 AND applications.joblistings_id = 30 AND joblistings.
 UPDATE applications
 INNER JOIN joblistings ON joblistings.id = applications.joblistings_id
 SET applications.rating = 1, applications.reviewed = 1
-WHERE applications.users_id = 34 AND applications.joblistings_id = 12 AND joblistings.users_id = 34 AND applications.id = 13
+WHERE applications.users_id = 34 AND applications.joblistings_id = 12 AND joblistings.users_id = 34 AND applications.id = 13;
+
+SELECT joblistings.id, joblistings.timestamp, joblistings.description, joblistings.title, joblistings.salary, joblistings.users_id, joblistings.workingTime, COUNT(applications.id) as 'applicationCount'
+FROM joblistings
+LEFT JOIN applications ON applications.joblistings_id = joblistings.id
+WHERE joblistings.users_id = 44
+GROUP BY joblistings.id
+ORDER BY id DESC LIMIT 0, 10;
+
+SELECT COUNT(id) AS maxCount FROM joblistings WHERE users_id = 44;
+
+SELECT applications.cvFile
+FROM applications JOIN joblistings ON joblistings.id = applications.joblistings_id
+WHERE applications.joblistings_id = 38 AND joblistings.users_id = 44 AND applications.users_id = 34 AND applications.id = 57;
+
+delete from jobListings where LENGTH(description) < 100;

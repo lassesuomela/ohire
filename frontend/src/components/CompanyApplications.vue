@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <el-card>
-    <el-table :data="applications" :stripe="true">
+    <el-table :data="applications" :stripe="true" class="table">
     <el-table-column label="Username" prop="username" />
     <el-table-column label="Timestamp" prop="timestamp" />
     <el-table-column label="Score" prop="score">
@@ -129,5 +129,7 @@ export default {
 .buttons {
   padding-top: 1rem;
 }
-
+.table {
+  padding: 1rem;
+}
 </style>

@@ -21,4 +21,10 @@ export default {
 .container {
     padding-top: 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+    .container {
+        padding-top: 0rem;
+    }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <el-card>
+  <el-card class="table">
     <el-table :data="jobs" :stripe="true">
     <el-table-column label="Title" prop="title" width="200"/>
     <el-table-column label="Description" prop="description" width="150"/>
@@ -93,7 +93,7 @@ export default {
         return;
       }
 
-      axios.get('/jobs/company/' + page).then(response => {
+      axios.get('/company/jobs/' + page).then(response => {
         console.log(response);
 
         if(response.data.status === "success"){
@@ -191,7 +191,8 @@ export default {
 .container {
   justify-content: center;
   text-align: center;
-  padding: 10rem;
+  padding: 15rem;
+  padding-bottom:5rem;
 }
 
 .label {
@@ -200,5 +201,8 @@ export default {
 
 .buttons {
   padding-top: 1rem;
+}
+.table {
+  padding: 1rem;
 }
 </style>

@@ -22,7 +22,7 @@ const applications = {
     deleteById: (id, users_id, cb) => {
         return db.query("DELETE FROM applications WHERE id = ? AND users_id = ?", [id, users_id], cb);
     },
-    getCVByIds: (id, users_id, cb) => {
+    getCVById: (id, users_id, cb) => {
         return db.query("SELECT cvFile FROM applications WHERE id = ? AND users_id = ?", [id, users_id], cb);
     }
 }

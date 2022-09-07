@@ -100,7 +100,7 @@ export default {
 }
 .infinite-list {
   list-style: none;
-  padding: 0rem;
+  padding: 1rem;
 }
 .item {
   cursor: pointer;

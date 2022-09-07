@@ -46,7 +46,7 @@
                 <el-tag class="detailTag" size="large" type="info">{{job.workingTime}}</el-tag>
               </el-col>
               <el-col :span="24" class="details">
-                <el-tag class="detailTag" size="large" type="success">{{job.salary}}</el-tag>
+                <el-tag v-if="job.salary !== 'Not specified'" class="detailTag" size="large" type="success">{{job.salary}}</el-tag>
               </el-col>
             </el-col>
 
@@ -58,7 +58,7 @@
                 <i class="material-symbols-outlined">schedule</i>
               </el-col>
               <el-col :span="24" class="details">
-                <i class="material-symbols-outlined">payments</i>
+                <i v-if="job.salary !== 'Not specified'" class="material-symbols-outlined">payments</i>
               </el-col>
             </el-col>
           </el-row>
@@ -107,31 +107,58 @@ export default {
       let interval = seconds / 31536000;
 
       if (interval > 1) {
-        return Math.floor(interval) + " years ago";
+        interval = Math.floor(interval);
+
+        if(interval === 1){
+          return interval + " year ago";
+        }
+        return interval + " years ago";
       }
 
       // divide with month in seconds and check for n months
       interval = seconds / 2592000;
       if (interval > 1) {
-        return Math.floor(interval) + " months ago";
+
+        interval = Math.floor(interval);
+
+        if(interval === 1){
+          return interval + " month ago";
+        }
+        return interval + " months ago";
       }
 
       // divide with day in seconds and check for n days
       interval = seconds / 86400;
       if (interval > 1) {
-        return Math.floor(interval) + " days ago";
+        interval = Math.floor(interval);
+
+        if(interval === 1){
+          return interval + " day ago";
+        }
+        return interval + " days ago";
       }
 
       // divide with hour in seconds and check for n hours
       interval = seconds / 3600;
       if (interval > 1) {
-        return Math.floor(interval) + " hours ago";
+        interval = Math.floor(interval);
+
+        if(interval === 1){
+          return interval + " hour ago";
+        }
+        return interval + " hours ago";
       }
 
       // divide with minute in seconds and check for n minutes
       interval = seconds / 60;
       if (interval > 1) {
-        return Math.floor(interval) + " minutes ago";
+
+        interval = Math.floor(interval);
+
+        if(interval === 1){
+          return interval + " minute ago";
+        }
+        return interval + " minutes ago";
       }
 
       // only seconds have passed
