@@ -1,7 +1,36 @@
 <template>
 <div class="container">
   <el-card>
-    <el-container>
+    <el-container class="content">
+      
+      <el-aside class="avatar">
+        <el-avatar :src="pictureUrl" :size="200">
+          <i class="material-symbols-outlined">person</i>
+        </el-avatar>
+
+        <div>
+          <p>Change profile picture</p>
+          <el-upload
+            :auto-upload="false"
+            :limit="1"
+            accept=".png, .jpg, .jpeg"
+            :on-change="HandleFile"
+            v-model:file-list="list"
+            :on-exceed="HandleExceed"
+          >
+            <template #trigger>
+              <el-button type="primary">Select File</el-button>
+            </template>
+
+            <template #tip>
+              <div class="el-upload__tip">
+                Max file size 2 Mb.
+              </div>
+            </template>
+          </el-upload>
+        </div>
+      </el-aside>
+
       <el-main>
         <el-form label-position="top">
           <el-form-item label="Company Name" v-if="company">
@@ -44,11 +73,8 @@
           </el-form-item>
         </el-form>
       </el-main>
-
-      <el-aside class="avatar">
-        <el-avatar :size="200" />
-      </el-aside>
     </el-container>
+    <el-button @click="UpdateProfile">Update</el-button>
   </el-card>
 </div>
 </template>
@@ -71,9 +97,22 @@ export default {
       status: null,
       accountType: null,
       company: null,
+      picture: null,
+      pictureUrl: "http://localhost:8081/profilePictures/",
+      list: [],
     }
   },
   methods: {
+    HandleExceed(UploadFiles) {
+
+      // when file limit is exceeded remove old file and replace it with the new one
+      this.picture = UploadFiles[0];
+      this.list = UploadFiles;
+    },
+    HandleFile (uploadFile) {
+      this.picture = uploadFile.raw;
+      this.list = this.picture;
+    },
     FetchProfileData () {
 
       axios.get('/user/profile').then(response => {
@@ -83,6 +122,9 @@ export default {
           this.username = response.data.data.username;
           this.email = response.data.data.email;
           this.company = response.data.data.company;
+          this.pictureUrl = this.pictureUrl + response.data.data.profilePic;
+
+          console.log(this.pictureUrl);
 
           this.createdAt = this.FormatDate(response.data.data.createdAt);
 
@@ -111,6 +153,42 @@ export default {
             
       return date.toLocaleString('fi');
     },
+    UpdateProfile () {
+
+      if(!this.picture){
+        this.$notify({title:"Warning", message:"Picture must be selected", type:"warning", customClass:"notification"});
+        return;
+      }
+
+      let formData = new FormData();
+
+      formData.append("picture", this.picture);
+
+      axios.post('/user/profile', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }}).then(response => {
+
+        if(response.data.status === "success"){
+          this.status = response.data.message;
+
+          // send success msg
+          this.$notify({title:"Success", message:this.status, type:"success", customClass:"notification"});
+
+          this.$router.go();
+        }
+
+        if(response.data.status === "error"){
+          this.status = response.data.message;
+
+          // send error msg
+          this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
+        }
+
+      }).catch(error => {
+        console.log(error);
+      })
+    },
   },
   mounted () {
     this.FetchProfileData();
@@ -127,7 +205,17 @@ export default {
 }
 
 .avatar {
-  padding-top: 3rem;
+  justify-content: center;
+  display: grid;
+  padding-top:3rem;
+  padding-bottom: 1rem;
+}
+
+.avatar div {
+  font-size: 1rem;
+}
+.avatar i {
+  font-size: 10rem;;
 }
 .container {
   justify-content: center;
@@ -145,6 +233,9 @@ export default {
 @media screen and (max-width: 600px) {
   .container{
     padding: 0rem;
+  }
+  .content {
+    display: grid;
   }
 }
 </style>

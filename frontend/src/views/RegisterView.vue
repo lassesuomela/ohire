@@ -19,7 +19,7 @@ export default {
 <style scoped>
 
 .container {
-    padding-top: 2rem;
+  padding-top: 2rem;
 }
 @media screen and (max-width: 600px) {
   .container{

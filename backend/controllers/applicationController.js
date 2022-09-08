@@ -210,6 +210,10 @@ const getCV = (req, res) => {
             return res.json({status:"error", message:err});
         }
 
+        if(!result){
+            return res.json({status:"error", message:"No cv file found"});
+        }
+
         let filename = result[0].cvFile;
 
         //filename = filename.slice(0, filename.length - 32);

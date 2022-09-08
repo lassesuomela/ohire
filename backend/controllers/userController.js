@@ -1,7 +1,59 @@
 const bcrypt = require('bcrypt');
 const jwt = require('../configs/jwt');
-
+const multer = require('multer');
 const userModel = require('../models/userModel');
+const crypto = require('crypto');
+const storages = multer.diskStorage({
+    destination: "profilePictures/",
+    filename: (req, file, cb) => {
+
+        // valid mimes that match valid extensions
+        let mimes = {'image/jpeg':'.jpeg', 'image/png':'.png'};
+
+        // get the file extension
+        let fileExt = mimes[file.mimetype];
+
+        // add random characters to randomize the filename in case some one has the same file name
+        let random = crypto.randomBytes(16).toString('hex')
+
+        let finalName = file.originalname.split(fileExt)[0] + random + fileExt;
+        // return filename with extension
+
+        cb(null, finalName);
+    }
+})
+
+const upload = multer(
+{
+    storage: storages,
+    limits: {
+        // 2MB file size limit
+        fileSize: 1024 * 1024 * 2
+    },
+    fileFilter(req, file, cb) {
+
+        // check if file is not found 
+        if(!file){
+            return cb("Filetype not found", false);
+        }
+
+        // valid mimes that match valid extensions
+        let mimes = {'image/jpeg':'.jpeg', 'image/png':'.png'};
+
+        // get the file extension
+        let fileExt = mimes[file.mimetype];
+
+        if(!fileExt){
+            // return error if mimetype is not in ext list
+            return cb("Filetype not allowed: " + file.mimetype, false);
+        }
+
+        // else return null as error
+        cb(null, true);
+    }
+}
+).single("picture")
+
 
 const register = (req, res) => {
 
@@ -152,10 +204,39 @@ const profile = (req, res) => {
     })
 }
 
+const profileUpdate = (req, res) => {
+
+    upload(req, res, (err) => {
+
+        // return out if multer error
+        if(err){
+            console.log(err);
+            return res.json({status:"error", message:err});
+        }
+
+        if(!req.file){
+            return res.json({status:"error", message:"One or more fields must be provided"});
+        }
+
+        let filename = req.file.filename;
+
+        userModel.updateProfile(filename, req.id, (err, result) => {
+            if(err){
+                console.log(err);
+    
+                return res.json({status:"error", message:err});
+            }
+    
+            res.json({status:"success", message:"Profile updated successfully"});
+        })
+    })
+}
+
 module.exports = {
     register,
     login,
     authenticated,
     profile,
-    registerCompany
+    registerCompany,
+    profileUpdate
 }

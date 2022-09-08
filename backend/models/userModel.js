@@ -14,7 +14,10 @@ const user = {
         return db.query('SELECT id, username, role FROM users WHERE username = ? LIMIT 1', [username], cb);
     },
     getProfileDataByUsername: (username, cb) => {
-        return db.query('SELECT role, username, email, company, uuid, createdAt FROM users WHERE username = ? LIMIT 1', [username], cb);
+        return db.query('SELECT profilePic, role, username, email, company, uuid, createdAt FROM users WHERE username = ? LIMIT 1', [username], cb);
+    },
+    updateProfile: (pic, id, cb) => {
+        return db.query('UPDATE users SET profilePic = ? WHERE id = ?', [pic, id], cb);
     }
 }
 
