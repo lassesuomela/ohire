@@ -2,11 +2,11 @@
 <div class="container">
   <el-card class="content">
 
-    <el-header>
+    <el-header class="header">
       <h2>{{title}}</h2>
       <el-divider />
     </el-header>
-    <el-main>
+    <el-main class="content">
       <el-form label-position="top" class="form">
         <el-form-item label="Job Application">
           <el-input v-model="application" placeholder="Job Application" size="large" show-word-limit="true" maxlength="1000" type="textarea" :autosize="{minRows: 6}" class="customText"/>
@@ -190,4 +190,19 @@ export default {
   padding-top:2rem;
 }
 
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 0rem;
+    font-size: 1rem;
+  }
+  .fileUpload{
+    padding-top: 0rem;
+  }
+  .form {
+    padding-top: 2rem;
+  }
+  .content, .header {
+    padding: 0rem;
+  }
+}
 </style>

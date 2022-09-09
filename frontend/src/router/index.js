@@ -22,13 +22,8 @@ import store from '../store';
 
 const routes = [
     {
-        path: "/:catchAll(.*)",
-        component: NotFound,
-        name: "NotFound"
-    },
-    {
         path: "/",
-        component: LoginView,
+        component: JobView,
     },
     {
         path: "/login",
@@ -135,6 +130,11 @@ const routes = [
         meta: {
             auth: true,
         }
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: NotFound,
+        name: "NotFound"
     },
 ];
 

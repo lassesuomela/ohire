@@ -132,4 +132,10 @@ export default {
 .table {
   padding: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .container, .table {
+    padding: 0rem;
+  }
+}
 </style>

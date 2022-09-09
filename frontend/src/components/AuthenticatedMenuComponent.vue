@@ -1,37 +1,35 @@
 <template>
-<div>
-    <TabMenu :model="links" v-if="role === 1"/>
-    <TabMenu :model="corporateLinks" v-if="role === 2"/>
+<div v-if="role === 1">
+    <el-menu mode="horizontal" router class="menu" :ellipsis="true">
+        <el-menu-item class="menuItem" index="/jobs">Jobs</el-menu-item>
+        <el-menu-item class="menuItem" index="/meetings">Meetings</el-menu-item>
+        <el-menu-item class="menuItem" index="/applications">Applications</el-menu-item>
+        <el-menu-item class="menuItem" index="/profile">Profile</el-menu-item>
+        <el-menu-item class="menuItem" index="/logout">Logout</el-menu-item>
+    </el-menu>
 </div>
+<div v-else>
+    <el-menu mode="horizontal" router class="menu" :ellipsis="true">
+        <el-menu-item class="menuItem" index="/jobs">Jobs</el-menu-item>
+        <el-menu-item class="menuItem" index="/createJobs">Create Jobs</el-menu-item>
+        <el-menu-item class="menuItem" index="/companyJobs">My jobs</el-menu-item>
+        <el-menu-item class="menuItem" index="/meetings">Meetings</el-menu-item>
+        <el-menu-item class="menuItem" index="/profile">Profile</el-menu-item>
+        <el-menu-item class="menuItem" index="/logout">Logout</el-menu-item>
+    </el-menu>
+</div> 
 </template>
 
 <script>
-import TabMenu from 'primevue/tabmenu';
 import axios from '../axios';
 
 export default {
     components: {
-        TabMenu
     },
     data () {
         return {
             role: null,
             uuid: null,
-            links: [
-                {label: 'Job Listings', to: '/jobs'},
-                {label: 'Meetings', to: '/meetings'},
-                {label: 'Applications', to: '/applications'},
-                {label: 'Profile', to: '/profile'},
-                {label: 'Logout', to: '/logout'},
-            ],
-            corporateLinks: [
-                {label: 'Job Listings', to: '/jobs'},
-                {label: 'Create Jobs', to: '/createJobs'},
-                {label: 'My jobs', to: '/companyJobs'},
-                {label: 'Meetings', to: '/meetings'},
-                {label: 'Profile', to: '/profile'},
-                {label: 'Logout', to: '/logout'},
-            ]
         }
     },
     methods: {
@@ -61,3 +59,14 @@ export default {
     }
 }
 </script>
+<style scoped>
+.menu{
+    padding: 0rem;
+    overflow: hidden;
+}
+.menuItem {
+    font-size: 1.2rem;
+    font-family: "Roboto Condensed";
+}
+
+</style>

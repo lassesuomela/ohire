@@ -2,13 +2,13 @@
 <div class="container">
   <el-card>
     <el-container>
-      <el-header>
+      <el-header class="header">
         <h2>{{title}}</h2>
         <el-divider />
         <h3>Salary: {{salary}}</h3>
         <h3>Description:</h3>
       </el-header>
-      <el-main>
+      <el-main class="content">
         <div class="desc">
           <span class="customText">{{description}}</span>
         </div>
@@ -123,5 +123,21 @@ h1, h2, h3{
   text-align: start;
   word-break: break-all;
   padding-top:8rem;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 0rem;
+    font-size: 1rem;
+  }
+  .header {
+    padding: 0rem;
+  }
+  .content {
+    padding: 0rem;
+  }
+  .desc {
+    padding-top:10rem;
+  }
 }
 </style>

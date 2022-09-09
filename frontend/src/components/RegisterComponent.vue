@@ -42,7 +42,7 @@
     <el-footer>
 
       <div class="registerField">
-        <span>Already have an account? <router-link to="/login">Login here</router-link></span>
+        <span>Already have an account? <router-link class="link" to="/login">Login here</router-link></span>
       </div>
 
     </el-footer>

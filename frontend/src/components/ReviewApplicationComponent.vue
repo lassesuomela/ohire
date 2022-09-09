@@ -168,5 +168,10 @@ export default {
   padding: 15rem;
 }
 
-
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 0rem;
+    font-size: 1rem;
+  }
+}
 </style>

@@ -2,9 +2,9 @@
 <div class="container">
   <el-card class="card">
     <div class="searchBar">
-      <el-input v-model="search" placeholder="Search for title">
-        <template #append><el-button @click="DoSearch" size="small" type="primary">Search</el-button></template>
-      </el-input> 
+        <el-input v-model="search" placeholder="Search for title">
+          <template #append><el-button @click="DoSearch" size="small" type="primary">Search</el-button></template>
+        </el-input> 
 
       <p class="info" >Found {{jobCount}} job listings </p>
     </div>

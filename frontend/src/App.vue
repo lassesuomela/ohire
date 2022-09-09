@@ -54,7 +54,6 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 @import url('https://fonts.googleapis.com/css?family=Material+Symbols+Outlined');
-
 #app {
   font-family: 'Roboto Condensed';
   -webkit-font-smoothing: antialiased;
@@ -66,5 +65,10 @@ export default {
 
 .notification {
   font-family: 'Roboto Condensed';
+}
+.link {
+  text-decoration: none;
+  font-weight: bold;
+  color: #409EFF;
 }
 </style>

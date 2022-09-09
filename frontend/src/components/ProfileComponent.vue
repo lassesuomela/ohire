@@ -200,7 +200,7 @@ export default {
 
 .customText {
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   width:60ch;
 }
 

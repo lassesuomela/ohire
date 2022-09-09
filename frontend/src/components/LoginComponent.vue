@@ -27,7 +27,7 @@
     <el-footer>
       
       <div class="registerField">
-        <span>New user? <router-link to="/register">Register now</router-link></span>
+        <span>New user? <router-link class="link" to="/register">Register now</router-link></span>
       </div>
 
     </el-footer>
@@ -103,7 +103,6 @@ export default {
 </script>
 
 <style scoped>
-
 .registerField {
   padding-top: 1rem;
 }

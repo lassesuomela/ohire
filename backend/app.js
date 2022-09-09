@@ -11,9 +11,7 @@ const port = process.env.DOCKER_APP_PORT || 8081;
 
 let app = express();
 
-app.use(cors());
-app.options('*', cors());
-
+app.use(cors({origin: '*'}));
 app.set('trust proxy', '127.0.0.1');
 
 app.use(helmet());

@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <el-card class="content">
-    <el-main>
+    <el-main class="main">
       <el-form label-position="top">
         <el-form-item label="Job Title" class="title">
           <el-input v-model="title" placeholder="Title" size="large" show-word-limit="true" maxlength="60" class="customText">
@@ -165,22 +165,22 @@ export default {
   width: 70h;
 }
 .content{
-  justify-content: center;
-  display: flex;
+  justify-content: start;
 }
 
 @media screen and (max-width: 600px) {
-  .container, .content{
+  .container, .content .main{
     padding: 0rem;
+    overflow: hidden;
   }
   .title {
-    width: 35ch;
+    width: 33ch;
   }
   .salary {
     width: 40ch;
   }
   .description {
-    width: 35ch;
+    width: 33ch;
   }
   .btn{
     padding: 0rem;
