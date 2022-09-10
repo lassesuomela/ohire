@@ -5,20 +5,15 @@
     <li v-for="meeting in meetings" :key="meeting">
       <el-card shadow="hover" :body-style="list-item">
         <div class="card-header">
-          <el-row>
-            <el-col :span="20">
-              <span>{{meeting.description}}</span>
-            </el-col>
-            
-            <el-col :span="4">
+          <div class="title">
+            <span>{{meeting.description}}</span>
+          </div>
+            <div class="details">
               <el-tag class="companyHeader" size="large">{{meeting.username}}</el-tag>
               <el-tag class="detailTag" type="info" size="large">{{meeting.timestamp}}</el-tag>
 
-            </el-col>
-          </el-row>
-          <el-row class="btn">
-            <el-button @click="Join(meeting.meetingId, meeting.uuid)" size="medium" type="primary">Join<i class="material-symbols-outlined">groups</i></el-button>
-          </el-row>
+              <el-button @click="Join(meeting.meetingId, meeting.uuid)" size="medium" type="primary">Join</el-button>
+            </div>
         </div>
       </el-card>
     </li>
@@ -86,13 +81,6 @@ export default {
 </script>
 
 <style scoped>
-.el-col {
-  padding: 0rem;
-}
-.el-col p{
-  margin: 0rem;
-  margin-bottom: 1rem;
-}
 .container {
   justify-content: center;
   text-align: center;
@@ -112,35 +100,27 @@ export default {
 .card-header{
   text-align: start;
   font-weight: bold;
+  display: flex;
 }
-.card-header-details {
-  text-align: end;
-}
-.description {
+.title {
   text-align: start;
   word-break: break-all;
+  flex: 6;
 }
 .details {
-  text-align: end;
+  flex: 1;
+  display: grid;
 }
 .detailTag {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
   font-weight: normal;
-  text-align: center;
-  float: right;
-}
-.details i {
-  padding-bottom: 1rem;
 }
 .companyHeader {
   margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
   float:right;
-}
-.btn i {
-  padding-left: 0.5rem;
 }
 @media screen and (max-width: 600px) {
   .container, .infinite-list, .item{

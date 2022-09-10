@@ -5,8 +5,7 @@
         <el-input v-model="search" placeholder="Search for title">
           <template #append><el-button @click="DoSearch" size="small" type="primary">Search</el-button></template>
         </el-input> 
-
-      <p class="info" >Found {{jobCount}} job listings </p>
+      <p>Found {{jobCount}} job listings </p>
     </div>
   <ul v-infinite-scroll="Fetch" infinite-scroll-disabled="noMore" class="infinite-list">
     <li v-for="job in allJobs" :key="job">
@@ -14,48 +13,29 @@
         <el-card shadow="hover" :body-style="list-item">
           <template #header>
             <div class="card-header">
-              <el-row>
-                <el-col :span="20">
-                  <span>{{job.title}}</span>
-                </el-col>
-
-                <el-col :span="4">
-                  <el-tag v-if="job.company" class="companyHeader" size="large">{{job.company}}</el-tag>
-                  <el-tag v-else type="warning" class="companyHeader" size="large">Company Not Defined</el-tag>
-                </el-col>
-              </el-row>
+              <span>{{job.title}}</span>
             </div>
           </template>
-          <el-row class="description">
-            <el-col :span="18">
+          <div class="main">
+            <div class="description">
               <span>{{job.description}}</span>
-            </el-col>
-            
-            <el-col :span="5" class="details">
-              <el-col :span="24" class="details">
-                <el-tag class="detailTag" size="large" type="info">{{job.timestamp}}</el-tag>
-              </el-col>
-              <el-col :span="24" class="details">
-                <el-tag class="detailTag" size="large" type="info">{{job.workingTime}}</el-tag>
-              </el-col>
-              <el-col :span="24" class="details">
-                <el-tag v-if="job.salary !== 'Not specified'" class="detailTag" size="large" type="success">{{job.salary}}</el-tag>
-              </el-col>
-            </el-col>
-
-            <el-col :span="1" class="details">
-              <el-col :span="24" class="details">
+            </div>
+            <div class="details">
+              <el-tag v-if="job.company" class="companyHeader" size="large">{{job.company}}</el-tag>
+              <el-tag v-else type="warning" class="companyHeader" size="large">Unknown Company</el-tag>
+              <div class="info">
                 <i class="material-symbols-outlined">calendar_month</i>
-              </el-col>
-              <el-col :span="24" class="details">
+                <el-tag class="detailTag" size="large" type="info">{{job.timestamp}}</el-tag>
+
                 <i class="material-symbols-outlined">schedule</i>
-              </el-col>
-              <el-col :span="24" class="details">
-                <i v-if="job.salary !== 'Not specified'" class="material-symbols-outlined">payments</i>
-              </el-col>
-            </el-col>
-          </el-row>
-          
+                <el-tag class="detailTag" size="large" type="info">{{job.workingTime}}</el-tag>
+
+                <i class="material-symbols-outlined">payments</i>
+                <el-tag class="detailTag" size="large" type="success">{{job.salary}}</el-tag>
+
+              </div>
+            </div>
+          </div>
         </el-card>
       </a>
     </li>
@@ -233,7 +213,7 @@ export default {
           if(this.jobs[i].salary){
             this.jobs[i].salary = this.FormatSalary(this.jobs[i].salary);
           }else{
-            this.jobs[i].salary = "Not specified";
+            this.jobs[i].salary = "Not Specified";
           }
 
           if(this.jobs[i].description.length > 500){
@@ -245,9 +225,9 @@ export default {
           }
 
           if(this.jobs[i].workingTime === 1){
-            this.jobs[i].workingTime = "Full-time";
+            this.jobs[i].workingTime = "Full-Time";
           }else{
-            this.jobs[i].workingTime = "Part-time";
+            this.jobs[i].workingTime = "Part-Time";
           }
 
           this.allJobs.push(this.jobs[i]);
@@ -275,13 +255,6 @@ export default {
 </script>
 
 <style scoped>
-.el-col {
-  padding: 0rem;
-}
-.el-col p{
-  margin: 0rem;
-  margin-bottom: 1rem;
-}
 .container {
   justify-content: center;
   text-align: center;
@@ -303,40 +276,46 @@ export default {
   font-weight: bold;
   font-size: 1.5rem;
 }
-.card-header-details {
-  text-align: end;
+.main {
+  display: flex;
 }
 .description {
+  flex: 6;
   text-align: start;
   word-break: break-all;
   white-space: pre-wrap;
 }
 .details {
+  flex: 1;
   text-align: end;
+  padding-left: 10rem;
 }
 .detailTag {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
 }
-.details i {
-  padding-bottom: 1rem;
+.detailTag:last-of-type{
+  margin-bottom: 0rem;
 }
-
+.info i {
+  text-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+.info  {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
 .companyHeader {
   font-size: 1rem;
-  font-weight: normal;
-  float:right;
+  width: 100%;
+  margin-bottom: 1rem;
 }
-
 .btn i {
   padding-bottom: 1rem;
 }
-
-.info {
-  padding-top: 1rem;
-  float: right;
-}
-
 .searchBar {
   padding-bottom: 1rem;
   display: grid;
@@ -354,16 +333,7 @@ export default {
   .card-header{
     font-size: 0.9rem;
     padding:0rem;
-  }
-  .details {
-    display: grid;
-  }
-  .details i {
-    display: flex;
-  }
-  .companyHeader{
-    display: grid;
-    font-size: 0.8rem;
+    word-break: break-all;
   }
   .searchBar {
     display: grid;
@@ -373,8 +343,38 @@ export default {
     text-align: start;
     padding: 0rem;
   }
+  .main {
+    display: grid;
+  }
+  .description {
+    text-align: start;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+  .details {
+    padding-top: 1rem;
+    padding: 0rem;
+  }
   .detailTag {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .info  {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .info i {
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+  }
+  .companyHeader {
+    font-size: 0.95rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }
 </style>

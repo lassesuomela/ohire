@@ -187,7 +187,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   justify-content: center;
   text-align: center;
@@ -196,7 +195,7 @@ export default {
 }
 
 .label {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .buttons {

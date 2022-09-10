@@ -6,21 +6,16 @@
       <div class="item">
         <el-card shadow="hover" :body-style="list-item">
           <div class="card-header">
-            <el-row>
-              <el-col :span="20">
-                <span>{{application.title}}</span>
-              </el-col>
-              
-              <el-col :span="4">
-                <el-tag v-if="application.company" class="companyHeader" size="large">{{application.company}}</el-tag>
-                <el-tag v-else type="warning" class="companyHeader" size="large">Company Not Defined</el-tag>
-                <el-tag class="detailTag" type="info" size="large">{{application.timestamp}}</el-tag>
-                <el-tag class="detailTag" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
-              </el-col>
-            </el-row>
-            <el-row>
+            <div class="title">
+              <span>{{application.title}}</span>
+            </div>
+            <div class="details">
+              <el-tag v-if="application.company" class="companyHeader" size="large">{{application.company}}</el-tag>
+              <el-tag v-else type="warning" class="companyHeader" size="large">Company Not Defined</el-tag>
+              <el-tag class="detailTag" type="info" size="large">{{application.timestamp}}</el-tag>
+              <el-tag class="detailTag" type="success" size="large" v-if="application.reviewed === 1">Reviewed</el-tag>
               <el-button type="danger" @click="Delete(application.applicationId)">Delete</el-button>
-            </el-row>
+            </div>
           </div>
         </el-card>
       </div>
@@ -106,13 +101,6 @@ export default {
 </script>
 
 <style scoped>
-.el-col {
-  padding: 0rem;
-}
-.el-col p{
-  margin: 0rem;
-  margin-bottom: 1rem;
-}
 .container {
   justify-content: center;
   text-align: center;
@@ -131,12 +119,18 @@ export default {
 .card-header{
   text-align: start;
   font-weight: bold;
+  display: flex;
 }
-.card-header-details {
-  text-align: end;
+.title {
+  flex: 6;
 }
 .details {
+  display: grid;
   text-align: end;
+  flex: 1;
+}
+.details i {
+  padding-bottom: 1rem;
 }
 .detailTag {
   font-size: 0.95rem;
@@ -144,9 +138,6 @@ export default {
   font-weight: normal;
   text-align: center;
   float: right;
-}
-.details i {
-  padding-bottom: 1rem;
 }
 .companyHeader {
   margin-bottom: 0.5rem;
@@ -164,6 +155,13 @@ export default {
   }
   .card-header {
     font-size:0.9rem;
+    display: grid;
+  }
+  .companyHeader, .detailTag {
+    font-size: 0.9rem;
+  }
+  .details {
+    padding-top: 1rem;
   }
 }
 </style>
