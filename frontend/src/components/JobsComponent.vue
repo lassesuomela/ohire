@@ -356,10 +356,14 @@ export default {
     padding:0rem;
   }
   .details {
-    display: block;
+    display: grid;
+  }
+  .details i {
+    display: flex;
   }
   .companyHeader{
     display: grid;
+    font-size: 0.8rem;
   }
   .searchBar {
     display: grid;
@@ -368,6 +372,9 @@ export default {
   .searchBar p {
     text-align: start;
     padding: 0rem;
+  }
+  .detailTag {
+    font-size: 0.8rem;
   }
 }
 </style>
