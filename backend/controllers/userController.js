@@ -3,6 +3,7 @@ const jwt = require('../configs/jwt');
 const multer = require('multer');
 const userModel = require('../models/userModel');
 const crypto = require('crypto');
+const fs = require('fs');
 const storages = multer.diskStorage({
     destination: "profilePictures/",
     filename: (req, file, cb) => {
@@ -205,7 +206,7 @@ const profile = (req, res) => {
 }
 
 const profileUpdate = (req, res) => {
-
+    
     upload(req, res, (err) => {
 
         // return out if multer error
@@ -218,16 +219,32 @@ const profileUpdate = (req, res) => {
             return res.json({status:"error", message:"One or more fields must be provided"});
         }
 
-        let filename = req.file.filename;
-
-        userModel.updateProfile(filename, req.id, (err, result) => {
+        userModel.getProfileDataByUsername(req.username, (err, result) => {
             if(err){
                 console.log(err);
-    
-                return res.json({status:"error", message:err});
+                return res.json({status:"error", message:"Error on file deletion"});
             }
     
-            res.json({status:"success", message:"Profile updated successfully"});
+            if(result[0].profilePic === "default.png"){
+                return;
+            }
+
+            try {
+                fs.unlinkSync("./profilePictures/" + result[0].profilePic);
+            }catch(e){
+                console.log(e);
+            }
+
+            let filename = req.file.filename;
+            userModel.updateProfile(filename, req.id, (err, result) => {
+                if(err){
+                    console.log(err);
+        
+                    return res.json({status:"error", message:err});
+                }
+        
+                res.json({status:"success", message:"Profile updated successfully"});
+            })
         })
     })
 }
