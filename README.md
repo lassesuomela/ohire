@@ -1,30 +1,30 @@
 # Readme
 
-This is online hiring web site. Backend is created with Node.js and database that was used is MySQL. Frontend is made with [Vue.js](https://vuejs.org/) and [element-plus](https://element-plus.org/en-US/) UI library.
+This is online hiring site. Backend is created with Node.js and database that was used is MySQL. Frontend is made with [Vue.js](https://vuejs.org/) and [element-plus](https://element-plus.org/en-US/) UI library.
 
-# Demo
-Demo of this repository will be available at https://jobs.saunagaming.com.
-
----
-# How to run backend
-  - `cd ./backend`
-  - run `npm i`
-  - install sql scheme with `*.sql` file
-  - create ".env" file and populate it with your credentials
-    - `DB_HOST=localhost`
-	- `DB_USERNAME=root`
-	- `DB_PASSWORD=root`
-	- `DB_DATABASE=ohire`
-    - `TOKEN=some_secret_token_for_jwt_auth`
-  - run `npm start` and the backend is running at http://localhost:8081
-  ---
-  # How to run frontend
-  - `cd ./frontend`
-  - run `npm i`
-  - run `vue serve` and the frontend is running at http://localhost:8080
+## Demo
+Demo of this repository will be available at [https://jobs.saunagaming.com](https://jobs.saunagaming.com).
 
 ---
-# Screenshots below from the site
+## How to run backend
+- `cd ./backend`
+- run `npm i`
+- install sql scheme with `*.sql` file
+- create ".env" file and populate it with your credentials
+  - `DB_HOST=localhost`
+  - `DB_USERNAME=root`
+  - `DB_PASSWORD=root`
+  - `DB_DATABASE=ohire`
+  - `TOKEN=some_secret_token_for_jwt_auth`
+- run `npm start` and the backend is running at [http://localhost:8081](http://localhost:8081)
+---
+## How to run frontend
+- `cd ./frontend`
+- run `npm i`
+- run `vue serve` and the frontend is running at [http://localhost:8080](http://localhost:8080)
+
+---
+## Screenshots below from the site
 
 Login page
 !["Login page"](/images/login.png)
