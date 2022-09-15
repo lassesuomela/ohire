@@ -13,4 +13,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.REMOTE_PORT }}
-        script: whoami
+        script: |
+          cd ${{ secrets.REMOTE_PATH }}
+          git pull
+          echo "CD test" > test.txt
