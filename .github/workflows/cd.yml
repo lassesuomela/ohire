@@ -1,9 +1,13 @@
 name: CD to VPS
-on: [push]
+on:
+  workflow_run:
+    workflows: ["Node.js CI"]
+    branches: [main]
+    types: 
+      - completed
 jobs:
-
-  build:
-    name: Build
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
     - name: Testing ssh connection
