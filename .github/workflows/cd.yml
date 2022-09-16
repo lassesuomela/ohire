@@ -20,4 +20,5 @@ jobs:
         script: |
           cd ${{ secrets.REMOTE_PATH }}
           git pull
-          echo "CD test" > test.txt
+          chmod +x ./restart.sh
+          ./restart.sh
