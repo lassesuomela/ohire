@@ -1,0 +1,47 @@
+version: '3'
+services:
+
+  # Nginx will proxy requests to Nodejs server
+  ohire-reverse-proxy:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    image: ohire-frontend:latest
+    container_name: reverse_proxy_ohire
+    depends_on:
+      - ohire-srv
+    ports:
+      - 80:80
+      - 443:443
+  # Nodejs backend
+  ohire-srv:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    image: ohire-srv:latest
+    container_name: ohire-srv
+    network_mode: "host"
+    ports:
+      - 8081:8081
+    restart: on-failure
+    environment:
+      - DOCKER_APP_PORT=8081
+
+  # MySql server
+  ohire-mysql-srv:
+    build:
+      context: ./mysql-docker
+      dockerfile: Dockerfile
+    image: ohire-mysql:latest
+    container_name: ohire-mysql-srv
+    network_mode: "host"
+    ports:
+      - 3306:3306
+    restart: on-failure
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ohire-mysql:/var/lib/mysql
+volumes:
+  ohire-mysql:
