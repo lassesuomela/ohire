@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Testing ssh connection
+    - name: Pulling from GIT, building images and running them
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.REMOTE_HOST }}
@@ -20,5 +20,6 @@ jobs:
         script: |
           cd ${{ secrets.REMOTE_PATH }}
           git pull
+          cd ./backend
           chmod +x ./restart.sh
           ./restart.sh
