@@ -7,7 +7,7 @@ services:
       context: ../frontend
       dockerfile: Dockerfile
     image: ohire-frontend:latest
-    container_name: reverse_proxy_ohire
+    container_name: ohire-reverse-proxy
     depends_on:
       - ohire-srv
     ports:
