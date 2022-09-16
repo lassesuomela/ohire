@@ -13,6 +13,10 @@ services:
     ports:
       - 80:80
       - 443:443
+    volume:
+      - /root/ohire/frontend/lassesuomela.com.pem:/root/ohire/frontend/lassesuomela.com.pem
+      - /root/ohire/frontend/lassesuomela.com.key:/root/ohire/frontend/lassesuomela.com.key
+
   # Nodejs backend
   ohire-srv:
     build:
