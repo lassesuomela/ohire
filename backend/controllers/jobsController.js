@@ -1,4 +1,5 @@
 const jobsModel = require('../models/jobsModel');
+const cache = require('../configs/cache');
 
 const create = (req, res) => {
 
@@ -77,7 +78,12 @@ const getNAmountOfPostings = (req, res) => {
                 return res.json({status:"error", message:err});
             }
 
-            res.json({status:"success", maxPageAmount: maxPage, data:result, count: maxRecordCount})
+            let data = {status:"success", maxPageAmount: maxPage, data:result, count: maxRecordCount};
+
+            let key = req.originalUrl;
+
+            cache.saveCache(key, data);
+            res.json(data);
 
         })
     })
@@ -153,7 +159,12 @@ const getById = (req, res) => {
             return res.json({status:"error", message:"No job listings found for that id"});
         }
 
-        res.json({status:"success", data:result[0]})
+        let data = {status:"success", data:result[0]};
+
+        let key = req.originalUrl;
+
+        cache.saveCache(key, data);
+        res.json(data);
     })
 }
 

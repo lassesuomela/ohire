@@ -16,8 +16,8 @@ services:
   # Nodejs backend
   ohire-srv:
     build:
-        context: .
-        dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile
     image: ohire-srv:latest
     container_name: ohire-srv
     network_mode: "host"

@@ -4,8 +4,10 @@ let router = express.Router();
 
 let jobsController = require('../controllers/jobsController');
 
-router.get('/jobs/:page', jobsController.getNAmountOfPostings);
-router.get('/jobs/:page/:filter', jobsController.getNAmountOfPostings);
-router.get('/job/:id', jobsController.getById);
+let cache = require('../configs/cache');
+
+router.get('/jobs/:page', cache.checkCache, jobsController.getNAmountOfPostings);
+router.get('/jobs/:page/:filter', cache.checkCache, jobsController.getNAmountOfPostings);
+router.get('/job/:id', cache.checkCache, jobsController.getById);
 
 module.exports = router;

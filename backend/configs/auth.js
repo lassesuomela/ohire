@@ -18,9 +18,6 @@ const auth = (req, res, next) => {
 
     jwt.verifyToken(apiKey, (err, result) => {
         if(err) {
-            console.log("using apikey = " + apiKey);
-            console.log(err);
-
             return res.json({status:"error", message:"JWT Auth error"});
         }
 
