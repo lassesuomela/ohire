@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     image: ohire-frontend:latest
     container_name: ohire-reverse-proxy
+    network_mode: "host"
     depends_on:
       - ohire-srv
     ports:
@@ -36,7 +37,7 @@ services:
     build:
       context: ./mysql-docker
       dockerfile: Dockerfile
-    image: ohire-mysql:latest
+    image: ohire-mysql-srv:latest
     container_name: ohire-mysql-srv
     network_mode: "host"
     ports:
@@ -46,6 +47,6 @@ services:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ohire-mysql:/var/lib/mysql
+      - ohire-mysql-srv:/var/lib/mysql
 volumes:
-  ohire-mysql:
+  ohire-mysql-srv:
