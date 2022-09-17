@@ -98,7 +98,7 @@ export default {
       accountType: null,
       company: null,
       picture: null,
-      pictureUrl: "http://localhost:8081/profilePictures/",
+      pictureUrl: "https://jobs.lassesuomela.com/profilePictures/",
       list: [],
     }
   },
