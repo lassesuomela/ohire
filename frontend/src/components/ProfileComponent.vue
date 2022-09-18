@@ -4,7 +4,7 @@
     <el-container class="content">
       
       <el-aside class="avatar">
-        <el-avatar :src="pictureUrl" :size="200">
+        <el-avatar :src="profilePicture" :size="200">
           <i class="material-symbols-outlined">person</i>
         </el-avatar>
 
@@ -98,8 +98,8 @@ export default {
       accountType: null,
       company: null,
       picture: null,
-      pictureUrl: "https://jobs.lassesuomela.com/profilePictures/",
       list: [],
+      profilePicture: null,
     }
   },
   methods: {
@@ -122,9 +122,6 @@ export default {
           this.username = response.data.data.username;
           this.email = response.data.data.email;
           this.company = response.data.data.company;
-          this.pictureUrl = this.pictureUrl + response.data.data.profilePic;
-
-          console.log(this.pictureUrl);
 
           this.createdAt = this.FormatDate(response.data.data.createdAt);
 
@@ -189,9 +186,21 @@ export default {
         console.log(error);
       })
     },
+    FetchProfilePicture() {
+      axios.get('/user/profile/picture').then(response => {
+
+        this.profilePicture = response.data;
+        console.log(this.profilePicture);
+
+
+      }).catch(error => {
+        console.log(error);
+      })
+    }
   },
   mounted () {
     this.FetchProfileData();
+    this.FetchProfilePicture();
   }
 }
 </script>

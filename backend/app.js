@@ -30,7 +30,7 @@ let meetingsRoutes = require('./routes/meetingsRoutes');
 app.use('/api/', loginRoutes);
 app.use('/api/', jobRoutes);
 
-app.use('/profilePictures', express.static('profilePictures'));
+app.use('/api/profilePictures', express.static('profilePictures'));
 
 app.use(auth);
 

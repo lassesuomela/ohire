@@ -247,11 +247,28 @@ const profileUpdate = (req, res) => {
     })
 }
 
+const profilePic = (req, res) => {
+
+    userModel.getProfileDataByUsername(req.username, (err, result) => {
+        if(err){
+            console.log(err);
+
+            return res.json({status:"error", message:err});
+        }
+
+        let filename = result[0].profilePic;
+
+        //res.sendFile(filename, {root: "./profilePictures"});
+        res.send("/api/profilePictures/" + filename);
+    })
+}
+
 module.exports = {
     register,
     login,
     authenticated,
     profile,
     registerCompany,
-    profileUpdate
+    profileUpdate,
+    profilePic
 }
