@@ -138,6 +138,10 @@ export default {
   padding-top: 1rem;
 }
 
+.registerField a:hover {
+  color: #66b1ff;
+}
+
 .registerBtn{
   padding-top: 2rem;
 }

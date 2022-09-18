@@ -135,6 +135,10 @@ const getCompanysPostings = (req, res) => {
                 return res.json({status:"error", message:err});
             }
 
+            let key = req.originalUrl;
+
+            cache.delCache(key);
+
             res.json({status:"success", maxPageAmount: maxPage, data:result, count: maxRecordCount})
         })
     })
@@ -189,6 +193,10 @@ const deleteById = (req, res) => {
         if(!result) {
             return res.json({status:"error", message:"No job listings found for that id"});
         }
+
+        let key = req.originalUrl;
+
+        cache.delCache(key);
 
         res.json({status:"success", message:"Job deleted"})
     })

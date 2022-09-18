@@ -154,14 +154,12 @@ export default {
       this.currentPage = 1;
       this.maxPage = 1;
       this.noMore = false;
-
       this.allJobs = [];
 
       this.Fetch();
     },
     Fetch() {
-      
-      if(this.searchMode){
+      if(this.searchMode && !this.loading){
         // enable loading text and search with keywords
         this.loading = true;
         this.Search(this.search);
@@ -185,7 +183,6 @@ export default {
       }
     },
     Search(searchTerm) {
-      
 
       axios.get('/jobs/' + this.currentPage + '/' + searchTerm).then(response => {
         console.log(response);
@@ -291,7 +288,7 @@ export default {
   padding-left: 10rem;
 }
 .detailTag {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
 .detailTag:last-of-type{

@@ -15,11 +15,11 @@
             :limit="1"
             accept=".png, .jpg, .jpeg"
             :on-change="HandleFile"
-            :file-list="list"
+            v-model:file-list="list"
             :on-exceed="HandleExceed"
           >
             <template #trigger>
-              <el-button type="primary">Select File</el-button>
+              <el-button type="normal">Select File</el-button>
             </template>
 
             <template #tip>
@@ -74,7 +74,7 @@
         </el-form>
       </el-main>
     </el-container>
-    <el-button @click="UpdateProfile">Update</el-button>
+    <el-button @click="UpdateProfile" type="primary">Update</el-button>
   </el-card>
 </div>
 </template>
@@ -209,7 +209,7 @@ export default {
 
 #avatar {
   background-color: Transparent;
-  border: .25rem solid  #66b1ff;
+  border: .25rem solid #66b1ff;
 }
 #avatar i {
   color:   #CFD3DC;

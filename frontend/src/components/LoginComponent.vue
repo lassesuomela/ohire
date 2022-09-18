@@ -107,6 +107,10 @@ export default {
   padding-top: 1rem;
 }
 
+.registerField a:hover {
+  color: #66b1ff;
+}
+
 .loginBtn{
   padding-top: 2rem;
 }

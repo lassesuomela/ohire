@@ -2,7 +2,7 @@
 <div v-if="role === 1">
     <el-menu mode="horizontal" router class="menu" :ellipsis="true">
         <el-menu-item class="menuItem" index="/jobs">Jobs</el-menu-item>
-        <el-menu-item class="menuItem" index="/meetings">Meetings</el-menu-item>
+        <!--el-menu-item class="menuItem" index="/meetings">Meetings</el-menu-item-->
         <el-menu-item class="menuItem" index="/applications">Applications</el-menu-item>
         <el-menu-item class="menuItem" index="/profile">Profile</el-menu-item>
         <el-menu-item class="menuItem" index="/logout">Logout</el-menu-item>
@@ -13,7 +13,7 @@
         <el-menu-item class="menuItem" index="/jobs">Jobs</el-menu-item>
         <el-menu-item class="menuItem" index="/createJobs">Create Jobs</el-menu-item>
         <el-menu-item class="menuItem" index="/companyJobs">My jobs</el-menu-item>
-        <el-menu-item class="menuItem" index="/meetings">Meetings</el-menu-item>
+        <!--el-menu-item class="menuItem" index="/meetings">Meetings</el-menu-item-->
         <el-menu-item class="menuItem" index="/profile">Profile</el-menu-item>
         <el-menu-item class="menuItem" index="/logout">Logout</el-menu-item>
     </el-menu>
