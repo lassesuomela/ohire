@@ -225,14 +225,12 @@ const profileUpdate = (req, res) => {
                 return res.json({status:"error", message:"Error on file deletion"});
             }
     
-            if(result[0].profilePic === "default.png"){
-                return;
-            }
-
-            try {
-                fs.unlinkSync("./profilePictures/" + result[0].profilePic);
-            }catch(e){
-                console.log(e);
+            if(result[0].profilePic !== "default.png"){
+                try {
+                    fs.unlinkSync("./profilePictures/" + result[0].profilePic);
+                }catch(e){
+                    console.log(e);
+                }
             }
 
             let filename = req.file.filename;
