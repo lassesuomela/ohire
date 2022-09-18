@@ -4,7 +4,7 @@
     <el-container class="content">
       
       <el-aside class="avatar">
-        <el-avatar :src="profilePicture" :size="200">
+        <el-avatar :src="profilePicture" :size="200" id="avatar">
           <i class="material-symbols-outlined">person</i>
         </el-avatar>
 
@@ -15,7 +15,7 @@
             :limit="1"
             accept=".png, .jpg, .jpeg"
             :on-change="HandleFile"
-            v-model:file-list="list"
+            :file-list="list"
             :on-exceed="HandleExceed"
           >
             <template #trigger>
@@ -207,6 +207,13 @@ export default {
 
 <style scoped>
 
+#avatar {
+  background-color: Transparent;
+  border: .25rem solid  #66b1ff;
+}
+#avatar i {
+  color:   #CFD3DC;
+}
 .customText {
   color: black;
   font-size: 1rem;
