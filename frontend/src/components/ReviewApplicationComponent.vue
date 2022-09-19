@@ -30,7 +30,7 @@
         <el-button @click="Back">
           Back
         </el-button>
-        <el-button @click="Save">
+        <el-button @click="Save" type="primary">
           Save
         </el-button>
       </el-col>
@@ -166,6 +166,10 @@ export default {
   justify-content: center;
   text-align: center;
   padding: 15rem;
+}
+
+p {
+  text-align: start;
 }
 
 @media screen and (max-width: 600px) {
