@@ -24,6 +24,7 @@ const create = (req, res) => {
             return res.json({status:"error", message:err});
         }
 
+        cache.deleteCache();
         res.json({status:"success", message:"Job listing saved"});
     })
 }
@@ -135,10 +136,6 @@ const getCompanysPostings = (req, res) => {
                 return res.json({status:"error", message:err});
             }
 
-            let key = req.originalUrl;
-
-            cache.delCache(key);
-
             res.json({status:"success", maxPageAmount: maxPage, data:result, count: maxRecordCount})
         })
     })
@@ -190,13 +187,11 @@ const deleteById = (req, res) => {
             return res.json({status:"error", message:err});
         }
 
-        if(!result) {
+        if(result.affectedRows === 0) {
             return res.json({status:"error", message:"No job listings found for that id"});
         }
 
-        let key = req.originalUrl;
-
-        cache.delCache(key);
+        cache.deleteCache();
 
         res.json({status:"success", message:"Job deleted"})
     })

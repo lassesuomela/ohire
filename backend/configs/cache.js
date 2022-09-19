@@ -1,5 +1,5 @@
 const NodeCache = require('node-cache');
-const cache = new NodeCache();
+const cache = new NodeCache({stdTTL:300});
 
 const checkCache = (req, res, next) => {
 
@@ -17,12 +17,17 @@ const saveCache = (key, value) => {
     cache.set(key, value);
 }
 
-const delCache = (key) => {
-    cache.del(key);
+const deleteCache = () => {
+
+    console.log("Keys: " + cache.keys());
+
+    cache.del(cache.keys());
+
+    console.log("Keys: " + cache.keys());
 }
 
 module.exports = {
     checkCache,
     saveCache,
-    delCache
+    deleteCache
 }
