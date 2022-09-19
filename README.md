@@ -3,7 +3,7 @@
 This is online hiring site. Backend is created with Node.js and database that was used is MySQL. Frontend is made with [Vue.js](https://vuejs.org/) and [element-plus](https://element-plus.org/en-US/) UI library.
 
 ## Demo
-Demo of this repository will be available at [https://jobs.saunagaming.com](https://jobs.saunagaming.com).
+Demo of this repository will be available at [https://jobs.lassesuomela.com](https://jobs.lassesuomela.com).
 
 ---
 ## How to run backend
