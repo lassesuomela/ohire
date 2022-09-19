@@ -151,7 +151,12 @@ router.beforeEach((to) => {
         router.go();
     }
 
-    document.title = to.name;
+    if(to.name){
+        document.title = "Ohire - " + to.name;
+    }else{
+        document.title = "Ohire";
+    }
+
     let isAuthenticated = false;
 
     if(!to.meta.auth){
