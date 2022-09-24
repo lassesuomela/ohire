@@ -12,7 +12,6 @@ import ViewMoreJobView from "@/views/ViewMoreJobView.vue";
 import ApplyView from "@/views/ApplyView.vue";
 import ApplicationsView from "@/views/ApplicationsView.vue";
 import MeetingsView from "@/views/MeetingsView.vue";
-import TestWebcamView from "@/views/TestWebcamView.vue";
 import CompanysJobsView from "@/views/CompanysJobsView.vue";
 import CompanyApplicationsView from "@/views/CompanyApplicationsView.vue";
 import ReviewApplication from "@/views/ReviewApplication.vue";
@@ -95,14 +94,6 @@ const routes = [
         path: "/meetings",
         component: MeetingsView,
         name: "Meetings",
-        meta: {
-            auth: true,
-        }
-    },
-    {
-        path: "/testWebcam/:meetingsId/:uuid",
-        component: TestWebcamView,
-        name: "Test Your Web Cam",
         meta: {
             auth: true,
         }
