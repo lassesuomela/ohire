@@ -70,6 +70,7 @@
 
 <script>
 import axios from '../axios';
+import { ElLoading } from 'element-plus';
 
 export default {
   name: 'MyJobsComponent',
@@ -82,6 +83,7 @@ export default {
       currentPage: 1,
       maxPage: 1,
       jobCount: 0,
+      loader:null
     }
   },
   methods: {
@@ -128,6 +130,8 @@ export default {
             this.jobs[i].title = this.jobs[i].title.substring(0, 35) + "...";
           }
         }
+
+        this.loader.close();
       }).catch(error => {
         console.log(error);
       })
@@ -181,6 +185,7 @@ export default {
     }
   },
   mounted () {
+    this.loader = ElLoading.service({ fullscreen: true });
     this.Fetch(this.currentPage);
   }
 }

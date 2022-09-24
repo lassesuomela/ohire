@@ -2,7 +2,7 @@
 <div class="container">
   <el-card>
     <el-main>
-      <el-form label-position="top">
+      <el-form label-position="top" @keyup.enter="Register">
         <el-form-item label="Username">
           <el-input v-model="username" placeholder="Username" size="large">
             <template #prepend>

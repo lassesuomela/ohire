@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import {ElForm} from 'element-plus';
+import {ElForm, ElLoading} from 'element-plus';
 
 import axios from '../axios';
 
@@ -100,6 +100,7 @@ export default {
       picture: null,
       list: [],
       profilePicture: null,
+      loader:null
     }
   },
   methods: {
@@ -139,6 +140,8 @@ export default {
           // send error msg
           this.$notify({title:"Error", message:this.status, type:"error", class:"notification"});
         }
+
+        this.loader.close();
 
       }).catch(error => {
         console.log(error);
@@ -199,6 +202,8 @@ export default {
     }
   },
   mounted () {
+    this.loader = ElLoading.service({ fullscreen: true });
+
     this.FetchProfileData();
     this.FetchProfilePicture();
   }

@@ -42,6 +42,7 @@
 
 <script>
 import axios from '../axios';
+import { ElLoading } from 'element-plus';
 
 export default {
   name: 'ReviewApplicationComponent',
@@ -57,6 +58,7 @@ export default {
       jobId: null,
       pdfLink: null,
       filename: null,
+      loader:null
     }
   },
   methods: {
@@ -89,6 +91,8 @@ export default {
           this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
           return;
         }
+
+        this.loader.close();
       }).catch(error => {
         console.log(error);
       })
@@ -148,6 +152,8 @@ export default {
   mounted () {
     this.applicationId = this.$route.params.id;
     this.jobId = this.$route.params.jobId;
+
+    this.loader = ElLoading.service({ fullscreen: true });
 
     this.FetchApplication(this.applicationId, this.jobId);
   }

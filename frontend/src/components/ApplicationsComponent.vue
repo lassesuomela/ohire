@@ -27,6 +27,7 @@
 
 <script>
 import axios from '../axios';
+import {ElLoading} from 'element-plus';
 
 export default {
   name: 'ApplicationsComponent',
@@ -36,6 +37,7 @@ export default {
     return {
       status: null,
       applications: [],
+      loader: null
     }
   },
   methods: {
@@ -83,6 +85,8 @@ export default {
         for(let i = 0; i < this.applications.length; i++){
           this.applications[i].timestamp = this.FormatToDate(this.applications[i].timestamp);
         }
+
+        this.loader.close();
       }).catch(error => {
         console.log(error);
       })
@@ -95,6 +99,8 @@ export default {
     }
   },
   mounted () {
+    this.loader = ElLoading.service({ fullscreen: true });
+
     this.FetchApplications();
   }
 }

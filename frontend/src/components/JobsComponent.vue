@@ -66,7 +66,7 @@ export default {
       noMore: false,
       search: '',
       jobCount: 0,
-      searchMode: false
+      searchMode: false,
     }
   },
   methods: {

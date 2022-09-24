@@ -45,6 +45,7 @@
 
 <script>
 import axios from '../axios';
+import {ElLoading} from 'element-plus';
 
 export default {
   name: 'MyJobsComponent',
@@ -56,6 +57,7 @@ export default {
       applications: [],
       currentPage: 1,
       applicationCount: 0,
+      loader:null
     }
   },
   methods: {
@@ -90,6 +92,8 @@ export default {
           this.applications[i].timestamp = this.FormatToDate(this.applications[i].timestamp);
         }
 
+        this.loader.close();
+
       }).catch(error => {
         console.log(error);
       })
@@ -105,6 +109,7 @@ export default {
     }
   },
   mounted () {
+    this.loader = ElLoading.service({ fullscreen: true });
     this.Fetch(this.$route.params.id, 1);
   }
 }

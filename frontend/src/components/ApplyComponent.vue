@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { ElButton} from 'element-plus';
+import { ElButton, ElLoading } from 'element-plus';
 
 import axios from '../axios';
 
@@ -62,7 +62,8 @@ export default {
       salary: null,
       jobId: this.$route.params.id,
       file: null,
-      list: []
+      list: [],
+      loader:null
     }
   },
   methods: {
@@ -139,6 +140,8 @@ export default {
           // send error msg
           this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
         }
+        
+        this.loader.close();
 
       }).catch(error => {
         console.log(error);
@@ -153,6 +156,8 @@ export default {
     },
   },
   mounted () {
+    this.loader = ElLoading.service({ fullscreen: true });
+
     this.FetchJobData(this.jobId);
   }
 }

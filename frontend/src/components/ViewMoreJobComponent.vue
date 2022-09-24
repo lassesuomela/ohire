@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { ElButton} from 'element-plus';
+import { ElButton, ElLoading } from 'element-plus';
 
 import axios from '../axios';
 
@@ -41,6 +41,7 @@ export default {
       salary: null,
       status: null,
       role: null,
+      loader:null
     }
   },
   methods: {
@@ -68,6 +69,8 @@ export default {
           this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
         }
 
+        this.loader.close();
+
       }).catch(error => {
         console.log(error);
       })
@@ -84,6 +87,8 @@ export default {
     }
   },
   mounted () {
+    this.loader = ElLoading.service({ fullscreen: true });
+
     this.role = this.$store.state.role;
     this.FetchJob(this.id);
   }
