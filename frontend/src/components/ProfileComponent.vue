@@ -209,10 +209,10 @@ export default {
 
 #avatar {
   background-color: Transparent;
-  border: .25rem solid #66b1ff;
+  border: .25rem solid var(--primary);
 }
 #avatar i {
-  color:   #CFD3DC;
+  color:   var(--grayish-color);
 }
 .customText {
   color: black;

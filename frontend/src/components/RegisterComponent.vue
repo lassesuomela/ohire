@@ -129,7 +129,7 @@ export default {
 }
 
 .registerField a:hover {
-  color: #66b1ff;
+  color: var(--primary);
 }
 
 .registerBtn{

@@ -54,12 +54,18 @@ export default {
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 @import url('https://fonts.googleapis.com/css?family=Material+Symbols+Outlined');
+:root {
+  --primary: #66b1ff;
+  --link-color: #409EFF;
+  --text-color: #2c3e50;
+  --grayish-color: #CFD3DC;
+}
 #app {
   font-family: 'Roboto Condensed';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-top: 60px;
 }
 
@@ -69,6 +75,6 @@ export default {
 .link {
   text-decoration: none;
   font-weight: bold;
-  color: #409EFF;
+  color: var(--link-color);
 }
 </style>
