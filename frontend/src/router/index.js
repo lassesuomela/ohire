@@ -164,7 +164,7 @@ router.beforeEach((to) => {
     }
 
     if(!localStorage.getItem('token')){
-        return router.push('/Login');
+        return router.push('/login');
     }
 
     axios.get('/user').then((response) => {
@@ -175,13 +175,13 @@ router.beforeEach((to) => {
         }else{
             // incase of error status we dont let the user in
             localStorage.removeItem('token');
-            return router.push('Login');
+            return router.push('/login');
         }
 
         // if user is not authenticated then go to login page else let in to other page
         if(!isAuthenticated){
             localStorage.removeItem('token');
-            return router.push('Login');
+            return router.push('/login');
         }else{
 
             return true;
@@ -190,7 +190,7 @@ router.beforeEach((to) => {
     }).catch(error => {
         console.log(error);
         localStorage.removeItem('token');
-        return router.push('Login');
+        return router.push('/login');
     })
 })
 

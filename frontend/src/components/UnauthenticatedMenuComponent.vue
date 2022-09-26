@@ -1,5 +1,5 @@
 <template>
-    <el-menu mode="horizontal" router class="menu" :ellipsis="true">
+    <el-menu mode="horizontal" router class="menu" :ellipsis="true" :default-active="$route.path">
         <el-menu-item class="menuItem" index="/jobs">Jobs</el-menu-item>
         <el-menu-item class="menuItem" index="/login">Login</el-menu-item>
         <el-menu-item class="menuItem" index="/register">Register</el-menu-item>
@@ -7,17 +7,6 @@
     </el-menu>
 </template>
 
-<script>
-
-export default {
-    components: {
-    },
-    data () {
-        return {
-        }
-    }
-}
-</script>
 <style scoped>
 
 .menu{
