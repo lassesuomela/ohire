@@ -1,4 +1,4 @@
-name: CD to VPS
+name: Deliver to VPS
 on:
   workflow_run:
     workflows: ["Node.js CI"]

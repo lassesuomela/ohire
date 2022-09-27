@@ -1,4 +1,7 @@
 # Readme
+![Lint code base](https://github.com/lassesuomela/ohire/actions/workflows/super-linter.yml/badge.svg)
+![Build the backend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.yml/badge.svg)
+![Deliver to VPS](https://github.com/lassesuomela/ohire/actions/workflows/cd.yml/badge.svg)
 
 This is online hiring site. Backend is created with Node.js and database that was used is MySQL. Frontend is made with [Vue.js](https://vuejs.org/) and [element-plus](https://element-plus.org/en-US/) UI library.
 
