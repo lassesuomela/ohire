@@ -1,5 +1,5 @@
-FROM mysql
+FROM mysql:8.0.30
 
-ADD db.sql /docker-entrypoint-initdb.d
+COPY db.sql /docker-entrypoint-initdb.d
 
 EXPOSE 3306
