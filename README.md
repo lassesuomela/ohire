@@ -7,6 +7,7 @@
 
 ![Lint code base](https://github.com/lassesuomela/ohire/actions/workflows/super-linter.yml/badge.svg)
 ![Build the backend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.yml/badge.svg)
+[![Build frontend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.frontend.yml/badge.svg)](https://github.com/lassesuomela/ohire/actions/workflows/node.js.frontend.yml)
 ![Deliver to VPS](https://github.com/lassesuomela/ohire/actions/workflows/cd.yml/badge.svg)
 
 ---
