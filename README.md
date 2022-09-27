@@ -1,7 +1,15 @@
-# Readme
+# Readme 
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
 ![Lint code base](https://github.com/lassesuomela/ohire/actions/workflows/super-linter.yml/badge.svg)
 ![Build the backend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.yml/badge.svg)
 ![Deliver to VPS](https://github.com/lassesuomela/ohire/actions/workflows/cd.yml/badge.svg)
+
+---
 
 This is online hiring site. Backend is created with Node.js and database that was used is MySQL. Frontend is made with [Vue.js](https://vuejs.org/) and [element-plus](https://element-plus.org/en-US/) UI library.
 
