@@ -9,6 +9,7 @@
 ![Build the backend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.yml/badge.svg)
 [![Build frontend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.frontend.yml/badge.svg)](https://github.com/lassesuomela/ohire/actions/workflows/node.js.frontend.yml)
 ![Deliver to VPS](https://github.com/lassesuomela/ohire/actions/workflows/cd.yml/badge.svg)
+![Demo website](https://img.shields.io/website?down_message=Offline&label=Demo&up_message=Online&url=https%3A%2F%2Flassesuomela.com)
 
 ---
 
