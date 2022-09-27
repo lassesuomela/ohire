@@ -1,7 +1,7 @@
 name: Deliver to VPS
 on:
   workflow_run:
-    workflows: ["Node.js CI"]
+    workflows: ["Build frontend", "Build backend"]
     branches: [main]
     types: 
       - completed
