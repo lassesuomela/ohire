@@ -1,7 +1,7 @@
 name: Deliver to VPS
 on:
   workflow_run:
-    workflows: ["Build frontend", "Build backend"]
+    workflows: ["Build backend"]
     branches: [main]
     types: 
       - completed
