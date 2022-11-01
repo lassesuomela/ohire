@@ -83,6 +83,8 @@ export default {
         if(response.data.status === "error"){
           this.status = response.data.message;
 
+          this.loader.close();
+
           // send error msg
           this.$notify({title:"Error", message:this.status, type:"error", customClass:"notification"});
           return;

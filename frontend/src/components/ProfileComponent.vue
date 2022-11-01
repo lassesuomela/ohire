@@ -135,6 +135,8 @@ export default {
         }
 
         if(response.data.status === "error"){
+
+          this.loader.close();
           this.status = response.data.message;
 
           // send error msg
