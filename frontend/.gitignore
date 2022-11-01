@@ -2,7 +2,8 @@
 node_modules
 /dist
 
-
+*.pem
+*.key
 # local env files
 .env.local
 .env.*.local

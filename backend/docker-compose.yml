@@ -9,6 +9,7 @@ services:
     image: ohire-frontend:latest
     container_name: ohire-reverse-proxy
     network_mode: "host"
+    restart: unless-stopped
     depends_on:
       - ohire-srv
     ports:
@@ -26,9 +27,12 @@ services:
     image: ohire-srv:latest
     container_name: ohire-srv
     network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - /root/ohire/backend/applications:/app/applications
+      - /root/ohire/backend/profilePictures:/app/profilePictures
     ports:
       - 8081:8081
-    restart: on-failure
     environment:
       - DOCKER_APP_PORT=8081
 
@@ -42,7 +46,7 @@ services:
     network_mode: "host"
     ports:
       - 3306:3306
-    restart: on-failure
+    restart: unless-stopped
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
