@@ -73,6 +73,3 @@ Company jobs page
 
 View job applications page
 !["View job applications page"](/images/company_applications.png)
-
-View meetings page
-!["View meetings page"](/images/meetings.png)
