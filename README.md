@@ -5,7 +5,6 @@
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-![Lint code base](https://github.com/lassesuomela/ohire/actions/workflows/super-linter.yml/badge.svg)
 ![Build the backend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.yml/badge.svg)
 [![Build frontend](https://github.com/lassesuomela/ohire/actions/workflows/node.js.frontend.yml/badge.svg)](https://github.com/lassesuomela/ohire/actions/workflows/node.js.frontend.yml)
 ![Deliver to VPS](https://github.com/lassesuomela/ohire/actions/workflows/cd.yml/badge.svg)
