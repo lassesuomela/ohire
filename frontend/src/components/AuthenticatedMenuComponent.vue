@@ -26,8 +26,7 @@ export default {
     },
     data () {
         return {
-            role: null,
-            uuid: null,
+            role: null
         }
     },
     methods: {
@@ -36,15 +35,12 @@ export default {
 
                 if(response.data.status === "success"){
                     this.role = response.data.data.role;
-                    this.uuid = response.data.data.uuid;
 
                     if(this.role === 1){
                         this.$store.commit('normalUser');
                     }else if(this.role === 2){
                         this.$store.commit('corporateUser');
                     }
-
-                    this.$store.commit('changeUuid', this.uuid);
                 }
 
             }).catch(error => {

@@ -18,7 +18,7 @@ const auth = (req, res, next) => {
 
     jwt.verifyToken(apiKey, (err, result) => {
         if(err) {
-            return res.json({status:"error", message:"JWT Auth error"});
+            return res.json({status:"info", message:"JWT missing"});
         }
 
         // save tokens data to req for future use on other controllers
